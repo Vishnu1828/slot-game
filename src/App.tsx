@@ -1,6 +1,10 @@
 import { Application } from '@pixi/react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './api/queryClient'
+import GameShell from './game/GameShell'
+
+// The game to boot. Later this comes from the route / lobby selection (e.g. /games/:gameId).
+const GAME = 'fortune-teller-trove'
 
 function App() {
   return (
@@ -11,7 +15,7 @@ function App() {
       autoDensity
     >
       <QueryClientProvider client={queryClient}>
-        <></>
+        <GameShell game={GAME} />
       </QueryClientProvider>
     </Application>
   )

@@ -15,7 +15,8 @@ const pipes = pixiPipes({
   texturePacker: {
     // Same tiers for packed atlases; keep sheets within GPU limits.
     resolutionOptions: { resolutions, maximumTextureSize: 4096 },
-    texturePacker: { nameStyle: 'short', padding: 2, allowTrim: true },
+    // removeFileExtension: frames are addressable as `info_idle` (not `info_idle.png`).
+    texturePacker: { nameStyle: 'short', removeFileExtension: true, padding: 2, allowTrim: true },
   },
   audio: {}, // transcodes .wav/.mp3/.ogg -> .mp3 + .ogg
   manifest: { createShortcuts: true, trimExtensions: true, nameStyle: 'short' },
