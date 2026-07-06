@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { extend } from '@pixi/react'
+import '@pixi/layout' // enables the optional `layout` prop (so text can be a flex child)
 import {
   BitmapText,
   Cache,
@@ -7,6 +8,7 @@ import {
   type PointData,
   type TextStyleOptions,
 } from 'pixi.js'
+import type { LayoutStyle } from './PixiLayout'
 
 // Register <pixiBitmapText> as a JSX element (idempotent — safe to call from every module).
 extend({ BitmapText })
@@ -42,6 +44,8 @@ export interface PixiBitmapTextProps {
   rotation?: number
   scale?: number | PointData
   visible?: boolean
+  /** Opt into flex layout (as a child of a PixiLayout). Omit to position with x/y. */
+  layout?: LayoutStyle
 
   /**
    * If the bitmap font isn't installed yet, render nothing instead of letting Pixi silently
