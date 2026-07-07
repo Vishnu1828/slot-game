@@ -1,11 +1,10 @@
 import { extend } from "@pixi/react";
-import { Assets, Graphics, Texture } from "pixi.js";
+import { Assets, Container, Graphics, Texture } from "pixi.js";
 import PixiSprite from "../components/pixi/PixiSprite";
 import PixiBitmapText from "../components/pixi/PixiBitmapText";
-import { useScreen } from "./useScreen";
+import { useScreen } from "../hooks/useScreen";
 
-// <pixiGraphics> for the progress bar.
-extend({ Graphics });
+extend({ Container, Graphics });
 
 // Bitmap font shown on the loading screen (loaded up front by GameShell). Must match the .fnt face.
 export const LOADING_FONT = "Inter_Regular";

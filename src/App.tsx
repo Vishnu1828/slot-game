@@ -1,10 +1,11 @@
-import { Application } from '@pixi/react'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient } from './api/queryClient'
-import GameShell from './game/GameShell'
+import { Application } from "@pixi/react";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient";
+import GameShell from "./game/GameShell";
+import type { GameId } from "./game/registry";
 
 // The game to boot. Later this comes from the route / lobby selection (e.g. /games/:gameId).
-const GAME = 'fortune-teller-trove'
+const GAME: GameId = "fortune-teller-trove";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <GameShell game={GAME} />
       </QueryClientProvider>
     </Application>
-  )
+  );
 }
 
-export default App
+export default App;
