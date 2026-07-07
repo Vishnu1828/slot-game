@@ -8,8 +8,13 @@ import { createNewAssetAt } from '@assetpack/core'
 //   low     -> 1K (@0.25x)
 const resolutions = { default: 1, medium: 0.5, low: 0.25 }
 
+// Cache-bust (content-hashed filenames) ONLY for production builds (`AP_CACHEBUST=1`). In dev the
+// filenames stay stable, so repacks don't pile up stale atlas files and the running app's loaded
+// manifest never points at a renamed-away atlas (no vanishing icons on new uploads).
+const cacheBust = process.env.AP_CACHEBUST === '1'
+
 const pipes = pixiPipes({
-  cacheBust: true, // content-hash filenames for long-term browser caching
+  cacheBust, // hashed filenames in prod only (see above)
   resolutions, // fed to the mipmap pipe (loose images)
   compression: { png: true, jpg: true, webp: true },
   texturePacker: {

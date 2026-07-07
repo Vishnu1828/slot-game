@@ -8,7 +8,8 @@
     "dev": "concurrently -k -n assets,vite -c blue,green \"npm:assets:watch\" \"vite --host 0.0.0.0\"",
     "assets": "assetpack",
     "assets:watch": "assetpack -w",
-    "build": "npm run lint && npm run assets && vite build",
+    "assets:prod": "rm -rf public/assets .assetpack && AP_CACHEBUST=1 assetpack",
+    "build": "npm run lint && npm run assets:prod && vite build",
     "lint": "eslint ."
   },
   "dependencies": {

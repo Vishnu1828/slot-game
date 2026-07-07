@@ -1,6 +1,5 @@
 import { extend } from "@pixi/react";
-import { Assets, Container, Graphics, Texture } from "pixi.js";
-import PixiSprite from "../components/pixi/PixiSprite";
+import { Container, Graphics } from "pixi.js";
 import PixiBitmapText from "../components/pixi/PixiBitmapText";
 import { useScreen } from "../hooks/useScreen";
 
@@ -19,10 +18,7 @@ export interface LoadingScreenProps {
  * caption and a progress bar. Shown by GameShell while the game bundle streams in.
  */
 export function LoadingScreen({ progress }: LoadingScreenProps) {
-  const { w, h, portrait } = useScreen();
-  const scenario = portrait ? "scenario_mobile_vertical" : "scenario_desktop";
-  const tex = Assets.get<Texture>(scenario);
-  const scale = tex ? Math.max(w / tex.width, h / tex.height) : 1;
+  const { w, h } = useScreen();
 
   const barW = Math.min(w * 0.6, 640);
   const barH = 14;
@@ -31,7 +27,7 @@ export function LoadingScreen({ progress }: LoadingScreenProps) {
 
   return (
     <pixiContainer>
-      {tex && (
+      {/* {tex && (
         <PixiSprite
           texture={tex}
           anchor={0.5}
@@ -39,7 +35,7 @@ export function LoadingScreen({ progress }: LoadingScreenProps) {
           y={h / 2}
           scale={scale}
         />
-      )}
+      )} */}
       <PixiBitmapText
         text="Loading..."
         font={LOADING_FONT}
