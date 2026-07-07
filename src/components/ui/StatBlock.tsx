@@ -1,6 +1,6 @@
-import PixiLayout from "../../components/pixi/PixiLayout";
-import PixiBitmapText from "../../components/pixi/PixiBitmapText";
-import { FONT_BOLD, FONT_REGULAR } from "./fonts";
+import PixiLayout from "../pixi/PixiLayout";
+import PixiBitmapText from "../pixi/PixiBitmapText";
+import { FONT_BOLD, FONT_REGULAR } from "../../constants/fonts";
 
 export interface StatBlockProps {
   /** Small dim caption, e.g. "Balance". Rendered in Inter-Regular. */
