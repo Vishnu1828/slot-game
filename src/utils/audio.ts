@@ -1,3 +1,4 @@
+import { Assets } from "pixi.js";
 import { Sound, sound, type PlayOptions } from "@pixi/sound";
 import gsap from "gsap";
 
@@ -5,6 +6,15 @@ let audioUnlockPromise: Promise<void> | null = null;
 
 const getAudioContext = () =>
   (sound.context as { audioContext?: AudioContext })?.audioContext;
+
+/**
+ * Resolve a Sound by alias. When sounds are loaded via Pixi Assets bundles, @pixi/sound registers
+ * them in its library under `asset.alias[0]` (the full manifest path, e.g.
+ * "common/audio/click_spin.wav") — so `sound.find("click_spin")` misses. Pixi Assets, however,
+ * caches the Sound under *every* alias (incl. the short "click_spin"), so resolve through it first.
+ */
+const findSound = (alias: string): Sound | undefined =>
+  Assets.get<Sound>(alias) ?? (sound.exists(alias) ? sound.find(alias) : undefined);
 
 /**
  * A class to handle background music within the game.
@@ -30,7 +40,8 @@ class BGM {
     // Do nothing if the requested music is already being played
     if (this.currentAlias === alias) return;
 
-    if (!sound.exists(alias)) {
+    const next = findSound(alias);
+    if (!next) {
       return;
     }
 
@@ -53,7 +64,7 @@ class BGM {
     }
 
     // Find out the new instance to be played
-    this.current = sound.find(alias);
+    this.current = next;
     this.currentAlias = alias;
 
     // Loudness is driven by the master volume below (global × instance). Do NOT
@@ -106,18 +117,19 @@ class SFX {
    * @param options - Options to be passed to the sound instance.
    */
   public play(alias: string, options?: PlayOptions) {
-    if (!sound.exists(alias)) {
+    const snd = findSound(alias);
+    if (!snd) {
       return;
     }
     const volume = this._volume * (options?.volume ?? 1);
     const playNow = () => {
       try {
-        sound.play(alias, { ...options, volume });
+        snd.play({ ...options, volume });
       } catch {
         // Some browsers may still suspend momentarily; retry once.
         setTimeout(() => {
           try {
-            sound.play(alias, { ...options, volume });
+            snd.play({ ...options, volume });
           } catch (retryError) {
             console.warn("[audio] sfx.play failed:", retryError);
           }

@@ -71,7 +71,9 @@ export function Footer({ balance, totalBet }: FooterProps) {
             active={audioPanelOpen}
             size={ICON_SIZE}
             layout={{ width: ICON_SIZE, height: ICON_SIZE }}
-            onPress={toggleAudioPanel}
+            onPress={() => {
+              toggleAudioPanel();
+            }}
           />
           <IconButton
             idle="info_idle"
