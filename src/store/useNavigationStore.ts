@@ -10,6 +10,8 @@ interface NavigationState {
   setScreen: (screen: ScreenID) => void;
   showOverlay: (overlay: OverlayID) => void;
   hideOverlay: () => void;
+  /** Open the overlay, or close it if it's already the active one (button toggle). */
+  toggleOverlay: (overlay: OverlayID) => void;
 }
 
 export const useNavigationStore = create<NavigationState>((set) => ({
@@ -18,4 +20,6 @@ export const useNavigationStore = create<NavigationState>((set) => ({
   setScreen: (screen) => set({ currentScreen: screen }),
   showOverlay: (overlay) => set({ activeOverlay: overlay }),
   hideOverlay: () => set({ activeOverlay: "none" }),
+  toggleOverlay: (overlay) =>
+    set((s) => ({ activeOverlay: s.activeOverlay === overlay ? "none" : overlay })),
 }));
