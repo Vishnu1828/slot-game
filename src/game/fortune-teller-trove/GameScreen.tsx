@@ -1,7 +1,7 @@
 import Background from "../../components/ui/Background";
 import PixiContainer from "../../components/pixi/PixiContainer";
-import Footer from "../../components/ui/Footer";
 import { useScreen } from "@/hooks/useScreen";
+import Footer from "@/components/ui/footer";
 
 export function GameScreen() {
   const { portrait } = useScreen();
