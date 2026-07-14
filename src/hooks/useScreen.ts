@@ -1,15 +1,36 @@
 import { useEffect, useState } from 'react'
 
+/** Layout categories that drive per-mode sizing (desktop vs mobile landscape vs portrait). */
+export type LayoutMode = 'desktop' | 'mobile-landscape' | 'portrait'
+
+// A landscape viewport whose SHORT side is <= this is treated as a phone in landscape (vs desktop).
+// Short side ≈ height in landscape: phones ~360–450, tablets/desktops larger.
+const MOBILE_LANDSCAPE_MAX_SHORT_SIDE = 600
+
 export interface Screen {
   w: number
   h: number
   /** true when height >= width (portrait / vertical). */
   portrait: boolean
+  /** true when width > height. */
+  landscape: boolean
+  /** 'portrait' | 'mobile-landscape' | 'desktop' — use to reduce sizes per device class. */
+  mode: LayoutMode
+}
+
+function resolve(w: number, h: number): Screen {
+  const portrait = h >= w
+  const mode: LayoutMode = portrait
+    ? 'portrait'
+    : Math.min(w, h) <= MOBILE_LANDSCAPE_MAX_SHORT_SIDE
+      ? 'mobile-landscape'
+      : 'desktop'
+  return { w, h, portrait, landscape: !portrait, mode }
 }
 
 /**
- * Tracks the render surface size + orientation so components can pick the right art and cover-fit
- * or lay out against the current viewport. Updates on resize and orientation change.
+ * Tracks the render surface size + orientation/layout mode so components can pick the right art and
+ * cover-fit or reduce sizes per device class. Updates on resize and orientation change.
  */
 export function useScreen(): Screen {
   const [size, setSize] = useState(() => ({ w: window.innerWidth, h: window.innerHeight }))
@@ -28,5 +49,5 @@ export function useScreen(): Screen {
       window.removeEventListener('orientationchange', onOrientation)
     }
   }, [])
-  return { ...size, portrait: size.h >= size.w }
+  return resolve(size.w, size.h)
 }
