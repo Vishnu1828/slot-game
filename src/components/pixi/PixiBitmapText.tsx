@@ -91,7 +91,13 @@ export function PixiBitmapText({
   // rendering so we never flash a substituted DOM-font fallback.
   if (hideUntilFontReady && !Cache.has(`${font}-bitmap`)) return null
 
-  return <pixiBitmapText text={String(text)} style={style} {...transform} />
+  // Remount the node whenever the style changes. Changing a style prop (e.g. `size` on orientation
+  // flip) makes Pixi rebuild the glyph mesh and reset its color, but @pixi/react only re-applies
+  // props that CHANGED — so an unchanged `tint` is skipped and the rebuilt glyphs render black
+  // until a full remount. Keying by the style signature forces that remount, keeping tint correct.
+  const styleKey = `${font}|${size}|${align ?? ''}|${lineHeight ?? ''}|${letterSpacing ?? ''}|${maxWidth ?? ''}`
+
+  return <pixiBitmapText key={styleKey} text={String(text)} style={style} {...transform} />
 }
 
 export default PixiBitmapText

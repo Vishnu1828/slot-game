@@ -7,7 +7,13 @@
  * Per-game art lives in `makeTheme` (game-scoped); this is its shared counterpart.
  */
 export const commonTheme = {
-  fonts: { regular: "Inter_Regular", bold: "Inter_Bold" },
+  fonts: {
+    regular: "Inter_Regular",
+    bold: "Inter_Bold",
+    alexandria_regular: "Alexandria_Regular",
+    alexandria_medium: "Alexandria_Medium",
+    alexandria_semibold: "Alexandria_Semibold",
+  },
   footer: { background: "footer" },
   buttons: {
     sound: { idle: "sound_idle", hover: "sound_hover", active: "sound_active" },
@@ -22,6 +28,10 @@ export const commonTheme = {
     icon: "audio_icon",
     muteIcon: "audio_mute_icon",
   },
-  overlay: { container: "menu_container", close: "x_button" },
+  overlay: {
+    container: "menu_container",
+    close: "x_button",
+    popup: "popup_message_container",
+  },
   sfx: { click: "click_spin" },
 } as const;
