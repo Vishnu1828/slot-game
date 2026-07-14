@@ -1,12 +1,13 @@
 import { useMemo } from "react";
 import { extend } from "@pixi/react";
-import { BitmapFontManager, Cache, Graphics, TextStyle } from "pixi.js";
+import { Graphics } from "pixi.js";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
 import PixiButton, { type ButtonVariant } from "./PixiButton";
 import { useScreen } from "@/hooks/useScreen";
 import { commonTheme } from "@/constants/commonTheme";
+import { measureBitmapText } from "@/utils/measureBitmapText";
 
 // <pixiGraphics> for the dim backdrop only (the panel is now the `popup_message_container` asset).
 extend({ Graphics });
@@ -77,31 +78,6 @@ const MODE = {
   },
 } as const;
 
-// Measure the ACTUAL rendered height of (possibly wrapped) bitmap text, so the panel can be sized to
-// fit it — this is what keeps long titles inside the panel in portrait instead of spilling out.
-// Pixi's layout reports width/height in the font's base units; multiply by `scale` for pixels.
-function measureText(
-  text: string,
-  fontFamily: string,
-  fontSize: number,
-  wrapWidth: number,
-): { w: number; h: number } {
-  if (!Cache.has(`${fontFamily}-bitmap`)) {
-    return { w: 0, h: fontSize * 1.3 }; // font not ready — rough single-line fallback
-  }
-  const layout = BitmapFontManager.measureText(
-    text,
-    new TextStyle({
-      fontFamily,
-      fontSize,
-      wordWrap: true,
-      wordWrapWidth: wrapWidth,
-      align: "center",
-    }),
-  );
-  return { w: layout.width * layout.scale, h: layout.height * layout.scale };
-}
-
 /**
  * Reusable, config-driven modal popup — a centered `popup_message_container` panel with a title, an
  * optional message, and a row of one or more buttons. The title/message word-wrap to the panel's
@@ -119,14 +95,14 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
 
   // Measure wrapped text (memoized — only recompute when text/width/sizes change).
   const { titleH, bodyH } = useMemo(() => {
-    const t = measureText(
+    const t = measureBitmapText(
       title,
       commonTheme.fonts.alexandria_semibold,
       m.titleSize,
       innerW,
     );
     const b = hasMsg
-      ? measureText(
+      ? measureBitmapText(
           message as string,
           commonTheme.fonts.alexandria_regular,
           m.bodySize,
