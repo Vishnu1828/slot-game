@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { GAMES, isGameId, type GameId } from "@/game/registry";
 import { useNavigationStore } from "@/store/useNavigationStore";
 import { useToastStore } from "@/store/useToastStore";
-import { useInactivityOverlay } from "@/hooks/useInactivityOverlay";
 import InfoScreen from "@/components/ui/InfoScreen";
 import PopupModal from "@/components/ui/PopupModal";
 import Toast from "@/components/ui/Toast";
@@ -25,7 +24,8 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
   const clearToast = useToastStore((s) => s.clearToast);
 
   // Show the "ARE YOU STILL THERE" popup after a stretch of no user activity.
-  useInactivityOverlay();
+  // add this back in once full code done
+  // useInactivityOverlay();
 
   const GameScreen = isGameId(game) ? GAMES[game]?.Screen : undefined;
 

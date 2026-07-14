@@ -19,6 +19,34 @@ export const commonTheme = {
     sound: { idle: "sound_idle", hover: "sound_hover", active: "sound_active" },
     info: { idle: "info_idle", hover: "info_hover", pressed: "info_pressed" },
     exit: { idle: "exit_idle", hover: "exit_hover", pressed: "exit_pressed" },
+    // Bet controls (common/ui/betButton atlas).
+    betPlus: {
+      idle: "increase_bet_idle",
+      hover: "increase_bet_hover",
+      pressed: "increase_bet_pressed",
+    },
+    betMinus: {
+      idle: "decrease_bet_idle",
+      hover: "decrease_bet_hover",
+      pressed: "decrease_bet_pressed",
+    },
+    betSettings: {
+      idle: "bet_settings_idle",
+      hover: "bet_settings_hover",
+      pressed: "bet_settings_pressed",
+    },
+    // Autoplay toggle (common/ui/speedButton atlas) — active-as-pressed, like `sound`.
+    autoplay: {
+      idle: "autoplay_idle",
+      hover: "autoplay_hover",
+      active: "autoplay_active",
+    },
+    // Speed levels 1..3 (common/ui/speedButton atlas) — index by `level - 1`. Only idle/pressed.
+    speed: [
+      { idle: "speed_1_idle", pressed: "speed_1_pressed" },
+      { idle: "speed_2_idle", pressed: "speed_2_pressed" },
+      { idle: "speed_3_idle", pressed: "speed_3_pressed" },
+    ],
   },
   audio: {
     panel: "audio_panel",
