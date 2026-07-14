@@ -3,6 +3,7 @@ import { extend } from "@pixi/react";
 import "@pixi/layout"; // enables the optional `layout` prop
 import { Assets, Sprite, Texture } from "pixi.js";
 import type { LayoutStyle } from "../pixi/PixiLayout";
+import { PixiSprite } from "../pixi/PixiSprite";
 
 // Register <pixiSprite> as a JSX element (idempotent).
 extend({ Sprite });
@@ -20,6 +21,8 @@ export interface IconButtonProps {
   y?: number;
   layout?: LayoutStyle;
   label?: string;
+  width?: number;
+  height?: number;
 }
 
 function resolveTex(tex?: string | Texture): Texture | undefined {
@@ -35,6 +38,8 @@ export function IconButton({
   active = false,
   onPress,
   size,
+  width,
+  height,
   disabled = false,
   x,
   y,
@@ -59,10 +64,15 @@ export function IconButton({
         : idleTex;
   if (!tex) return null;
 
-  const dims = size != null ? { width: size, height: size } : {};
+  const dims =
+    width != null && height != null
+      ? { width, height }
+      : size != null
+        ? { width: size, height: size }
+        : {};
 
   return (
-    <pixiSprite
+    <PixiSprite
       texture={tex}
       {...dims}
       x={x}
