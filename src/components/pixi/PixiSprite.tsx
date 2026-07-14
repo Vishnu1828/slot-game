@@ -1,36 +1,57 @@
-import type { Ref } from 'react'
-import { extend } from '@pixi/react'
-import '@pixi/layout' // enables the optional `layout` prop even if PixiLayout isn't imported
-import { Assets, Sprite, Texture, type ColorSource, type EventMode, type PointData } from 'pixi.js'
-import type { LayoutStyle } from './PixiLayout'
+import type { Ref } from "react";
+import { extend } from "@pixi/react";
+import "@pixi/layout"; // enables the optional `layout` prop even if PixiLayout isn't imported
+import {
+  Assets,
+  Sprite,
+  Texture,
+  type ColorSource,
+  type EventMode,
+  type FederatedPointerEvent,
+  type PointData,
+} from "pixi.js";
+import type { LayoutStyle } from "./PixiLayout";
 
 // Register <pixiSprite> as a JSX element (idempotent).
-extend({ Sprite })
+extend({ Sprite });
+
+type PointerHandler = (event: FederatedPointerEvent) => void;
 
 export interface PixiSpriteProps {
   /** A Texture, or an asset alias to resolve via `Assets.get` (the asset must be loaded). */
-  texture: Texture | string
-  x?: number
-  y?: number
+  texture: Texture | string;
+  x?: number;
+  y?: number;
   /** 0..1 — a single number for both axes, or `{ x, y }`. Default 0 (top-left). */
-  anchor?: number | PointData
+  anchor?: number | PointData;
   /** Uniform scale (number) or per-axis `{ x, y }`. */
-  scale?: number | PointData
+  scale?: number | PointData;
   /** Explicit display size in px (overrides the texture's natural size). */
-  width?: number
-  height?: number
-  rotation?: number
-  angle?: number
+  width?: number;
+  height?: number;
+  rotation?: number;
+  angle?: number;
   /** Multiplies the texture color (0xffffff = unchanged). */
-  tint?: ColorSource
-  alpha?: number
-  visible?: boolean
-  eventMode?: EventMode
-  cursor?: string
+  tint?: ColorSource;
+  alpha?: number;
+  visible?: boolean;
+  eventMode?: EventMode;
+  cursor?: string;
   /** Opt into flex layout (as a child of a PixiLayout). Omit to position with x/y. */
-  layout?: LayoutStyle
-  label?: string
-  ref?: Ref<Sprite>
+  layout?: LayoutStyle;
+  label?: string;
+  ref?: Ref<Sprite>;
+  onPointerDown?: PointerHandler;
+  onPointerUp?: PointerHandler;
+  onPointerUpOutside?: PointerHandler;
+  onPointerMove?: PointerHandler;
+  onPointerTap?: PointerHandler;
+  onPointerOver?: PointerHandler;
+  onPointerOut?: PointerHandler;
+  onClick?: PointerHandler;
+  onRightClick?: PointerHandler;
+  onRightDown?: PointerHandler;
+  onRightUp?: PointerHandler;
 }
 
 /**
@@ -43,9 +64,10 @@ export interface PixiSpriteProps {
  * <PixiSprite texture={someTexture} width={120} height={120} tint={0xffd21e} />
  */
 export function PixiSprite({ texture, ref, ...props }: PixiSpriteProps) {
-  const tex = typeof texture === 'string' ? Assets.get<Texture>(texture) : texture
-  if (!tex) return null
-  return <pixiSprite ref={ref} texture={tex} {...props} />
+  const tex =
+    typeof texture === "string" ? Assets.get<Texture>(texture) : texture;
+  if (!tex) return null;
+  return <pixiSprite ref={ref} texture={tex} {...props} />;
 }
 
-export default PixiSprite
+export default PixiSprite;
