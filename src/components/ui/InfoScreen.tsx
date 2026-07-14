@@ -66,12 +66,8 @@ export function InfoScreen({ onClose }: InfoScreenProps) {
         onPress={onClose}
       />
       <PixiBitmapText
-        // Remount on mode change: @pixi/react only re-applies CHANGED props, and changing `size`
-        // rebuilds the glyph mesh (resetting its color) while the unchanged `tint` is skipped —
-        // leaving black text until refresh. A fresh key re-mounts with the tint applied.
-        key={`title-${mode}`}
         text="GAME RULES"
-        font={commonTheme.fonts.bold}
+        font={commonTheme.fonts.alexandria_semibold}
         size={cfg.title}
         tint={0xdfe3ee}
         anchor={0.5}
@@ -81,9 +77,8 @@ export function InfoScreen({ onClose }: InfoScreenProps) {
 
       {/* Body */}
       <PixiBitmapText
-        key={`body-${mode}`}
         text="CONTENT TBD"
-        font={commonTheme.fonts.bold}
+        font={commonTheme.fonts.alexandria_semibold}
         size={cfg.body}
         tint={0xcfd3de}
         anchor={0.5}
