@@ -2,11 +2,12 @@ import { extend } from "@pixi/react";
 import { Container, Graphics } from "pixi.js";
 import PixiBitmapText from "../components/pixi/PixiBitmapText";
 import { useScreen } from "../hooks/useScreen";
+import { commonTheme } from "@/constants/commonTheme";
 
 extend({ Container, Graphics });
 
-// Bitmap font shown on the loading screen (loaded up front by GameShell). Must match the .fnt face.
-export const LOADING_FONT = "Inter_Regular";
+// Bitmap font shown on the loading screen (loaded up front by GameShell). Sourced from commonTheme.
+export const LOADING_FONT = commonTheme.fonts.regular;
 
 export interface LoadingScreenProps {
   /** 0..1 load progress for the bar. */

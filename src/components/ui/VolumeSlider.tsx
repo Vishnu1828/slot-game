@@ -8,6 +8,7 @@ import {
   type FederatedPointerEvent,
 } from "pixi.js";
 import { useSettingsStore } from "../../store/useSettingsStore";
+import { commonTheme } from "@/constants/commonTheme";
 
 // Raw <pixiContainer>/<pixiSprite> so we can attach pointer/drag handlers.
 extend({ Container, Sprite });
@@ -42,11 +43,11 @@ export function VolumeSlider({ x = 0, y = 0 }: VolumeSliderProps) {
   const containerRef = useRef<Container>(null);
   const [dragging, setDragging] = useState(false);
 
-  const panelTex = getTex("audio_panel");
-  const trackTex = getTex("audio_level");
-  const fillTex = getTex("audio_level_fill");
-  const knobTex = getTex("audio_knob");
-  const iconTex = getTex(volume === 0 ? "audio_mute_icon" : "audio_icon");
+  const panelTex = getTex(commonTheme.audio.panel);
+  const trackTex = getTex(commonTheme.audio.track);
+  const fillTex = getTex(commonTheme.audio.fill);
+  const knobTex = getTex(commonTheme.audio.knob);
+  const iconTex = getTex(volume === 0 ? commonTheme.audio.muteIcon : commonTheme.audio.icon);
   if (!panelTex || !trackTex || !knobTex) return null;
 
   const displayW = PANEL_W;

@@ -18,6 +18,7 @@ import {
   ICON,
   ICON_LARGE,
 } from "@/constants/footer";
+import { commonTheme } from "@/constants/commonTheme";
 
 export function Footer({ balance, totalBet }: FooterProps) {
   const { w, h, portrait } = useScreen();
@@ -31,7 +32,7 @@ export function Footer({ balance, totalBet }: FooterProps) {
   return (
     <PixiContainer x={0} y={h - BAR_H}>
       <PixiNineSliceSprite
-        texture="footer"
+        texture={commonTheme.footer.background}
         leftWidth={INSET_X}
         rightWidth={INSET_X}
         topHeight={INSET_Y}
@@ -65,9 +66,9 @@ export function Footer({ balance, totalBet }: FooterProps) {
           }}
         >
           <IconButton
-            idle="sound_idle"
-            hover="sound_hover"
-            pressed="sound_active"
+            idle={commonTheme.buttons.sound.idle}
+            hover={commonTheme.buttons.sound.hover}
+            pressed={commonTheme.buttons.sound.active}
             active={audioPanelOpen}
             size={ICON_SIZE}
             layout={{ width: ICON_SIZE, height: ICON_SIZE }}
@@ -76,18 +77,18 @@ export function Footer({ balance, totalBet }: FooterProps) {
             }}
           />
           <IconButton
-            idle="info_idle"
-            hover="info_hover"
-            pressed="info_pressed"
+            idle={commonTheme.buttons.info.idle}
+            hover={commonTheme.buttons.info.hover}
+            pressed={commonTheme.buttons.info.pressed}
             active={activeOverlay === "info"}
             size={ICON_SIZE}
             layout={{ width: ICON_SIZE, height: ICON_SIZE }}
             onPress={() => toggleOverlay("info")}
           />
           <IconButton
-            idle="exit_idle"
-            hover="exit_hover"
-            pressed="exit_pressed"
+            idle={commonTheme.buttons.exit.idle}
+            hover={commonTheme.buttons.exit.hover}
+            pressed={commonTheme.buttons.exit.pressed}
             active={activeOverlay === "quit"}
             size={ICON_SIZE}
             layout={{ width: ICON_SIZE, height: ICON_SIZE }}

@@ -1,6 +1,6 @@
 import PixiLayout from "../pixi/PixiLayout";
 import PixiBitmapText from "../pixi/PixiBitmapText";
-import { FONT_BOLD, FONT_REGULAR } from "../../constants/fonts";
+import { commonTheme } from "@/constants/commonTheme";
 
 export interface StatBlockProps {
   /** Small dim caption, e.g. "Balance". Rendered in Inter-Regular. */
@@ -18,14 +18,14 @@ export function StatBlock({ label, value }: StatBlockProps) {
     <PixiLayout layout={{ flexDirection: "column", alignItems: "flex-start" }}>
       <PixiBitmapText
         text={label}
-        font={FONT_REGULAR}
+        font={commonTheme.fonts.regular}
         size={12}
         tint={0xb8bcc8}
         layout={{}}
       />
       <PixiBitmapText
         text={value}
-        font={FONT_BOLD}
+        font={commonTheme.fonts.bold}
         size={16}
         tint={0xffffff}
         layout={{}}
