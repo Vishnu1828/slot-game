@@ -7,7 +7,7 @@
 
 /** Textures for the spin button's states. `idle` is required; the rest fall back to `idle`. */
 export interface SpinButtonArt {
-  idle: string;
+  idle?: string;
   active?: string; // e.g. auto-spin engaged
   pressed?: string; // held down
   disabled?: string; // spin in progress / not allowed

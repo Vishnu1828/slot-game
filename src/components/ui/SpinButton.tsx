@@ -41,14 +41,16 @@ export function SpinButton({
 }: SpinButtonProps) {
   const [held, setHeld] = useState(false);
 
-  const idle = resolveTex(art.idle);
+  // Base/resting look: prefer an explicit idle frame, else fall back to `active` (many spin sheets
+  // only ship active/pressed/disabled — `active` is the enabled/resting art).
+  const base = resolveTex(art.idle) ?? resolveTex(art.active);
   const tex = disabled
-    ? (resolveTex(art.disabled) ?? idle)
+    ? (resolveTex(art.disabled) ?? base)
     : held
-      ? (resolveTex(art.pressed) ?? idle)
+      ? (resolveTex(art.pressed) ?? base)
       : active
-        ? (resolveTex(art.active) ?? idle)
-        : idle;
+        ? (resolveTex(art.active) ?? base)
+        : base;
   if (!tex) return null;
 
   const dims = size != null ? { width: size, height: size } : {};

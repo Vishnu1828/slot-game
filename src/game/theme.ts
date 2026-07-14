@@ -16,7 +16,6 @@ const LOOSE_DEFAULTS = {
  * NOT game-scoped — only the active game's atlas is loaded, so a bare frame name is unambiguous.
  */
 const SPIN_DEFAULTS: SpinButtonArt = {
-  idle: "spin_idle",
   active: "spin_active",
   pressed: "spin_pressed",
   disabled: "spin_disabled",
@@ -38,7 +37,10 @@ export interface ThemeOverrides {
  * `games/<id>/<path>` so their aliases never collide across games; atlas frames (spin, symbols)
  * stay bare frame names. Games override only what differs from the defaults above.
  */
-export const makeTheme = (gameId: string, o: ThemeOverrides = {}): ThemeAssets => {
+export const makeTheme = (
+  gameId: string,
+  o: ThemeOverrides = {},
+): ThemeAssets => {
   const scope = (rel: string) => `games/${gameId}/${rel}`;
   return {
     header: scope(o.header ?? LOOSE_DEFAULTS.header),
