@@ -22,5 +22,6 @@ export const commonTheme = {
     icon: "audio_icon",
     muteIcon: "audio_mute_icon",
   },
+  overlay: { container: "menu_container", close: "x_button" },
   sfx: { click: "click_spin" },
 } as const;
