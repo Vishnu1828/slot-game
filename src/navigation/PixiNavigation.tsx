@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 import { GAMES, isGameId, type GameId } from "@/game/registry";
 import { useNavigationStore } from "@/store/useNavigationStore";
+import { useToastStore } from "@/store/useToastStore";
 import { useInactivityOverlay } from "@/hooks/useInactivityOverlay";
 import InfoScreen from "@/components/ui/InfoScreen";
 import PopupModal from "@/components/ui/PopupModal";
+import Toast from "@/components/ui/Toast";
 
 export interface PixiNavigationProps {
   /** The active game id — selects which game's screen renders (see src/game/registry.ts). */
@@ -19,6 +21,8 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
   const currentScreen = useNavigationStore((s) => s.currentScreen);
   const activeOverlay = useNavigationStore((s) => s.activeOverlay);
   const hideOverlay = useNavigationStore((s) => s.hideOverlay);
+  const toast = useToastStore((s) => s.toast);
+  const clearToast = useToastStore((s) => s.clearToast);
 
   // Show the "ARE YOU STILL THERE" popup after a stretch of no user activity.
   useInactivityOverlay();
@@ -65,9 +69,20 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
         />
       )}
 
-      {/* Add as they're specced:
-          {activeOverlay === "repeat-insufficient" && <PopupModal … />}
-          <Toast />  // transient "BET INCREASED / SPEED ENABLED" toasts — separate component */}
+      {/* Transient toasts ("BET INCREASED / SPEED ENABLED"). Keyed by id so re-showing restarts
+          the fade. Drive via useToastStore.getState().showToast(...). */}
+      {toast && (
+        <Toast
+          key={toast.id}
+          message={toast.message}
+          icon={toast.icon}
+          durationMs={toast.durationMs}
+          onDone={clearToast}
+        />
+      )}
+
+      {/* Add as it's specced:
+          {activeOverlay === "repeat-insufficient" && <PopupModal … />} */}
     </>
   );
 };
