@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { GAMES, isGameId, type GameId } from "@/game/registry";
 import { useNavigationStore } from "@/store/useNavigationStore";
+import InfoScreen from "@/components/ui/InfoScreen";
 
 export interface PixiNavigationProps {
   /** The active game id — selects which game's screen renders (see src/game/registry.ts). */
@@ -14,7 +15,8 @@ export interface PixiNavigationProps {
  */
 const PixiNavigation = ({ game }: PixiNavigationProps) => {
   const currentScreen = useNavigationStore((s) => s.currentScreen);
-  // const activeOverlay = useNavigationStore((s) => s.activeOverlay); // enable when overlays exist
+  const activeOverlay = useNavigationStore((s) => s.activeOverlay);
+  const hideOverlay = useNavigationStore((s) => s.hideOverlay);
 
   const GameScreen = isGameId(game) ? GAMES[game]?.Screen : undefined;
 
@@ -26,8 +28,10 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
         </Suspense>
       )}
 
-      {/* Common overlays (shared across all games) — add as their screens are built:
-          {activeOverlay === "info" && <InfoScreen />}
+      {/* Common overlays (shared across all games), drawn on top of the game screen. */}
+      {activeOverlay === "info" && <InfoScreen onClose={hideOverlay} />}
+
+      {/* Add as their screens are built:
           {activeOverlay === "quit" && <QuitWarningPopUp />}
           {activeOverlay === "inactive" && <InactiveWarningPopUp />}
           {activeOverlay === "balance" && <BalanceWarningPopUp />}
