@@ -4,10 +4,11 @@ import { Graphics } from "pixi.js";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
-import PixiButton, { type ButtonVariant } from "./PixiButton";
+import Button from "./Button";
 import { useScreen } from "@/hooks/useScreen";
 import { commonTheme } from "@/constants/commonTheme";
 import { measureBitmapText } from "@/utils/measureBitmapText";
+import { measureButtonWidth } from "@/utils/buttonMetrics";
 
 // <pixiGraphics> for the dim backdrop only (the panel is now the `popup_message_container` asset).
 extend({ Graphics });
@@ -18,7 +19,6 @@ const clamp = (v: number, min: number, max: number) =>
 export interface PopupButton {
   label: string;
   onPress?: () => void;
-  variant?: ButtonVariant;
 }
 
 export interface PopupModalProps {
@@ -34,7 +34,7 @@ const MODE = {
   portrait: {
     titleSize: 16,
     bodySize: 14,
-    btnH: 52,
+    btnH: 40,
     btnFont: 16,
     padX: 16,
     padTop: 16,
@@ -49,8 +49,8 @@ const MODE = {
   "mobile-landscape": {
     titleSize: 16,
     bodySize: 14,
-    btnH: 32,
-    btnFont: 12,
+    btnH: 40,
+    btnFont: 14,
     padX: 16,
     padTop: 16,
     padBottom: 16,
@@ -64,7 +64,7 @@ const MODE = {
   desktop: {
     titleSize: 18,
     bodySize: 16,
-    btnH: 56,
+    btnH: 46,
     btnFont: 18,
     padX: 16,
     padTop: 16,
@@ -89,9 +89,21 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
   const { w, h, mode } = useScreen();
   const m = MODE[mode];
 
-  const panelW = clamp(w * m.wFactor, m.wMin, m.wMax);
-  const innerW = panelW - 2 * m.padX;
   const hasMsg = !!message;
+
+  // Self-sizing button row: each button auto-fits its label; the panel grows to contain the row.
+  const btnWidths = buttons.map((b) =>
+    measureButtonWidth(b.label, { textSize: m.btnFont, height: m.btnH }),
+  );
+  const rowW =
+    btnWidths.reduce((a, b) => a + b, 0) + m.btnRowGap * (buttons.length - 1);
+
+  const panelW = clamp(
+    Math.max(w * m.wFactor, rowW + 2 * m.padX),
+    m.wMin,
+    m.wMax,
+  );
+  const innerW = panelW - 2 * m.padX;
 
   // Measure wrapped text (memoized — only recompute when text/width/sizes change).
   const { titleH, bodyH } = useMemo(() => {
@@ -131,9 +143,14 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
   const btnY =
     panelY + m.padTop + titleH + (hasMsg ? m.titleGap + bodyH : 0) + m.btnGap;
 
-  // Button row: single button spans the inner width; two+ split it evenly with a gap.
-  const n = buttons.length;
-  const btnW = n <= 1 ? innerW : (innerW - m.btnRowGap * (n - 1)) / n;
+  // Center the button row; each button is placed by its center (see Button — center-anchored).
+  const btnCenterY = btnY + m.btnH / 2;
+  let cursor = cx - rowW / 2;
+  const btnCentersX = btnWidths.map((bw) => {
+    const centerX = cursor + bw / 2;
+    cursor += bw + m.btnRowGap;
+    return centerX;
+  });
 
   // Keep nine-slice insets within the panel bounds so the corners never overrun on small panels.
   const insetH = Math.min(56, Math.floor(panelW / 2) - 1);
@@ -191,15 +208,13 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
       )}
 
       {buttons.map((b, i) => (
-        <PixiButton
+        <Button
           key={b.label}
           label={b.label}
-          x={panelX + m.padX + i * (btnW + m.btnRowGap)}
-          y={btnY}
-          width={btnW}
+          x={btnCentersX[i]}
+          y={btnCenterY}
           height={m.btnH}
           textSize={m.btnFont}
-          variant={b.variant}
           onPress={b.onPress}
         />
       ))}

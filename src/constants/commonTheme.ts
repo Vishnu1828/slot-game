@@ -47,6 +47,8 @@ export const commonTheme = {
       { idle: "speed_2_idle", pressed: "speed_2_pressed" },
       { idle: "speed_3_idle", pressed: "speed_3_pressed" },
     ],
+    // Popup/dialog pill button (common/ui/popupButton atlas) — a text-labelled action button.
+    popup: { idle: "button_idle", pressed: "button_pressed" },
   },
   audio: {
     panel: "audio_panel",

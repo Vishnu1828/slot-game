@@ -29,7 +29,7 @@ export function Header({ art, alpha, visible }: HeaderProps) {
       : mode === "mobile-landscape"
         ? clamp(w * 0.35, 200, 380)
         : clamp(w * 0.5, 280, 500); // desktop
-  const top = mode === "portrait" ? h * 0.2 : 16;
+  const top = mode === "portrait" ? h * 0.2 : 0;
   const height = (width * tex.height) / tex.width; // preserve aspect
 
   return (

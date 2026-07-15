@@ -46,7 +46,7 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
           title="ARE YOU SURE YOU WANT TO QUIT?"
           message="All chips on the table will be cleared."
           buttons={[
-            { label: "NO", variant: "secondary", onPress: hideOverlay },
+            { label: "NO", onPress: hideOverlay },
             // TODO: wire "back to lobby" to real lobby navigation once it exists.
             { label: "YES, BACK TO LOBBY", onPress: hideOverlay },
           ]}
