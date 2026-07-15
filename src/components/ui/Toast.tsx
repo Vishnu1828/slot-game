@@ -109,7 +109,7 @@ export function Toast({
   return (
     <PixiContainer ref={containerRef} alpha={0} eventMode="none">
       <PixiNineSliceSprite
-        texture={commonTheme.overlay.popup}
+        texture={commonTheme.audio.panel}
         x={panelX}
         y={panelY}
         width={panelW}

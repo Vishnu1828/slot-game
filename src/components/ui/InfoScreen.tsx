@@ -15,9 +15,9 @@ const clamp = (v: number, min: number, max: number) =>
 
 // Header + text sizing per layout mode (mobile-landscape is shorter/tighter than portrait/desktop).
 const MODE = {
-  portrait: { headerH: 65, pad: 24, close: 30, title: 22, body: 22 },
-  "mobile-landscape": { headerH: 30, pad: 18, close: 18, title: 18, body: 18 },
-  desktop: { headerH: 65, pad: 28, close: 30, title: 22, body: 22 },
+  portrait: { headerH: 65, pad: 24, close: 18, title: 22, body: 22 },
+  "mobile-landscape": { headerH: 30, pad: 18, close: 14, title: 18, body: 18 },
+  desktop: { headerH: 65, pad: 28, close: 18, title: 22, body: 22 },
 } as const;
 
 export interface InfoScreenProps {
@@ -62,7 +62,7 @@ export function InfoScreen({ onClose }: InfoScreenProps) {
         idle={commonTheme.overlay.close}
         size={cfg.close}
         x={panelX + cfg.pad}
-        y={(cfg.headerH - cfg.close) / 2}
+        y={(cfg.headerH - cfg.close) / 1.7}
         onPress={onClose}
       />
       <PixiBitmapText

@@ -50,6 +50,13 @@ export const commonTheme = {
     // Popup/dialog pill button (common/ui/popupButton atlas) — a text-labelled action button.
     popup: { idle: "button_idle", pressed: "button_pressed" },
   },
+  // Segmented-tab pieces (common/ui/tabBox atlas). Tile left+[middle…]+right into one control; the
+  // selected segment uses `.active`. `middle` (square) also doubles as a plain value-box background.
+  tabs: {
+    left: { idle: "box_left_idle", active: "box_left_active" },
+    middle: { idle: "box_middle_idle", active: "box_middle_active" },
+    right: { idle: "box_right_idle", active: "box_right_active" },
+  },
   audio: {
     panel: "audio_panel",
     track: "audio_level",
