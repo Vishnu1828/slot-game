@@ -10,6 +10,7 @@ import {
   MIN_BET,
   MAX_BET,
 } from "@/store/useGameControlsStore";
+import { useNavigationStore } from "@/store/useNavigationStore";
 import type { SpinButtonArt } from "@/types/theme";
 
 export interface ControlsProps {
@@ -43,7 +44,7 @@ export function Controls({ spin, onSpin }: ControlsProps) {
   const increaseBet = useGameControlsStore((s) => s.increaseBet);
   const decreaseBet = useGameControlsStore((s) => s.decreaseBet);
   const cycleSpeed = useGameControlsStore((s) => s.cycleSpeed);
-  const toggleAutoplay = useGameControlsStore((s) => s.toggleAutoplay);
+  const showOverlay = useNavigationStore((s) => s.showOverlay);
 
   const speedArt = commonTheme.buttons.speed[speed - 1];
   const autoplayArt = commonTheme.buttons.autoplay;
@@ -56,7 +57,7 @@ export function Controls({ spin, onSpin }: ControlsProps) {
       hover: autoplayArt.hover,
       pressed: autoplayArt.active, // "active" art shown while held / when engaged
       active: autoplay,
-      onPress: toggleAutoplay,
+      onPress: () => showOverlay("settings"), // open the Autospin Settings drawer
     },
     {
       idle: speedArt.idle,
