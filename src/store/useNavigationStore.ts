@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 export type ScreenID = 'game'
 
-export type OverlayID = | 'settings' | 'quit' | 'info' | 'inactive' | 'balance' | 'repeat-insufficient' | 'none'
+export type OverlayID = | 'settings' | 'bet-settings' | 'quit' | 'info' | 'inactive' | 'balance' | 'repeat-insufficient' | 'none'
 
 interface NavigationState {
   currentScreen: ScreenID;

@@ -17,6 +17,15 @@ export const MIN_AUTOSPIN = 1;
 export const MAX_AUTOSPIN = 100;
 export const AUTOSPIN_STEP = 1;
 
+/** Betting settings (independent placeholders until a real payline model exists). */
+export const BET_LINES = 5; // fixed line count shown in the title for now
+export const DEFAULT_COINS_PER_LINE = 9;
+export const MIN_COINS_PER_LINE = 1;
+export const MAX_COINS_PER_LINE = 20;
+export const DEFAULT_COIN_VALUE = 2;
+export const MIN_COIN_VALUE = 1;
+export const MAX_COIN_VALUE = 50;
+
 interface GameControlsState {
   /** Current bet amount (whole units); also feeds the footer's "Total Bet". */
   bet: number;
@@ -28,6 +37,10 @@ interface GameControlsState {
   autospinCount: number;
   /** Skip win/feature screens during autospin. */
   skipScreens: boolean;
+  /** Betting settings — coins wagered per line. */
+  coinsPerLine: number;
+  /** Betting settings — value of one coin (whole currency units). */
+  coinValue: number;
   /** Raise the bet by one step (clamped to MAX_BET); toasts when it changes. */
   increaseBet: () => void;
   /** Lower the bet by one step (clamped to MIN_BET); toasts when it changes. */
@@ -45,6 +58,13 @@ interface GameControlsState {
   toggleAutoplay: () => void;
   /** Set auto-play on/off directly (e.g. START AUTOSPIN). */
   setAutoplay: (v: boolean) => void;
+  /** Betting settings steppers (clamped). */
+  increaseCoinsPerLine: () => void;
+  decreaseCoinsPerLine: () => void;
+  increaseCoinValue: () => void;
+  decreaseCoinValue: () => void;
+  /** Max out coins/value and total bet. */
+  betMax: () => void;
 }
 
 const toast = (message: string) => useToastStore.getState().showToast(message);
@@ -55,6 +75,8 @@ export const useGameControlsStore = create<GameControlsState>((set, get) => ({
   autoplay: false,
   autospinCount: DEFAULT_AUTOSPIN_COUNT,
   skipScreens: false,
+  coinsPerLine: DEFAULT_COINS_PER_LINE,
+  coinValue: DEFAULT_COIN_VALUE,
 
   increaseBet: () => {
     const bet = Math.min(get().bet + BET_STEP, MAX_BET);
@@ -91,4 +113,24 @@ export const useGameControlsStore = create<GameControlsState>((set, get) => ({
 
   toggleAutoplay: () => set((s) => ({ autoplay: !s.autoplay })),
   setAutoplay: (v) => set({ autoplay: v }),
+
+  increaseCoinsPerLine: () =>
+    set((s) => ({
+      coinsPerLine: Math.min(s.coinsPerLine + 1, MAX_COINS_PER_LINE),
+    })),
+  decreaseCoinsPerLine: () =>
+    set((s) => ({
+      coinsPerLine: Math.max(s.coinsPerLine - 1, MIN_COINS_PER_LINE),
+    })),
+  increaseCoinValue: () =>
+    set((s) => ({ coinValue: Math.min(s.coinValue + 1, MAX_COIN_VALUE) })),
+  decreaseCoinValue: () =>
+    set((s) => ({ coinValue: Math.max(s.coinValue - 1, MIN_COIN_VALUE) })),
+
+  betMax: () =>
+    set({
+      coinsPerLine: MAX_COINS_PER_LINE,
+      coinValue: MAX_COIN_VALUE,
+      bet: MAX_BET,
+    }),
 }));
