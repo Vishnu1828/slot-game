@@ -68,7 +68,7 @@ export function Controls({ spin, onSpin }: ControlsProps) {
       idle: betSettingsArt.idle,
       hover: betSettingsArt.hover,
       pressed: betSettingsArt.pressed,
-      onPress: () => {}, // TODO: open bet-settings panel (not designed yet)
+      onPress: () => showOverlay("bet-settings"), // open the Betting Settings drawer
     },
   ];
 

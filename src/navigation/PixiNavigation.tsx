@@ -4,6 +4,7 @@ import { useNavigationStore } from "@/store/useNavigationStore";
 import { useToastStore } from "@/store/useToastStore";
 import InfoScreen from "@/components/ui/InfoScreen";
 import AutospinScreen from "@/components/ui/AutospinScreen";
+import BettingScreen from "@/components/ui/BettingScreen";
 import PopupModal from "@/components/ui/PopupModal";
 import Toast from "@/components/ui/Toast";
 
@@ -41,6 +42,9 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
       {/* Common overlays (shared across all games), drawn on top of the game screen. */}
       {activeOverlay === "info" && <InfoScreen onClose={hideOverlay} />}
       {activeOverlay === "settings" && <AutospinScreen onClose={hideOverlay} />}
+      {activeOverlay === "bet-settings" && (
+        <BettingScreen onClose={hideOverlay} />
+      )}
 
       {/* Modal popups — all share the reusable PopupModal (title + message + buttons). */}
       {activeOverlay === "quit" && (
