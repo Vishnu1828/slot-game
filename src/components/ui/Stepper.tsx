@@ -60,7 +60,7 @@ export function Stepper({
       />
 
       <PixiSprite
-        texture={commonTheme.tabs.middle.idle}
+        texture={commonTheme.input.idle}
         x={boxX}
         y={0}
         width={boxW}

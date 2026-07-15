@@ -71,4 +71,7 @@ export const commonTheme = {
     popup: "popup_message_container",
   },
   sfx: { click: "click_spin" },
+  input: {
+    idle: "input_field",
+  },
 } as const;
