@@ -6,6 +6,7 @@ import Footer from "@/components/ui/Footer";
 import { useScreen } from "@/hooks/useScreen";
 import { getTheme } from "../registry";
 import { useGameControlsStore } from "@/store/useGameControlsStore";
+import GameState from "@/components/ui/GameState";
 
 const theme = getTheme("fortune-teller-trove");
 
@@ -25,8 +26,8 @@ export function GameScreen() {
 
       {/* Game controls: spin + bet +/- + autoplay + speed + bet-settings */}
       <Controls spin={theme.spin} />
-
       <Footer balance={balance} totalBet={totalBet} />
+      <GameState />
     </PixiContainer>
   );
 }

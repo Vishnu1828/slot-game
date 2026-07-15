@@ -51,7 +51,7 @@ export const CONTROLS: Record<LayoutMode, ControlsSizing> = {
     gap: 16,
     rowGap: 16,
     marginX: 24,
-    marginBottom: 24,
+    marginBottom: 65,
     spinTopFactor: 0.3,
   },
 };
