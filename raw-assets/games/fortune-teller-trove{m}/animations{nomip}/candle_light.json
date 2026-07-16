@@ -1,0 +1,849 @@
+{
+  "sprites": [
+    {
+      "fileName": "candlelight_000.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_001.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_002.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_003.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_004.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_005.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_006.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_007.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_008.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_009.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_010.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 0
+    },
+    {
+      "fileName": "candlelight_011.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_012.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_013.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_014.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_015.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_016.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_017.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_018.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_019.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_020.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_021.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 196
+    },
+    {
+      "fileName": "candlelight_022.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_023.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_024.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_025.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_026.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_027.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_028.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_029.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_030.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_031.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_032.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 392
+    },
+    {
+      "fileName": "candlelight_033.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_034.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_035.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_036.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_037.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_038.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_039.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_040.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_041.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_042.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_043.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 588
+    },
+    {
+      "fileName": "candlelight_044.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_045.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_046.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_047.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_048.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_049.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_050.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_051.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_052.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_053.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_054.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 784
+    },
+    {
+      "fileName": "candlelight_055.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_056.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_057.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_058.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_059.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_060.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_061.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_062.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_063.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_064.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_065.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 980
+    },
+    {
+      "fileName": "candlelight_066.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_067.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_068.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_069.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_070.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_071.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_072.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_073.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_074.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_075.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_076.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 1176
+    },
+    {
+      "fileName": "candlelight_077.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_078.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_079.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_080.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_081.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_082.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_083.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_084.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_085.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_086.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_087.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 1372
+    },
+    {
+      "fileName": "candlelight_088.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_089.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_090.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_091.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_092.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_093.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_094.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_095.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_096.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_097.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_098.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 1568
+    },
+    {
+      "fileName": "candlelight_099.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_100.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_101.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_102.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_103.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_104.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_105.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_106.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_107.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_108.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_109.png",
+      "width": 254,
+      "height": 196,
+      "x": 2540,
+      "y": 1764
+    },
+    {
+      "fileName": "candlelight_110.png",
+      "width": 254,
+      "height": 196,
+      "x": 0,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_111.png",
+      "width": 254,
+      "height": 196,
+      "x": 254,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_112.png",
+      "width": 254,
+      "height": 196,
+      "x": 508,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_113.png",
+      "width": 254,
+      "height": 196,
+      "x": 762,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_114.png",
+      "width": 254,
+      "height": 196,
+      "x": 1016,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_115.png",
+      "width": 254,
+      "height": 196,
+      "x": 1270,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_116.png",
+      "width": 254,
+      "height": 196,
+      "x": 1524,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_117.png",
+      "width": 254,
+      "height": 196,
+      "x": 1778,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_118.png",
+      "width": 254,
+      "height": 196,
+      "x": 2032,
+      "y": 1960
+    },
+    {
+      "fileName": "candlelight_119.png",
+      "width": 254,
+      "height": 196,
+      "x": 2286,
+      "y": 1960
+    }
+  ],
+  "packMode": "grid",
+  "padding": 0,
+  "backgroundColor": "rgba(0, 0, 0, 0)",
+  "spriteSheetWidth": 2794,
+  "spriteSheetHeight": 2156
+}

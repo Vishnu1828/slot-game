@@ -2,13 +2,15 @@ import { useScreen } from "@/hooks/useScreen";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiSprite from "../pixi/PixiSprite";
 import { Assets, type Texture } from "pixi.js";
+import { coverScale } from "@/utils/cover";
 
 import type { BackgroundTypes } from "@/types/backgroundTypes";
 
 const Background = ({ bgTexture }: BackgroundTypes) => {
   const { w, h } = useScreen();
   const bg = Assets.get<Texture>(bgTexture);
-  const scale = bg ? Math.max(w / bg.width, h / bg.height) : 1;
+  // Cover-fit the art (see utils/cover). Overlays pinned to the bg use the same transform.
+  const scale = bg ? coverScale(w, h, bg.width, bg.height) : 1;
   return (
     <PixiContainer>
       {bg && (
