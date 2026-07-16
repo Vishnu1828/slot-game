@@ -8,7 +8,7 @@ import { audio } from "./utils/audio";
 import { useSettingsStore } from "./store/useSettingsStore";
 
 // The game to boot. Later this comes from the route / lobby selection (e.g. /games/:gameId).
-const GAME: GameId = "fortune-teller-trove";
+const GAME: GameId = "fortune-teller";
 
 function App() {
   useEffect(() => {

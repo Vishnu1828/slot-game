@@ -1,6 +1,6 @@
 import { lazy, type ComponentType, type LazyExoticComponent } from "react";
 import type { ThemeAssets } from "@/types/theme";
-import fortuneTellerTroveTheme from "./fortune-teller-trove/theme";
+import fortuneTellerTheme from "./fortune-teller/theme";
 
 export interface GameEntry {
   /** Human-readable name (for a lobby, titles, etc.). */
@@ -18,10 +18,10 @@ export interface GameEntry {
  * in `<id>/theme.ts`; only reference it below so this file stays a compact manifest).
  */
 export const GAMES = {
-  "fortune-teller-trove": {
-    title: "Fortune Teller Trove",
-    Screen: lazy(() => import("./fortune-teller-trove/GameScreen")),
-    theme: fortuneTellerTroveTheme,
+  "fortune-teller": {
+    title: "Fortune Teller",
+    Screen: lazy(() => import("./fortune-teller/GameScreen")),
+    theme: fortuneTellerTheme,
   },
 } satisfies Record<string, GameEntry>;
 
