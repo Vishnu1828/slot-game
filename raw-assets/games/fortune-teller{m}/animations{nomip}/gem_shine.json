@@ -1,0 +1,681 @@
+{
+  "sprites": [
+    {
+      "fileName": "frame_gem_shine00.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine01.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine02.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine03.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine04.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine05.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine06.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine07.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine08.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine09.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 0
+    },
+    {
+      "fileName": "frame_gem_shine10.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine11.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine12.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine13.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine14.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine15.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine16.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine17.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine18.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine19.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 200
+    },
+    {
+      "fileName": "frame_gem_shine20.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine21.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine22.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine23.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine24.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine25.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine26.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine27.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine28.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine29.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 400
+    },
+    {
+      "fileName": "frame_gem_shine30.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine31.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine32.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine33.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine34.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine35.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine36.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine37.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine38.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine39.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 600
+    },
+    {
+      "fileName": "frame_gem_shine40.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine41.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine42.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine43.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine44.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine45.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine46.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine47.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine48.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine49.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 800
+    },
+    {
+      "fileName": "frame_gem_shine50.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine51.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine52.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine53.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine54.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine55.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine56.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine57.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine58.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine59.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 1000
+    },
+    {
+      "fileName": "frame_gem_shine60.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine61.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine62.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine63.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine64.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine65.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine66.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine67.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine68.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine69.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 1200
+    },
+    {
+      "fileName": "frame_gem_shine70.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine71.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine72.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine73.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine74.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine75.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine76.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine77.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine78.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine79.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 1400
+    },
+    {
+      "fileName": "frame_gem_shine80.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine81.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine82.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine83.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine84.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine85.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine86.png",
+      "width": 200,
+      "height": 200,
+      "x": 1200,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine87.png",
+      "width": 200,
+      "height": 200,
+      "x": 1400,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine88.png",
+      "width": 200,
+      "height": 200,
+      "x": 1600,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine89.png",
+      "width": 200,
+      "height": 200,
+      "x": 1800,
+      "y": 1600
+    },
+    {
+      "fileName": "frame_gem_shine90.png",
+      "width": 200,
+      "height": 200,
+      "x": 0,
+      "y": 1800
+    },
+    {
+      "fileName": "frame_gem_shine91.png",
+      "width": 200,
+      "height": 200,
+      "x": 200,
+      "y": 1800
+    },
+    {
+      "fileName": "frame_gem_shine92.png",
+      "width": 200,
+      "height": 200,
+      "x": 400,
+      "y": 1800
+    },
+    {
+      "fileName": "frame_gem_shine93.png",
+      "width": 200,
+      "height": 200,
+      "x": 600,
+      "y": 1800
+    },
+    {
+      "fileName": "frame_gem_shine94.png",
+      "width": 200,
+      "height": 200,
+      "x": 800,
+      "y": 1800
+    },
+    {
+      "fileName": "frame_gem_shine95.png",
+      "width": 200,
+      "height": 200,
+      "x": 1000,
+      "y": 1800
+    }
+  ],
+  "packMode": "grid",
+  "padding": 0,
+  "backgroundColor": "rgba(0, 0, 0, 0)",
+  "spriteSheetWidth": 2000,
+  "spriteSheetHeight": 2000
+}
