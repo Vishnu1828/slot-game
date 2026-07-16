@@ -5,24 +5,28 @@ import Header from "@/components/ui/Header";
 import Controls from "@/components/ui/Controls";
 import Footer from "@/components/ui/Footer";
 import { useScreen } from "@/hooks/useScreen";
-import { getTheme } from "../registry";
 import { useGameControlsStore } from "@/store/useGameControlsStore";
 import GameState from "@/components/ui/GameState";
 import { PixiGameAnimation } from "@/components/pixi/PixiGameAnimation";
+import DecorAnimation from "@/components/ui/DecorAnimation";
 import { anchorToScreen } from "@/utils/cover";
-
-const theme = getTheme("fortune-teller-trove");
-
-// Candle flame overlay, positioned over the candles in `bg_horizontal` (landscape/desktop art).
-// Values are FRACTIONS of that art (0..1) — tune by eye. CANDLE_ART_W is the flame width in art
-// pixels; multiplying by the cover scale keeps it proportional to the background at any size.
-const CANDLE_FX = 0.44;
-const CANDLE_FY = 0.33;
-const CANDLE_ART_W = 360;
-const CANDLE_ASPECT = 196 / 254; // candle_light frame is 254×196
-// Fallback intrinsic size of bg_horizontal (used only until its texture is available).
-const BG_W = 3840;
-const BG_H = 2160;
+import {
+  CANDLE_FX,
+  CANDLE_FY,
+  CANDLE_ART_W,
+  CANDLE_ASPECT,
+  BG_W,
+  BG_H,
+  LAMP_X_FRAC,
+  LAMP_H_FRAC,
+  LAMP_Y_FRAC,
+  LAMP_ASPECT,
+  CHANDELIER_X_FRAC,
+  CHANDELIER_Y_FRAC,
+  CHANDELIER_H_FRAC,
+  CHANDELIER_ASPECT,
+  theme,
+} from "./constant";
 
 export function GameScreen() {
   const { w, h, portrait } = useScreen();
@@ -56,6 +60,27 @@ export function GameScreen() {
           anchor={{ x: 0.5, y: 0.85 }} // flame base sits on the wick
           loop
           animationSpeed={0.4}
+        />
+      )}
+      {/* Hanging lanterns — landscape/desktop (hung from the top-right). */}
+      {!portrait && (
+        <DecorAnimation
+          sheet="hanging_lamps"
+          xFrac={LAMP_X_FRAC}
+          yFrac={LAMP_Y_FRAC}
+          heightFrac={LAMP_H_FRAC}
+          aspect={LAMP_ASPECT}
+        />
+      )}
+      {/* Chandelier — portrait (hung from the top-center). */}
+      {portrait && (
+        <DecorAnimation
+          sheet="chandelier"
+          xFrac={CHANDELIER_X_FRAC}
+          yFrac={CHANDELIER_Y_FRAC}
+          heightFrac={CHANDELIER_H_FRAC}
+          aspect={CHANDELIER_ASPECT}
+          animationSpeed={0.7}
         />
       )}
       {/* Themed chrome — art comes from this game's theme descriptor */}
