@@ -1,17 +1,14 @@
 import { useMemo } from "react";
-import { extend } from "@pixi/react";
-import { Graphics } from "pixi.js";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
+import DesignStage from "../pixi/DesignStage";
+import OverlayScrim from "../pixi/OverlayScrim";
 import Button from "./Button";
-import { useScreen } from "@/hooks/useScreen";
+import { useStage } from "@/hooks/useStage";
 import { commonTheme } from "@/constants/commonTheme";
 import { measureBitmapText } from "@/utils/measureBitmapText";
 import { measureButtonWidth } from "@/utils/buttonMetrics";
-
-// <pixiGraphics> for the dim backdrop only (the panel is now the `popup_message_container` asset).
-extend({ Graphics });
 
 const clamp = (v: number, min: number, max: number) =>
   Math.min(max, Math.max(min, v));
@@ -86,7 +83,7 @@ const MODE = {
  * backdrop blocks click-through but does NOT close on tap (the user must choose an action).
  */
 export function PopupModal({ title, message, buttons }: PopupModalProps) {
-  const { w, h, mode } = useScreen();
+  const { w, h, mode } = useStage();
   const m = MODE[mode];
 
   const hasMsg = !!message;
@@ -158,15 +155,11 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
 
   return (
     <PixiContainer>
-      {/* Dim backdrop — blocks input to the game beneath; no tap-to-close (must choose an action). */}
-      <pixiGraphics
-        eventMode="static"
-        draw={(g) => {
-          g.clear();
-          g.rect(0, 0, w, h).fill({ color: 0x05070f, alpha: 0.6 });
-        }}
-      />
+      {/* Dim backdrop (real screen) — blocks input; no tap-to-close (must choose an action). */}
+      <OverlayScrim alpha={0.6} />
 
+      {/* Scaled design-canvas content */}
+      <DesignStage>
       {/* Panel (asset) */}
       <PixiNineSliceSprite
         texture={commonTheme.overlay.popup}
@@ -218,6 +211,7 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
           onPress={b.onPress}
         />
       ))}
+      </DesignStage>
     </PixiContainer>
   );
 }

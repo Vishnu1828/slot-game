@@ -5,7 +5,8 @@ import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiSprite } from "../pixi/PixiSprite";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
-import { useScreen } from "@/hooks/useScreen";
+import DesignStage from "../pixi/DesignStage";
+import { useStage } from "@/hooks/useStage";
 import { commonTheme } from "@/constants/commonTheme";
 import { measureBitmapText } from "@/utils/measureBitmapText";
 
@@ -61,7 +62,7 @@ export function Toast({
   durationMs = 2000,
   onDone,
 }: ToastProps) {
-  const { w, h, mode } = useScreen();
+  const { w, h, mode } = useStage();
   const m = MODE[mode];
 
   const containerRef = useRef<Container>(null);
@@ -106,6 +107,7 @@ export function Toast({
   const insetH = Math.min(56, Math.floor(panelW / 2) - 1);
   const insetV = Math.min(56, Math.floor(panelH / 2) - 1);
   return (
+    <DesignStage>
     <PixiContainer ref={containerRef} alpha={0} eventMode="none">
       <PixiNineSliceSprite
         texture={commonTheme.audio.panel}
@@ -140,6 +142,7 @@ export function Toast({
         y={textTopY}
       />
     </PixiContainer>
+    </DesignStage>
   );
 }
 

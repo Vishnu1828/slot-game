@@ -3,7 +3,7 @@ import PixiContainer from "../pixi/PixiContainer";
 import { PixiSprite } from "../pixi/PixiSprite";
 import { PixiGameAnimation } from "../pixi/PixiGameAnimation";
 import ReelGrid from "./ReelGrid";
-import { useScreen } from "@/hooks/useScreen";
+import { useStage } from "@/hooks/useStage";
 import { REEL } from "@/constants/reel";
 import type { Rect } from "@/utils/reelCells";
 import type { ReelArt } from "@/types/theme";
@@ -24,7 +24,7 @@ export interface ReelFrameProps {
  * FRAME-local, so they track the frame at any size. Renders nothing until the frame texture loads.
  */
 export function ReelFrame({ reel, symbols }: ReelFrameProps) {
-  const { w, h, mode, portrait } = useScreen();
+  const { w, h, mode, portrait } = useStage();
   const o = portrait ? reel.vertical : reel.horizontal;
 
   const frameTex = Assets.get<Texture>(o.frame);

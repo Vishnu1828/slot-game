@@ -10,6 +10,7 @@ import GameState from "@/components/ui/GameState";
 import { PixiGameAnimation } from "@/components/pixi/PixiGameAnimation";
 import DecorAnimation from "@/components/ui/DecorAnimation";
 import ReelFrame from "@/components/ui/ReelFrame";
+import DesignStage from "@/components/pixi/DesignStage";
 import { anchorToScreen } from "@/utils/cover";
 import {
   CANDLE_FX,
@@ -84,16 +85,20 @@ export function GameScreen() {
           animationSpeed={0.7}
         />
       )}
-      {/* Slot playfield: frame + reel bg + symbol grid + theme-driven decor animations. */}
-      <ReelFrame reel={theme.reel} />
+      {/* UI cluster — laid out in the fixed DESIGN canvas (useStage) and uniformly scaled to fit.
+          Background + decor above stay at REAL screen size so art fills any letterbox margins. */}
+      <DesignStage>
+        {/* Slot playfield: frame + reel bg + symbol grid + theme-driven decor animations. */}
+        <ReelFrame reel={theme.reel} />
 
-      {/* Themed chrome — art comes from this game's theme descriptor */}
-      <Header art={theme.header} />
+        {/* Themed chrome — art comes from this game's theme descriptor */}
+        <Header art={theme.header} />
 
-      {/* Game controls: spin + bet +/- + autoplay + speed + bet-settings */}
-      <Controls spin={theme.spin} />
-      <Footer balance={balance} totalBet={totalBet} />
-      <GameState />
+        {/* Game controls: spin + bet +/- + autoplay + speed + bet-settings */}
+        <Controls spin={theme.spin} />
+        <Footer balance={balance} totalBet={totalBet} />
+        <GameState />
+      </DesignStage>
     </PixiContainer>
   );
 }

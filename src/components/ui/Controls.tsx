@@ -1,7 +1,7 @@
 import PixiContainer from "../pixi/PixiContainer";
 import IconButton from "./IconButton";
 import SpinButton from "./SpinButton";
-import { useScreen } from "@/hooks/useScreen";
+import { useStage } from "@/hooks/useStage";
 import { commonTheme } from "@/constants/commonTheme";
 import { CONTROLS } from "@/constants/controls";
 import { BAR_H } from "@/constants/footer";
@@ -35,7 +35,7 @@ interface Center {
  * center-anchored and placed by its center.
  */
 export function Controls({ spin, onSpin }: ControlsProps) {
-  const { w, h, mode } = useScreen();
+  const { w, h, mode } = useStage();
   const c = CONTROLS[mode];
 
   const bet = useGameControlsStore((s) => s.bet);

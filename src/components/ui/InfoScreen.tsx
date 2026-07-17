@@ -1,14 +1,11 @@
-import { extend } from "@pixi/react";
-import { Graphics } from "pixi.js";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import IconButton from "./IconButton";
-import { useScreen } from "@/hooks/useScreen";
+import DesignStage from "../pixi/DesignStage";
+import OverlayScrim from "../pixi/OverlayScrim";
+import { useStage } from "@/hooks/useStage";
 import { commonTheme } from "@/constants/commonTheme";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
-
-// <pixiGraphics> for the dim backdrop + header divider.
-extend({ Graphics });
 
 const clamp = (v: number, min: number, max: number) =>
   Math.min(max, Math.max(min, v));
@@ -30,7 +27,7 @@ export interface InfoScreenProps {
  * Header height, paddings and font sizes adapt per layout mode.
  */
 export function InfoScreen({ onClose }: InfoScreenProps) {
-  const { w, h, mode } = useScreen();
+  const { w, h, mode } = useStage();
   const cfg = MODE[mode];
 
   const panelW = mode === "portrait" ? w : clamp(w * 0.3, 320, 460);
@@ -39,14 +36,11 @@ export function InfoScreen({ onClose }: InfoScreenProps) {
 
   return (
     <PixiContainer>
-      {/* Dim backdrop */}
-      <pixiGraphics
-        draw={(g) => {
-          g.clear();
-          g.rect(0, 0, w, h).fill({ color: 0x05070f, alpha: 0.55 });
-        }}
-      />
+      {/* Dim backdrop (real screen) */}
+      <OverlayScrim alpha={0.55} />
 
+      {/* Scaled design-canvas content */}
+      <DesignStage>
       {/* Panel background (blocks click-through) */}
       <PixiNineSliceSprite
         texture={commonTheme.overlay.container}
@@ -85,6 +79,7 @@ export function InfoScreen({ onClose }: InfoScreenProps) {
         x={cx}
         y={h / 2}
       />
+      </DesignStage>
     </PixiContainer>
   );
 }

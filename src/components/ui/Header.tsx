@@ -1,6 +1,6 @@
 import { Assets, Texture } from "pixi.js";
 import PixiSprite from "../pixi/PixiSprite";
-import { useScreen } from "@/hooks/useScreen";
+import { useStage } from "@/hooks/useStage";
 
 export interface HeaderProps {
   /** Header/logo art alias (from the active theme). */
@@ -18,7 +18,7 @@ const clamp = (v: number, min: number, max: number) =>
  * derived from the texture aspect so the logo never distorts. Renders nothing until it's loaded.
  */
 export function Header({ art, alpha, visible }: HeaderProps) {
-  const { w, h, mode } = useScreen();
+  const { w, h, mode } = useStage();
   const tex = Assets.get<Texture>(art);
   if (!tex) return null;
 
