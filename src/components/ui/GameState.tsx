@@ -2,7 +2,7 @@ import { commonTheme } from "@/constants/commonTheme";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiSprite } from "../pixi/PixiSprite";
-import { useStage } from "@/hooks/useStage";
+import { useScreen } from "@/hooks/useScreen";
 import { BAR_H } from "@/constants/footer";
 import { measureBitmapText } from "@/utils/measureBitmapText";
 
@@ -34,7 +34,9 @@ export function GameState({
   icon,
   detail,
 }: GameStateProps) {
-  const { w, h, mode } = useStage();
+  // Real-screen chrome (sibling of the real-space Footer): center on the real screen and sit just
+  // above the real footer — NOT the design canvas (else it drifts on any screen != the design size).
+  const { w, h, mode } = useScreen();
   const size = SIZE[mode];
   const bold = commonTheme.fonts.alexandria_semibold;
   const regular = commonTheme.fonts.alexandria_regular;
