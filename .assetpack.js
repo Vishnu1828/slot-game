@@ -35,7 +35,7 @@ const pipes = pixiPipes({
 //     ships no bitmap-font cache-bust mod. So below we make the cache-buster emit a *no-op* child
 //     (same filename) for font assets: the transform chain the manifest walks stays intact, but
 //     the .fnt and its .png keep stable names so the reference stays valid.
-// (The same applies to MSDF fonts generated from a .ttf via msdfFont() — see raw-assets/README.md.)
+// (The same applies to MSDF fonts generated from a .ttf via msdfFont() — see docs/assets.md.)
 const isBitmapFont = (asset) =>
   asset.extension === '.fnt' || /[\\/]fonts[^\\/]*[\\/]/.test(asset.path)
 
