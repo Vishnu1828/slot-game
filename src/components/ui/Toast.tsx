@@ -105,7 +105,6 @@ export function Toast({
 
   const insetH = Math.min(56, Math.floor(panelW / 2) - 1);
   const insetV = Math.min(56, Math.floor(panelH / 2) - 1);
-
   return (
     <PixiContainer ref={containerRef} alpha={0} eventMode="none">
       <PixiNineSliceSprite

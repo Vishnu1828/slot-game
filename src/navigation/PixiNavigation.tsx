@@ -24,7 +24,6 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
   const hideOverlay = useNavigationStore((s) => s.hideOverlay);
   const toast = useToastStore((s) => s.toast);
   const clearToast = useToastStore((s) => s.clearToast);
-
   // Show the "ARE YOU STILL THERE" popup after a stretch of no user activity.
   // add this back in once full code done
   // useInactivityOverlay();

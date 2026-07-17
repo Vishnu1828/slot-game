@@ -12,7 +12,7 @@ export const commonTheme = {
     bold: "Inter_Bold",
     alexandria_regular: "Alexandria_Regular",
     alexandria_medium: "Alexandria_Medium",
-    alexandria_semibold: "Alexandria_Semibold",
+    alexandria_semibold: "Alexandria_SemiBold",
   },
   footer: { background: "footer" },
   buttons: {
@@ -73,5 +73,11 @@ export const commonTheme = {
   sfx: { click: "click_spin" },
   input: {
     idle: "input_field",
+  },
+  buttonIcons: {
+    coins: "coins",
+    speed_1: "speed_1",
+    speed_2: "speed_2",
+    speed_3: "speed_3",
   },
 } as const;

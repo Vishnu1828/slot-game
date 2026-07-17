@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { useToastStore } from "./useToastStore";
+import { commonTheme } from "@/constants/commonTheme";
 
 /** Bet the game starts at (in whole currency units). */
 export const DEFAULT_BET = 5;
@@ -67,7 +68,10 @@ interface GameControlsState {
   betMax: () => void;
 }
 
-const toast = (message: string) => useToastStore.getState().showToast(message);
+const toast = (
+  message: string,
+  options?: { icon?: string; durationMs?: number },
+) => useToastStore.getState().showToast(message, options);
 
 export const useGameControlsStore = create<GameControlsState>((set, get) => ({
   bet: DEFAULT_BET,
@@ -82,20 +86,22 @@ export const useGameControlsStore = create<GameControlsState>((set, get) => ({
     const bet = Math.min(get().bet + BET_STEP, MAX_BET);
     if (bet === get().bet) return; // already at max
     set({ bet });
-    toast(`BET INCREASED TO $${bet}`);
+    toast(`BET INCREASED TO $${bet}`, { icon: commonTheme.buttonIcons.coins });
   },
 
   decreaseBet: () => {
     const bet = Math.max(get().bet - BET_STEP, MIN_BET);
     if (bet === get().bet) return; // already at min
     set({ bet });
-    toast(`BET REDUCED TO $${bet}`);
+    toast(`BET REDUCED TO $${bet}`, { icon: commonTheme.buttonIcons.coins });
   },
 
   cycleSpeed: () => {
     const speed = ((get().speed % 3) + 1) as SpeedLevel;
     set({ speed });
-    toast(`SPEED ${speed} ENABLED`);
+    toast(`SPEED ${speed} ENABLED`, {
+      icon: commonTheme.buttonIcons[`speed_${speed}`],
+    });
   },
 
   setSpeed: (level) => set({ speed: level }),
