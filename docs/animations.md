@@ -158,3 +158,13 @@ refs, so swapping a callback never restarts playback.
 - **Put the PNG in a `{tps}` folder** → AssetPack re-packs it into a *different* atlas and your JSON
   coords no longer match. Keep animation PNG+JSON in a plain `{nomip}` folder.
 - **Blurry frames** → a low tier was served; author the sheet large enough, and never upscale sources.
+- **Black box / nothing on mobile (esp. Android)** → the PNG exceeds the GPU **max texture size**.
+  Mobile/Android caps textures at ~**4096px per side** (desktop 8192–16384); a larger texture can't
+  upload to WebGL, so Pixi shows black/nothing. `{nomip}` ships sheets at full size and the `{tps}`
+  `maximumTextureSize` cap does **not** apply to these loose sheets, so nothing clamps them
+  automatically. Keep every animation sheet **≤ 4096px on each side** (drop to **≤ 2048** if you must
+  support old/low-end devices). If a sheet is too big, run `node scripts/fit-animation-sheets.mjs` — it
+  downscales any oversized sheet's PNG **and** rewrites its JSON grid coords by the same factor (safe
+  for `PixiGameAnimation`; only sharpness drops), then re-run `npm run assets`. For best quality at
+  small on-screen sizes, prefer re-exporting the animation with fewer/smaller frames rather than
+  relying on the downscaler.
