@@ -1,9 +1,8 @@
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import IconButton from "./IconButton";
-import DesignStage from "../pixi/DesignStage";
 import OverlayScrim from "../pixi/OverlayScrim";
-import { useStage } from "@/hooks/useStage";
+import { useScreen } from "@/hooks/useScreen";
 import { commonTheme } from "@/constants/commonTheme";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
 
@@ -27,7 +26,7 @@ export interface InfoScreenProps {
  * Header height, paddings and font sizes adapt per layout mode.
  */
 export function InfoScreen({ onClose }: InfoScreenProps) {
-  const { w, h, mode } = useStage();
+  const { w, h, mode } = useScreen();
   const cfg = MODE[mode];
 
   const panelW = mode === "portrait" ? w : clamp(w * 0.3, 320, 460);
@@ -39,9 +38,7 @@ export function InfoScreen({ onClose }: InfoScreenProps) {
       {/* Dim backdrop (real screen) */}
       <OverlayScrim alpha={0.55} />
 
-      {/* Scaled design-canvas content */}
-      <DesignStage>
-      {/* Panel background (blocks click-through) */}
+      {/* Panel background (blocks click-through) — full REAL screen size (not the design canvas) */}
       <PixiNineSliceSprite
         texture={commonTheme.overlay.container}
         x={panelX}
@@ -79,7 +76,6 @@ export function InfoScreen({ onClose }: InfoScreenProps) {
         x={cx}
         y={h / 2}
       />
-      </DesignStage>
     </PixiContainer>
   );
 }

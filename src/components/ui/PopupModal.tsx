@@ -2,10 +2,9 @@ import { useMemo } from "react";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
-import DesignStage from "../pixi/DesignStage";
 import OverlayScrim from "../pixi/OverlayScrim";
 import Button from "./Button";
-import { useStage } from "@/hooks/useStage";
+import { useScreen } from "@/hooks/useScreen";
 import { commonTheme } from "@/constants/commonTheme";
 import { measureBitmapText } from "@/utils/measureBitmapText";
 import { measureButtonWidth } from "@/utils/buttonMetrics";
@@ -83,7 +82,7 @@ const MODE = {
  * backdrop blocks click-through but does NOT close on tap (the user must choose an action).
  */
 export function PopupModal({ title, message, buttons }: PopupModalProps) {
-  const { w, h, mode } = useStage();
+  const { w, h, mode } = useScreen();
   const m = MODE[mode];
 
   const hasMsg = !!message;
@@ -158,9 +157,7 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
       {/* Dim backdrop (real screen) — blocks input; no tap-to-close (must choose an action). */}
       <OverlayScrim alpha={0.6} />
 
-      {/* Scaled design-canvas content */}
-      <DesignStage>
-      {/* Panel (asset) */}
+      {/* Panel (asset) — sized to the REAL screen (not the design canvas) */}
       <PixiNineSliceSprite
         texture={commonTheme.overlay.popup}
         x={panelX}
@@ -211,7 +208,6 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
           onPress={b.onPress}
         />
       ))}
-      </DesignStage>
     </PixiContainer>
   );
 }
