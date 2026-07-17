@@ -2,7 +2,7 @@ import { commonTheme } from "@/constants/commonTheme";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiSprite } from "../pixi/PixiSprite";
-import { useScreen } from "@/hooks/useScreen";
+import { useStage } from "@/hooks/useStage";
 import { BAR_H } from "@/constants/footer";
 import { measureBitmapText } from "@/utils/measureBitmapText";
 
@@ -34,7 +34,7 @@ export function GameState({
   icon,
   detail,
 }: GameStateProps) {
-  const { w, h, mode } = useScreen();
+  const { w, h, mode } = useStage();
   const size = SIZE[mode];
   const bold = commonTheme.fonts.alexandria_semibold;
   const regular = commonTheme.fonts.alexandria_regular;

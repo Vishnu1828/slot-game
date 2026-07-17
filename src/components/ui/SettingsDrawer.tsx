@@ -6,10 +6,12 @@ import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
 import IconButton from "./IconButton";
 import Button from "./Button";
-import { useScreen } from "@/hooks/useScreen";
+import DesignStage from "../pixi/DesignStage";
+import OverlayScrim from "../pixi/OverlayScrim";
+import { useStage } from "@/hooks/useStage";
 import { commonTheme } from "@/constants/commonTheme";
 
-// <pixiGraphics> for the dim backdrop, rounded-top sheet, and header divider.
+// <pixiGraphics> for the rounded-top sheet + header divider (the backdrop is <OverlayScrim>).
 extend({ Graphics });
 
 const clamp = (v: number, min: number, max: number) =>
@@ -74,7 +76,7 @@ export function SettingsDrawer({
   sections,
   footer,
 }: SettingsDrawerProps) {
-  const { w, h, mode } = useScreen();
+  const { w, h, mode } = useStage();
   const cfg = MODE[mode];
 
   // Portrait = bottom sheet (full width, anchored to the bottom, sized to content);
@@ -130,14 +132,11 @@ export function SettingsDrawer({
 
   return (
     <PixiContainer>
-      {/* Dim backdrop */}
-      <pixiGraphics
-        draw={(g) => {
-          g.clear();
-          g.rect(0, 0, w, h).fill({ color: 0x05070f, alpha: 0.55 });
-        }}
-      />
+      {/* Dim backdrop (real screen) */}
+      <OverlayScrim alpha={0.55} />
 
+      {/* Scaled design-canvas content */}
+      <DesignStage>
       {/* Panel background (blocks click-through). Portrait sheet is drawn `SHEET_RADIUS` taller so
           its bottom corners fall off-screen and only the top corners are rounded. */}
       {isSheet ? (
@@ -208,6 +207,7 @@ export function SettingsDrawer({
         textSize={cfg.footerFont}
         onPress={footer.onPress}
       />
+      </DesignStage>
     </PixiContainer>
   );
 }
