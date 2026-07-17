@@ -4,7 +4,7 @@ import PixiNineSliceSprite from "../pixi/PixiNineSliceSprite";
 import IconButton from "./IconButton";
 import StatBlock from "./StatBlock";
 import VolumeSlider from "./VolumeSlider";
-import { useStage } from "../../hooks/useStage";
+import { useScreen } from "../../hooks/useScreen";
 import { useNavigationStore } from "../../store/useNavigationStore";
 import { useSettingsStore } from "../../store/useSettingsStore";
 import { formatMoney } from "../../utils/format";
@@ -21,7 +21,7 @@ import {
 import { commonTheme } from "@/constants/commonTheme";
 
 export function Footer({ balance, totalBet }: FooterProps) {
-  const { w, h, portrait } = useStage();
+  const { w, h, portrait } = useScreen();
   const ICON_SIZE = portrait ? ICON : ICON_LARGE;
 
   const activeOverlay = useNavigationStore((s) => s.activeOverlay);

@@ -13,6 +13,6 @@ export interface ReelSizing {
 
 export const REEL: Record<LayoutMode, ReelSizing> = {
   desktop: { widthFrac: 0.7, heightFrac: 0.7, centerYFrac: 0.5 },
-  "mobile-landscape": { widthFrac: 0.5, heightFrac: 0.7, centerYFrac: 0.5 },
+  "mobile-landscape": { widthFrac: 0.5, heightFrac: 0.7, centerYFrac: 0.48 },
   portrait: { widthFrac: 0.96, heightFrac: 0.5, centerYFrac: 0.48 },
 };

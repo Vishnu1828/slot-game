@@ -96,9 +96,11 @@ export function GameScreen() {
 
         {/* Game controls: spin + bet +/- + autoplay + speed + bet-settings */}
         <Controls spin={theme.spin} />
-        <Footer balance={balance} totalBet={totalBet} />
-        <GameState />
       </DesignStage>
+
+      {/* Footer bar — full REAL screen width, pinned to the real bottom (chrome, not letterboxed). */}
+      <Footer balance={balance} totalBet={totalBet} />
+      <GameState />
     </PixiContainer>
   );
 }
