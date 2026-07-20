@@ -13,9 +13,15 @@ import { Assets, type ProgressCallback, type UnresolvedAsset } from 'pixi.js'
  */
 
 // AssetPack writes asset `src` paths RELATIVE to public/assets/ (e.g. "games/lucky-slots/..").
-// basePath makes Pixi resolve them against /assets/ regardless of the current route — otherwise
-// a page at /games/... would resolve them against the page URL and 404 (e.g. /games/games/..).
-const ASSETS_BASE = `${import.meta.env.BASE_URL}assets`
+// basePath makes Pixi resolve them against the assets root regardless of the current route —
+// otherwise a page at /games/... would resolve them against the page URL and 404 (e.g. /games/games/..).
+//
+// Assets are served from the app host by default. To decouple asset hosting from the app deploy (host
+// them on a dedicated CDN / object storage — recommended as the game count grows), set
+// `VITE_ASSETS_BASE` to the assets root origin, e.g. `https://cdn.example.com/assets` (no trailing
+// slash). Unset → identical to the previous behaviour.
+const ASSETS_BASE =
+  import.meta.env.VITE_ASSETS_BASE ?? `${import.meta.env.BASE_URL}assets`
 const MANIFEST_URL = `${ASSETS_BASE}/manifest.json`
 
 let initialized: Promise<void> | null = null
