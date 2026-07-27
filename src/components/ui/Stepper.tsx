@@ -1,5 +1,5 @@
 import PixiContainer from "../pixi/PixiContainer";
-import { PixiSprite } from "../pixi/PixiSprite";
+import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import IconButton from "./IconButton";
 import { commonTheme } from "@/constants/commonTheme";
@@ -26,8 +26,9 @@ export interface StepperProps {
 
 /**
  * Reusable [ − ] [ value ] [ + ] stepper. The +/- are `IconButton`s (bet minus/plus art), the value
- * sits in a plain (stretched) `box_middle` container. Buttons are top-left anchored; the value box
- * fills the remaining middle span. Purely presentational — parent supplies value + handlers.
+ * sits in a NINE-SLICE `input_field` container (loose texture, so corners don't distort as it
+ * stretches). Buttons are top-left anchored; the value box fills the remaining middle span. Purely
+ * presentational — parent supplies value + handlers.
  */
 export function Stepper({
   value,
@@ -59,12 +60,18 @@ export function Stepper({
         onPress={onDecrease}
       />
 
-      <PixiSprite
+      {/* Nine-slice so the rounded caps keep their shape while the middle stretches. Insets are the
+          input_field art's corner size — tune to the asset if the corners look off. */}
+      <PixiNineSliceSprite
         texture={commonTheme.input.idle}
         x={boxX}
         y={0}
         width={boxW}
         height={height}
+        leftWidth={36}
+        rightWidth={36}
+        topHeight={24}
+        bottomHeight={24}
       />
       <PixiBitmapText
         text={value}

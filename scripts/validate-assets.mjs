@@ -29,6 +29,7 @@ import { join, extname, basename, relative } from "node:path";
 const ROOT = process.cwd();
 const RAW = join(ROOT, "raw-assets");
 const MAX_TEXTURE = 4096;
+const MIN_ICON = 96; // atlas source icons smaller than this (long side) warn — blurry on high-DPI
 const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 const SOUND_EXTS = new Set([".wav", ".mp3", ".ogg"]);
 
@@ -92,6 +93,14 @@ for (const f of files) {
     } else m.set(stem(f), f);
     atlasFramesByBundle.set(b, m);
     available.add(stem(f));
+    // WARN: atlas source icon smaller than MIN_ICON → will upscale/blur on high-DPI screens.
+    if (ext === ".png") {
+      const sz = pngSize(f);
+      if (sz && Math.max(sz.w, sz.h) < MIN_ICON)
+        warn(
+          `[icon] ${relative(ROOT, f)} is ${sz.w}x${sz.h} — small for high-DPI (blurs when scaled up); author UI icons ~2x their on-screen size (>= ${MIN_ICON}px long side)`,
+        );
+    }
   } else if (inAnim(f) && ext === ".png") {
     available.add(stem(f));
   } else if (inFonts(f) && (ext === ".fnt" || ext === ".png")) {
