@@ -1,0 +1,105 @@
+# Asset pipeline — validate source art, build with AssetPack, publish to the runtime CDN bucket.
+#
+# CURRENT: Cloudflare R2 (S3-compatible) + Cloudflare CDN.
+# FUTURE (AWS): see the "AWS migration" comments — drop --endpoint-url, use OIDC instead of the R2
+# token, and swap the Cloudflare purge step for `aws cloudfront create-invalidation`. The build/validate
+# steps do not change.
+#
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   R2_ENDPOINT            e.g. https://<account-id>.r2.cloudflarestorage.com
+#   R2_ACCESS_KEY_ID       R2 API token access key (S3-compatible)
+#   R2_SECRET_ACCESS_KEY   R2 API token secret
+#   R2_RUNTIME_BUCKET      runtime bucket name, e.g. slot-assets-runtime
+#   CF_API_TOKEN           Cloudflare API token with cache-purge permission
+#   CF_ZONE_ID             Cloudflare zone id for the CDN domain
+name: assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "raw-assets/**"
+      - ".assetpack.js"
+      - "scripts/validate-assets.mjs"
+      - ".github/workflows/assets.yml"
+  workflow_dispatch: {}
+
+concurrency:
+  group: assets-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (with LFS — pulls the GitHub LFS source art)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Persist AssetPack's incremental cache so unchanged games are NOT reprocessed.
+      - name: Cache AssetPack build cache
+        uses: actions/cache@v4
+        with:
+          path: .assetpack
+          key: assetpack-${{ hashFiles('raw-assets/**') }}
+          restore-keys: |
+            assetpack-
+
+      - name: Validate assets (fail fast)
+        run: npm run validate:assets
+
+      - name: Build assets (incremental, cache-busted)
+        run: npm run assets:ci
+
+      # --- Publish to the runtime bucket (Cloudflare R2 via the S3-compatible API) ---
+      # AWS migration: remove ENDPOINT and use aws-actions/configure-aws-credentials (OIDC) instead.
+      - name: Upload hashed assets (immutable, long cache)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          BUCKET: ${{ secrets.R2_RUNTIME_BUCKET }}
+        run: |
+          # Everything except the manifest is content-hashed -> cache forever, never invalidate.
+          aws s3 sync public/assets "s3://$BUCKET/assets" \
+            --endpoint-url "$ENDPOINT" \
+            --size-only \
+            --exclude "manifest.json" \
+            --cache-control "public, max-age=31536000, immutable"
+
+      - name: Upload manifest (short cache so new deploys are picked up)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          BUCKET: ${{ secrets.R2_RUNTIME_BUCKET }}
+        run: |
+          aws s3 cp public/assets/manifest.json "s3://$BUCKET/assets/manifest.json" \
+            --endpoint-url "$ENDPOINT" \
+            --cache-control "public, max-age=60, must-revalidate"
+
+      # --- Purge the CDN edge cache for the manifest only (hashed files never need purging) ---
+      # AWS migration: replace this step with `aws cloudfront create-invalidation --paths /assets/manifest.json`.
+      - name: Purge Cloudflare cache (manifest)
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CDN_BASE: ${{ vars.CDN_BASE }} # e.g. https://cdn.example.com
+        run: |
+          curl -fsS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data "{\"files\":[\"$CDN_BASE/assets/manifest.json\"]}"
