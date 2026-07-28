@@ -10,7 +10,9 @@
     "assets:watch": "assetpack -w",
     "assets:prod": "rm -rf public/assets .assetpack && AP_CACHEBUST=1 assetpack",
     "assets:ci": "AP_CACHEBUST=1 assetpack",
+    "typecheck": "tsc -b",
     "validate:assets": "node scripts/validate-assets.mjs",
+    "validate:assets:strict": "node scripts/validate-assets.mjs --strict",
     "build": "npm run lint && npm run assets:prod && vite build",
     "build:app": "vite build",
     "lint": "eslint ."

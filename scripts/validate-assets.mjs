@@ -33,14 +33,17 @@ const MIN_ICON = 96; // atlas source icons smaller than this (long side) warn �
 const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 const SOUND_EXTS = new Set([".wav", ".mp3", ".ogg"]);
 
+// Three tiers: ERRORS always block; WARNINGS block only with --strict; NOTICES are advisory (never block).
+const STRICT = process.argv.includes("--strict");
 const errors = [];
 const warnings = [];
+const notices = [];
 const err = (m) => errors.push(m);
 const warn = (m) => warnings.push(m);
+const notice = (m) => notices.push(m);
 
 // ---------- fs helpers ----------
 function walk(dir, out = []) {
-  console.log(`walk ${relative(ROOT, dir)}`);
   for (const name of readdirSync(dir)) {
     if (name === ".DS_Store") continue;
     const p = join(dir, name);
@@ -93,11 +96,12 @@ for (const f of files) {
     } else m.set(stem(f), f);
     atlasFramesByBundle.set(b, m);
     available.add(stem(f));
-    // WARN: atlas source icon smaller than MIN_ICON → will upscale/blur on high-DPI screens.
+    // NOTICE (advisory, never blocks): atlas source icon smaller than MIN_ICON → will upscale/blur on
+    // high-DPI screens. Cosmetic + needs re-exported art, so it must not gate deploys.
     if (ext === ".png") {
       const sz = pngSize(f);
       if (sz && Math.max(sz.w, sz.h) < MIN_ICON)
-        warn(
+        notice(
           `[icon] ${relative(ROOT, f)} is ${sz.w}x${sz.h} — small for high-DPI (blurs when scaled up); author UI icons ~2x their on-screen size (>= ${MIN_ICON}px long side)`,
         );
     }
@@ -264,12 +268,17 @@ for (const id of gameFolders) {
 }
 
 // ---------- report ----------
+for (const n of notices) console.log("· " + n); // advisory — never blocks
 for (const w of warnings) console.warn("⚠ " + w);
 for (const e of errors) console.error("✖ " + e);
-if (errors.length) {
+
+// ERRORS always fail; WARNINGS fail only in --strict; NOTICES never fail.
+const failed = errors.length > 0 || (STRICT && warnings.length > 0);
+const tally = `${errors.length} error(s), ${warnings.length} warning(s), ${notices.length} notice(s)`;
+if (failed) {
   console.error(
-    `\n✖ asset validation FAILED: ${errors.length} error(s), ${warnings.length} warning(s).`,
+    `\n✖ asset validation FAILED: ${tally}${STRICT ? " (strict: warnings block)" : ""}.`,
   );
   process.exit(1);
 }
-console.log(`✔ asset validation passed (${warnings.length} warning(s)).`);
+console.log(`✔ asset validation passed: ${tally}${STRICT ? " (strict)" : ""}.`);

@@ -25,18 +25,18 @@ Node built-ins — no `sharp`, no npm install — so it runs anywhere.
 | Local — on demand | `npm run validate:assets` | Run before pushing |
 
 In CI it is fail-fast: if validation fails, AssetPack never builds and nothing is uploaded to the runtime
-bucket. (It is not yet wired into `pull_request`, `npm run build`, or a git hook — see
-[asset-pipeline.md](asset-pipeline.md) §9 for recommended additions.)
+bucket. It runs in the CI `check` job (`.github/workflows/ci.yml`) on **every PR and push**, with
+`--strict` — see [deployment.md](deployment.md).
 
 ## How to run
 
 ```
-npm run validate:assets
-# or
-node scripts/validate-assets.mjs
+npm run validate:assets          # errors block; warnings + notices only reported
+npm run validate:assets:strict   # errors AND warnings block (this is what CI runs)
 ```
 
-Exit codes: `0` = passed (warnings allowed); `1` = one or more errors (build should stop).
+**Three tiers.** Exit `1` if any **ERROR** (always), or any **WARNING** under `--strict`; **NOTICES**
+never fail. Exit `0` otherwise.
 
 Example output:
 
@@ -62,11 +62,17 @@ Example output:
 | 4 | **Bundle ↔ registry** | A `raw-assets/games/<id>{m}/` folder has no `registry.ts` GAMES key, or a registry game has no folder | Keep the game id, folder name, and registry key identical |
 | 5 | **commonTheme aliases** | An alias string in `src/constants/commonTheme.ts` doesn't resolve to any source asset | Add the missing asset, or fix the alias string |
 
-### Warnings (reported, do not fail)
+### Warnings (block only with `--strict`)
 
 | # | Check | Warns when |
 |---|---|---|
 | 6 | **Per-game theme contract** | A game is missing a default file (`images/bg_horizontal|vertical`, `ui/logo`, `frame/reel_frame_*`, `frame/reel_bg_*`) or a spin frame (`spin_active/pressed/disabled`). OK if the game overrides these in its `theme.ts`. |
+
+### Notices (advisory — never block, even with `--strict`)
+
+| # | Check | Notes |
+|---|---|---|
+| 7 | **Under-res atlas icon** | An atlas source image's long side is `< 96px` → it upscales/blurs on high-DPI. Cosmetic + needs re-exported art, so it must not gate deploys. Fix by authoring the icon ~2× its on-screen size. |
 
 ---
 

@@ -1,0 +1,136 @@
+# CI/CD — one gated pipeline.
+#   PR         → run checks only (lint + typecheck + strict asset validation). No deploy.
+#   push main  → checks → (upload assets to R2 if raw-assets changed) → deploy the app to Cloudflare.
+# The app deploys ONLY through this workflow (Cloudflare's own Git auto-build must be turned OFF), so
+# nothing ships unless the checks pass.
+#
+# Required repo secrets:
+#   R2_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_RUNTIME_BUCKET   (asset upload → R2)
+#   CLOUDFLARE_API_TOKEN (Workers Scripts:Edit), CLOUDFLARE_ACCOUNT_ID       (app deploy → Cloudflare)
+# Optional (only with a Cloudflare custom domain): CF_API_TOKEN, CF_ZONE_ID, var CDN_BASE.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Detect whether this push touched assets (so we only rebuild/upload assets when needed).
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      assets: ${{ steps.filter.outputs.assets }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            assets:
+              - 'raw-assets/**'
+              - '.assetpack.js'
+              - 'scripts/validate-assets.mjs'
+
+  # THE GATE — runs on every PR and push. Everything below needs this to pass.
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run validate:assets:strict
+
+  # Build + upload runtime assets to R2 — only on main pushes that changed assets.
+  assets:
+    needs: [changes, check]
+    if: ${{ github.event_name == 'push' && needs.changes.outputs.assets == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Cache AssetPack build cache
+        uses: actions/cache@v4
+        with:
+          path: .assetpack
+          key: assetpack-${{ hashFiles('raw-assets/**') }}
+          restore-keys: |
+            assetpack-
+      - name: Build assets (incremental, cache-busted)
+        run: npm run assets:ci
+      - name: Upload hashed assets (immutable, long cache)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          BUCKET: ${{ secrets.R2_RUNTIME_BUCKET }}
+        run: |
+          aws s3 sync public/assets "s3://$BUCKET/assets" \
+            --endpoint-url "$ENDPOINT" --size-only --exclude "manifest.json" \
+            --cache-control "public, max-age=31536000, immutable"
+      - name: Upload manifest (short cache)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          BUCKET: ${{ secrets.R2_RUNTIME_BUCKET }}
+        run: |
+          aws s3 cp public/assets/manifest.json "s3://$BUCKET/assets/manifest.json" \
+            --endpoint-url "$ENDPOINT" --cache-control "public, max-age=60, must-revalidate"
+      - name: Purge Cloudflare cache (manifest) — skips without a custom-domain zone
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CDN_BASE: ${{ vars.CDN_BASE }}
+        run: |
+          if [ -z "$CF_ZONE_ID" ]; then echo "No CF_ZONE_ID — skipping purge."; exit 0; fi
+          curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
+            --data "{\"files\":[\"$CDN_BASE/assets/manifest.json\"]}"
+
+  # Build + deploy the app to Cloudflare — only on main, only if checks passed. Runs even when the
+  # `assets` job was skipped (code-only push); does NOT run if checks or the assets upload failed.
+  deploy-app:
+    needs: [check, assets]
+    if: >-
+      ${{ !cancelled()
+          && github.event_name == 'push'
+          && needs.check.result == 'success'
+          && needs.assets.result != 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build app (VITE_ASSETS_BASE from .env.production → R2)
+        run: npm run build:app
+      - name: Deploy to Cloudflare (wrangler.jsonc → dist/)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
