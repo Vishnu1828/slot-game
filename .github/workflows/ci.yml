@@ -4,9 +4,11 @@
 # The app deploys ONLY through this workflow (Cloudflare's own Git auto-build must be turned OFF), so
 # nothing ships unless the checks pass.
 #
-# Required repo secrets:
+# Required repo SECRETS (Settings → Secrets and variables → Actions → Secrets):
 #   R2_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_RUNTIME_BUCKET   (asset upload → R2)
 #   CLOUDFLARE_API_TOKEN (Workers Scripts:Edit), CLOUDFLARE_ACCOUNT_ID       (app deploy → Cloudflare)
+# Required repo VARIABLE (Settings → Secrets and variables → Actions → Variables):
+#   VITE_ASSETS_BASE = https://<pub-hash>.r2.dev/assets   (baked into the app build → loads assets from R2)
 # Optional (only with a Cloudflare custom domain): CF_API_TOKEN, CF_ZONE_ID, var CDN_BASE.
 name: ci
 
@@ -126,8 +128,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Build app (VITE_ASSETS_BASE from .env.production → R2)
+      - name: Build app (VITE_ASSETS_BASE from repo variable → app loads assets from R2)
         run: npm run build:app
+        env:
+          VITE_ASSETS_BASE: ${{ vars.VITE_ASSETS_BASE }}
       - name: Deploy to Cloudflare (wrangler.jsonc → dist/)
         uses: cloudflare/wrangler-action@v3
         with:

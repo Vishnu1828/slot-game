@@ -21,12 +21,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "ignoreDeprecations": "6.0",
 
-    /* Paths */
-    "baseUrl": ".",
+    /* Paths — `baseUrl` omitted (deprecated); since TS 4.1 `paths` resolve relative to this file.
+       Runtime `@` resolution is Vite's resolve.alias, independent of this. */
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]

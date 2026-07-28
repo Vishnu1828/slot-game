@@ -41,9 +41,9 @@ own Git auto-build is **turned off** so Actions is the single, gated deploy path
 | Thing | Value |
 |---|---|
 | R2 bucket (runtime) | `slot-assets-runtime` |
-| R2 S3 endpoint | `https://43b8bdfdf3eff901a00fe5c0a3e76dc5.r2.cloudflarestorage.com` |
-| R2 public CDN URL | `https://pub-160db37f0a074033b49e4006e71f89ca.r2.dev` |
-| App asset base (`VITE_ASSETS_BASE`) | `https://pub-160db37f0a074033b49e4006e71f89ca.r2.dev/assets` (in [`.env.production`](../.env.production)) |
+| R2 S3 endpoint | `https://<account-id>.r2.cloudflarestorage.com` — stored as secret `R2_ENDPOINT` |
+| R2 public CDN URL | `https://<pub-hash>.r2.dev` (from R2 → Public Development URL) |
+| App asset base | `https://<pub-hash>.r2.dev/assets` — GitHub Actions variable `VITE_ASSETS_BASE` |
 | Worker name / URL | `slot-game` → `https://slot-game.darkranger-v7.workers.dev` |
 | App build command | `npm run build:app` |
 | App deploy command | `npx wrangler deploy` (reads [`wrangler.jsonc`](../wrangler.jsonc)) |
@@ -62,8 +62,10 @@ own Git auto-build is **turned off** so Actions is the single, gated deploy path
 4. **Manage R2 API Tokens → Create** → permission **Object Read & Write**, scoped to `slot-assets-runtime`.
    Copy the **Access Key ID** + **Secret**.
 
-### 3.2 GitHub Actions secrets (for `ci.yml`)
-Repo → Settings → Secrets and variables → Actions → **Secrets**:
+### 3.2 GitHub Actions secrets + variable (for `ci.yml`)
+Repo → Settings → Secrets and variables → Actions.
+
+**Secrets** tab:
 
 | Secret | Value | Used by |
 |---|---|---|
@@ -74,13 +76,21 @@ Repo → Settings → Secrets and variables → Actions → **Secrets**:
 | `CLOUDFLARE_API_TOKEN` | token with **Workers Scripts:Edit** | `deploy-app` job |
 | `CLOUDFLARE_ACCOUNT_ID` | your Cloudflare account id | `deploy-app` job |
 
+**Variables** tab (public URL, not a secret):
+
+| Variable | Value | Used by |
+|---|---|---|
+| `VITE_ASSETS_BASE` | `https://pub-…r2.dev/assets` | `deploy-app` build (baked into the app) |
+
 *(CF cache-purge secrets `CF_API_TOKEN`/`CF_ZONE_ID` + var `CDN_BASE` are optional — only needed with a
 custom domain; the purge step skips on the r2.dev URL.)*
 
 ### 3.3 Cloudflare Worker (the app) — deployed from CI, auto-build OFF
 The app is a **Worker with static assets**; [`wrangler.jsonc`](../wrangler.jsonc) points `assets.directory`
-at `./dist`, and `ci.yml`'s `deploy-app` job runs `wrangler deploy`. `VITE_ASSETS_BASE` comes from the
-committed [`.env.production`](../.env.production), baked in by `npm run build:app`.
+at `./dist`, and `ci.yml`'s `deploy-app` job runs `wrangler deploy`. `VITE_ASSETS_BASE` is **injected into
+`npm run build:app` from the GitHub Actions repo variable** (`vars.VITE_ASSETS_BASE`) — Vite bakes it in.
+No `.env.production` file is required. *(Locally, set the var on the command line or a local `.env` if you
+want a local prod build to point at R2; otherwise local builds use `/assets`.)*
 
 **Turn OFF Cloudflare's own auto-build** so the app deploys only through the gated CI (no double deploy):
 Cloudflare → Workers & Pages → `slot-game` → Settings → Builds → disable "Build on push" / disconnect the
@@ -138,7 +148,7 @@ Assets are content-hashed + indexed by `manifest.json`, so deploys are atomic:
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| App loads assets from `…workers.dev/assets` (stale), not R2 | `VITE_ASSETS_BASE` wasn't set **at build time** → app fell back to bundled `/assets` | Ensure `.env.production` is committed; the `deploy-app` build bakes it |
+| App loads assets from `…workers.dev/assets` (stale), not R2 | `VITE_ASSETS_BASE` wasn't set **at build time** → app fell back to bundled `/assets` | Ensure the `VITE_ASSETS_BASE` repo **variable** is set; the `deploy-app` build injects it |
 | App deployed twice / un-gated deploy appeared | Cloudflare's own auto-build is still on alongside CI | Turn OFF Cloudflare auto-build (§3.3) — deploy only via `ci.yml` |
 | `deploy-app` skipped | `check` failed, or it was a PR (PRs only run `check`) | Fix the failing check; deploy runs on `main` pushes after `check` passes |
 | CI fails on `validate:assets` warning | `--strict` blocks warnings | Fix the warning, or if it's the cosmetic icon-size advisory it's a NOTICE (won't block) |
@@ -156,7 +166,7 @@ Assets are content-hashed + indexed by `manifest.json`, so deploys are atomic:
 | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) | Gated pipeline: `check` → `assets` (→ R2) → `deploy-app` (→ Cloudflare) |
 | [`scripts/validate-assets.mjs`](../scripts/validate-assets.mjs) | Asset validator (`--strict`; errors/warnings block, notices advisory) |
 | [`wrangler.jsonc`](../wrangler.jsonc) | Worker config: serve `dist/` as static assets |
-| [`.env.production`](../.env.production) | `VITE_ASSETS_BASE` for production builds (→ R2) |
+| GitHub Actions variable `VITE_ASSETS_BASE` | injected into `build:app` → app loads assets from R2 (no `.env.production` needed) |
 | [`src/assets/loader.ts`](../src/assets/loader.ts) | Runtime: reads `VITE_ASSETS_BASE`, loads manifest + bundles |
 | `package.json` | `build:app`, `assets:ci`, `typecheck`, `validate:assets:strict` |
 
