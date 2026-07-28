@@ -87,7 +87,9 @@ The preload bundle (if used) lives **inside** its game folder. Add a game by cop
 - `{m}` — start a new manifest **bundle**. `{mIgnore}` — exclude from the manifest.
 - `{tps}` — pack a folder of images into a **texture atlas**.
 - `{msdf}` / `{sdf}` — generate a bitmap font from a `.ttf` (needs `msdfFont()` in `.assetpack.js` pipes).
-- `{fix}` — emit only the base resolution (no downscaled variants).
+- `{fix}` — **emit only the full/base resolution** (skip the `@0.5x`/`@0.25x` downscaled copies), while
+  still packing + compressing normally. Use it on **small UI atlases** so the runtime can't load a
+  blurry lower tier (see the "UI icons blurry" pitfall). Combine with `{tps}` as `{tps}{fix}`.
 - `{nomip}` — no resolution variants at all.
 - `{nc}` — do not compress.
 
@@ -95,7 +97,7 @@ The preload bundle (if used) lives **inside** its game folder. Add a game by cop
 
 | Asset kind | Folder | Tag | Why |
 |---|---|---|---|
-| Small buttons / icons (a set) | `ui/<name>{tps}/` | `{tps}` | packed into one atlas → fewer draw calls, mipmapped to 3 tiers |
+| Small buttons / icons (a set) | `ui/<name>{tps}{fix}/` | `{tps}{fix}` | one atlas (fewer draw calls); `{fix}` = full-res only — tiers are pointless for tiny icons and can cause blurry-tier fallback |
 | Symbols | `reels{tps}/` | `{tps}` | atlas |
 | Large panel / background | `images/` or `frame/` | none (loose) | a big image in an atlas can exceed `maximumTextureSize` (4096) → blur/fail; loose is still mipmapped |
 | Nine-slice button/panel | loose (e.g. `popupButton/`) | none | atlas trimming cuts nine-slice caps → keep loose |
@@ -236,6 +238,12 @@ and passes that to a `PixiSprite`.
   ≤ 4096 yourself; see [animations.md](animations.md).)
 - **Nine-slice edges look cut** → the texture is in a `{tps}` atlas (trim eats the caps). Keep
   nine-slice art loose (like `popupButton/`).
+- **UI icons blurry — and blurrier in production than local** → the app's `texturePreference.resolution`
+  (`min(dpr, 2)`) matches no available tier, so Pixi falls back to the **first `src` in the manifest**,
+  and that order differs between dev (stable names) and prod (content-hashed) → a *lower* tier loads in
+  prod (`@0.25x`) than local (`@0.5x`). Fix: tag small UI atlases **`{fix}`** so only the full-res exists
+  → nothing blurry to fall back to. (Truly crisp still needs source art authored ≥ ~2× its on-screen
+  size; the validator warns on atlas icons < 96px.)
 - **New asset not showing** → you didn't reload after the repack, or the alias is wrong. Confirm it
   exists in `public/assets/manifest.json`.
 - **BitmapText renders nothing** → `fontFamily` must be the `.fnt`'s internal `face`, not the filename.
