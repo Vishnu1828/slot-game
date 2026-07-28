@@ -135,6 +135,8 @@ jobs:
       - name: Deploy to Cloudflare (wrangler.jsonc → dist/)
         uses: cloudflare/wrangler-action@v3
         with:
+          # Pin a Wrangler that supports wrangler.jsonc + assets-only Workers (the default 3.90.0 doesn't).
+          wranglerVersion: "3.114.17"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
