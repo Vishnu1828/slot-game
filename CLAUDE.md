@@ -52,6 +52,13 @@ There is **no test suite**. Verify changes by running `npm run dev` and exercisi
   has a custom cache-buster passthrough (a no-op child that keeps the filename) so the `.png` keeps
   its name and the `.fnt`'s `file=` reference stays valid. A BitmapText's `fontFamily` must equal
   the `.fnt`'s internal `face` name (e.g. `Inter_Regular`), not the filename.
+- **Pre-baked TexturePacker sheets** (the `<game>-win` bounce/winning/win-N art) name their atlas *inside*
+  the JSON (`meta.image`), and Pixi fetches that name directly rather than through the manifest. AssetPack's
+  `texturePackerCacheBuster` fixes exactly this but only tests `{tps}` folders — these are deliberately
+  untagged (already packed) — so `.assetpack.js` widens the test to any JSON carrying `meta.image`.
+  **The failure is invisible in dev** (stable filenames) and 404s only after a cache-busted deploy.
+  Custom-dialect sheets (`sprites[]`, in `animations{nomip}/`) name no atlas and are unaffected.
+  See `docs/asset-pipeline.md` § 7.1.
 
 ## Runtime asset loading — `src/assets/loader.ts`
 

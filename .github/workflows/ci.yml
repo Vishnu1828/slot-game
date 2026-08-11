@@ -69,15 +69,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Cache AssetPack build cache
-        uses: actions/cache@v4
-        with:
-          path: .assetpack
-          key: assetpack-${{ hashFiles('raw-assets/**') }}
-          restore-keys: |
-            assetpack-
-      - name: Build assets (incremental, cache-busted)
-        run: npm run assets:ci
+      # CLEAN build, deliberately NOT incremental (~16s on the current tree — the cache bought little and
+      # cost correctness twice over):
+      #   1. AssetPack's cache makes it SKIP EMITTING unchanged files while still regenerating the manifest
+      #      in full. `public/assets/` is git-ignored, so every CI checkout starts empty — a restored cache
+      #      therefore produced a complete manifest over a partial tree, and `s3 sync` uploaded the partial
+      #      tree. Whatever the cache skipped 404s at runtime, with nothing having failed.
+      #   2. The cache key hashed `raw-assets/**` only, so a change to `.assetpack.js` (how assets are
+      #      BUILT) was an exact cache hit: the job ran, emitted nothing but manifest.json, and the config
+      #      change never reached the bucket. That is how a pipeline fix silently no-ops.
+      # A clean build also self-heals R2: it re-emits everything, so the sync restores anything missing.
+      - name: Build assets (clean, cache-busted)
+        run: npm run assets:prod
       - name: Upload hashed assets (immutable, long cache)
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}

@@ -160,6 +160,63 @@ Fonts (`{nomip}{nc}`) and custom animations (`{nomip}`, both `animations…` and
 single-resolution so their baked coordinates stay valid. See docs/assets.md and docs/animations.md for
 placement/naming rules.
 
+### 7.1 Files that name another file — the cache-bust trap
+
+Cache-busting renames every output (`bonus_winning.png` → `bonus_winning-4sGMyw.png`). Most assets don't
+care: the app asks for them by **alias**, and the manifest always maps an alias to the current filename.
+
+The exception is any asset that **stores another file's name inside itself**. That name is written once at
+export time, the rename does not update it, and the reference dies. Two classes exist here, each handled
+differently in `.assetpack.js`:
+
+| Asset | Names what, where | Handling |
+|---|---|---|
+| Bitmap font `.fnt` | its `.png`, via `file="…"` | cache-buster **passthrough** — the font keeps its filename, so the reference stays valid |
+| Pre-baked TexturePacker `.json` | its atlas, via `meta.image` | **`texturePackerCacheBuster`'s test is widened** so the name inside the JSON is rewritten to the hashed one |
+
+**Why the TexturePacker case needed a fix.** AssetPack already ships `texturePackerCacheBuster`, which
+rewrites `meta.image` in its `finish` hook — but it only tests `{tps}`-tagged assets:
+
+```js
+test: (asset) => asset.allMetaData['tps'] && checkExt(asset.path, '.json')
+```
+
+Our win/animation sheets are exported from TexturePacker *already packed*, so they are deliberately **not**
+`{tps}` (that tag would make AssetPack re-pack them, and they already sit near the 4096px limit). They were
+therefore renamed with nothing correcting the reference. `.assetpack.js` widens that test to **any JSON
+carrying `meta.image`**, keying off file content rather than folder or tag.
+
+**How it fails, and why it only fails in production.** Pixi's spritesheet loader does not look `meta.image`
+up in the manifest — it fetches it relative to the JSON's own URL
+([`spritesheetAsset.js`](../node_modules/pixi.js/lib/spritesheet/spritesheetAsset.js): `loader.load(basePath + asset.meta.image)`).
+So one sheet issues **three** requests, and only the first two go through the manifest:
+
+```
+keys_bounce-_fVswg.json   200   ← manifest-resolved
+keys_bounce-wJfZHg.webp   200   ← manifest-resolved
+keys_bounce.png           404   ← from meta.image, unhashed
+```
+
+Dev keeps stable filenames, so the baked-in name still resolves and everything looks fine. **The bug is
+invisible until a cache-busted deploy** — the animation silently does not play, and `winAssets.ts` swallows
+the failure by design, so nothing errors.
+
+Two consequences worth remembering:
+
+- **Format is irrelevant, dialect is everything.** A sheet in the custom dialect (`sprites[]` +
+  `spriteSheetWidth`, see `PixiGameAnimation`) names no atlas and can never go stale — which is why
+  `animations/hanging_lamps` was unaffected while every sheet in `win/` broke. The split followed the
+  folders only by coincidence of which tool exported them.
+- **Adding a TexturePacker-exported sheet anywhere is now safe**, because the widened test inspects the
+  file, not its location.
+
+Verify after any change here — every emitted sheet must point at an atlas that exists:
+
+```
+find public/assets -name '*.json' ! -name manifest.json
+# for each: meta.image must name a file present in the same directory
+```
+
 ## 8. Asset validation
 
 An automated validator (`scripts/validate-assets.mjs`, run via `npm run validate:assets`) fails CI before
@@ -193,9 +250,15 @@ npm run validate:assets        # exits non-zero on any error
 Workflow `.github/workflows/assets.yml` runs on pushes to `main` that touch `raw-assets/**` (or manually):
 
 1. Checkout with `lfs: true` (pulls the GitHub LFS art).
-2. Setup Node, `npm ci`, restore the `.assetpack/` cache.
+2. Setup Node, `npm ci`.
 3. `npm run validate:assets` — fail fast on bad assets.
-4. `npm run assets:ci` — incremental, cache-busted build (only changed games reprocess).
+4. `npm run assets:prod` — **clean**, cache-busted build. Deliberately not incremental: AssetPack's cache
+   skips *emitting* unchanged files while still regenerating the manifest in full, and `public/assets/` is
+   git-ignored so CI always starts empty — a restored cache yields a complete manifest over a partial tree,
+   which uploads cleanly and 404s at runtime. The cache key also hashed `raw-assets/**` only, so a change
+   to `.assetpack.js` was a cache hit that emitted nothing but `manifest.json`, silently no-opping the very
+   pipeline change being deployed. A clean build is deterministic and re-emits everything, so the bucket
+   self-heals. See § 7.1.
 5. `aws s3 sync public/assets s3://<runtime-bucket>/assets --endpoint-url $R2_ENDPOINT` — upload only
    changed files, with immutable cache headers; upload `manifest.json` with a short cache.
 6. Purge the CDN edge cache for `/assets/manifest.json` only.
@@ -266,7 +329,7 @@ future target for organizations standardizing on AWS.
 | .github/workflows/assets.yml | Validate → build → upload to R2 → purge CDN   |
 | src/assets/loader.ts         | Runtime asset loading; reads VITE_ASSETS_BASE |
 | .assetpack.js                | AssetPack pipeline configuration              |
-| package.json                 | Scripts: assets, assets:ci, validate:assets   |
+| package.json                 | Scripts: assets, assets:prod, validate:assets  |
 
 ### 14.2 npm scripts
 
@@ -274,8 +337,7 @@ future target for organizations standardizing on AWS.
 | ----------------------- | -------------------------------------------- |
 | npm run dev             | AssetPack watcher + Vite (local development) |
 | npm run assets          | One-shot asset build (stable names)          |
-| npm run assets:ci       | Incremental, cache-busted build (CI)         |
-| npm run assets:prod     | Clean, cache-busted build (app release)      |
+| npm run assets:prod     | Clean, cache-busted build (CI and release)   |
 | npm run validate:assets | Run the asset validator                      |
 | npm run build           | lint → assets:prod → vite build              |
 

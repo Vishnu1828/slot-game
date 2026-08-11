@@ -209,6 +209,13 @@ Common loose images stay bare (`footer`) because the `common` bundle is unique.
 `animations{nomip}/chandelier.png` + `chandelier.json` are loaded by the base alias **`chandelier`**
 (the component resolves the `.png`+`.json` pair). See [animations.md](animations.md).
 
+> **Two sheet dialects ship here, and they behave differently under cache-bust.** The custom dialect
+> (`sprites[]` + `spriteSheetWidth` — everything in `animations{nomip}/`) names no atlas: the component
+> fetches the `.png` by alias, so renaming can't break it. TexturePacker sheets (`frames`/`animations`/
+> `meta` — everything in `<game>-win{m}{nomip}/`) store the atlas filename in `meta.image`, which Pixi
+> fetches **directly, not via the manifest**. `.assetpack.js` rewrites that name during cache-bust;
+> without it, every such sheet 404s in production only. See [asset-pipeline.md § 7.1](asset-pipeline.md).
+
 Win-presentation sheets are the exception: they are referenced **path-scoped**, as
 `games/<id>/win/<id>-win/<name>`, built by `winAnimPath` in [`theme.ts`](../src/game/theme.ts). Bare
 shortcuts are global across every loaded bundle and AssetPack *silently drops* one that two assets both
@@ -316,5 +323,11 @@ and passes that to a `PixiSprite`.
 - **New asset not showing** → you didn't reload after the repack, or the alias is wrong. Confirm it
   exists in `public/assets/manifest.json`.
 - **BitmapText renders nothing** → `fontFamily` must be the `.fnt`'s internal `face`, not the filename.
+- **An animation plays locally but is silently dead in production, with a 404 on the *unhashed* `.png`**
+  (`keys_bounce.json` + `keys_bounce.webp` both 200, `keys_bounce.png` 404) → the sheet is TexturePacker
+  dialect, so it names its atlas *inside* the JSON (`meta.image`) and Pixi fetches that name directly
+  rather than through the manifest. Cache-busting renames the atlas; the baked-in name goes stale. Dev
+  uses stable filenames, so it only ever breaks after deploy. `.assetpack.js` rewrites `meta.image` for
+  any JSON that has one — see [asset-pipeline.md § 7.1](asset-pipeline.md).
 - **Per-game short alias collides with another game** → per-game loose art must go through `makeTheme`
   scoping; don't hardcode a bare `bg_horizontal`.
