@@ -168,7 +168,7 @@ Assets are content-hashed + indexed by `manifest.json`, so deploys are atomic:
 | [`wrangler.jsonc`](../wrangler.jsonc) | Worker config: serve `dist/` as static assets |
 | GitHub Actions variable `VITE_ASSETS_BASE` | injected into `build:app` → app loads assets from R2 (no `.env.production` needed) |
 | [`src/assets/loader.ts`](../src/assets/loader.ts) | Runtime: reads `VITE_ASSETS_BASE`, loads manifest + bundles |
-| `package.json` | `build:app`, `assets:ci`, `typecheck`, `validate:assets:strict` |
+| `package.json` | `build:app`, `assets:prod`, `typecheck`, `validate:assets:strict` |
 
 ---
 
