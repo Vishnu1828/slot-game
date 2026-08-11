@@ -36,6 +36,13 @@ export interface UseReelSpinOptions {
   onInsufficient: () => void;
   /** Called at spin start (after the credit check passes) with the total bet — deduct the stake. */
   onCommit?: (betTokens: number) => void;
+  /**
+   * Called the moment the result ARRIVES, while the reels are still spinning — a whole spin before
+   * `onSettle`. Nothing player-visible may happen here (the reels haven't landed and the outcome is not
+   * public yet); it exists so the presentation can start fetching the art it will need against the
+   * longest possible deadline. See `useWinPresentation`'s `prefetchWin`.
+   */
+  onResult?: (result: SpinResult) => void;
   /** Called when the reels settle, with the spin result — credit the win / store the round. */
   onSettle?: (result: SpinResult) => void;
   /** Called if the spin request fails, with the total bet — refund the deducted stake. */
@@ -107,6 +114,10 @@ export function useReelSpin(opts: UseReelSpinOptions): UseReelSpin {
     try {
       const result = await requestSpin(betPerLineTokens);
       lastResultRef.current = result;
+      // Hand the result to the presentation NOW, not at settle. The celebration art is fetched on
+      // demand, and the glow beat is only BOUNCE_MS after the reels land — far too short a window for a
+      // multi-MB sheet over a CDN. Starting here buys the whole reel spin on top of it.
+      optsRef.current.onResult?.(result);
       setFinalStops(result.stops);
       setSpinId((n) => n + 1);
     } catch {

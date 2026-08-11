@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useTick } from "@pixi/react";
 import type { Ticker } from "pixi.js";
+import type { SpinResult } from "@/game/math/types";
 import { useRoundStore, type WinPhase } from "@/store/useRoundStore";
 import { useGameControlsStore } from "@/store/useGameControlsStore";
 import { BOUNCE_MS, PAYLINE_MS } from "@/constants/winPresentation";
@@ -28,6 +29,12 @@ export interface UseWinPresentation {
   phase: WinPhase;
   /** End the presentation now (the win screen's own dismiss/tap-to-skip calls this). */
   dismiss: () => void;
+  /**
+   * Start fetching this result's celebration art. Wire it to `useReelSpin`'s `onResult` so the download
+   * begins while the reels are still spinning — the beats are far too short to fetch multi-MB sheets
+   * against once they have started. Safe to call for a losing spin (it no-ops) and safe to call twice.
+   */
+  prefetchWin: (result: SpinResult) => void;
 }
 
 /**
@@ -83,16 +90,36 @@ export function useWinPresentation(
     void ensureSheets(bounceSheets(theme));
   }, [theme]);
 
-  // A win moves phase off "none", which is also the earliest this hook can know WHICH symbols paid.
-  // Fetch only their glows, plus the popup sheets; the popup is ~4s away (bounce + glow), so it has a
-  // comfortable window even if the glow itself doesn't make it.
+  // Fetch this spin's celebration art, glows FIRST.
+  //
+  // Both beats used to be requested in one `Assets.load`, which made them compete: a glow sheet is
+  // 1.3-2.5 MB and is needed BOUNCE_MS after the reels land, while the ten popup sheets total ~3.5 MB and
+  // are not needed for ~4s — so the urgent art was starved by art with eight times the slack. Awaiting the
+  // glows first gives them the full pipe, and the popup still lands comfortably inside its own window.
+  //
+  // Deliberately not awaited by callers: a sheet that misses its beat degrades on its own (`hasSheet`
+  // falls back to the still symbol), so a slow network costs an effect, never a stall.
+  const prefetchWin = useCallback(
+    async (result: SpinResult) => {
+      if (!result.wins.length) return; // a losing spin needs none of it
+      await ensureSheets(winningSheetsFor(theme, result.wins));
+      await ensureSheets(winPopupSheets(theme));
+    },
+    [theme],
+  );
+
+  // The real head start: `useReelSpin` calls `prefetchWin` the moment the result arrives, a whole reel
+  // spin before the reels land. This effect is the SAFETY NET for anything that reaches a phase without
+  // having gone through that path (a remount mid-presentation, a game that hasn't wired `onResult`).
+  // `ensureSheets` skips whatever is already cached, so in the normal case this costs nothing.
+  //
+  // Scoped to the beats where the art is still WANTED. Running it at "popup" would re-fetch the glow
+  // sheets in the same tick the effect below frees them — a load racing an unload over the same aliases.
   useEffect(() => {
-    if (phase === "none" || !lastResult?.wins.length) return;
-    void ensureSheets([
-      ...winningSheetsFor(theme, lastResult.wins),
-      ...winPopupSheets(theme),
-    ]);
-  }, [phase, lastResult, theme]);
+    if (!lastResult) return;
+    if (phase !== "bounce" && phase !== "paylines") return;
+    void prefetchWin(lastResult);
+  }, [phase, lastResult, prefetchWin]);
 
   // The beats never overlap, so peak memory is one beat's art rather than all of it: the glows are done
   // by the time the popup opens, and the popup's sheets are dead once the presentation ends. Freeing
@@ -172,7 +199,12 @@ export function useWinPresentation(
   // The "popup" beat needs no timer here: `WinPopup` runs its own `useTick` and calls `onDone` (wired to
   // `dismiss` below) when it finishes or is tapped — the same clock again.
 
-  return { phase, dismiss: reset };
+  return {
+    phase,
+    dismiss: reset,
+    // Fire-and-forget by design (see `prefetchWin`), so callers don't have to handle a promise.
+    prefetchWin: (result: SpinResult) => void prefetchWin(result),
+  };
 }
 
 export default useWinPresentation;
