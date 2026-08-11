@@ -7,7 +7,8 @@ import VolumeSlider from "./VolumeSlider";
 import { useScreen } from "../../hooks/useScreen";
 import { useNavigationStore } from "../../store/useNavigationStore";
 import { useSettingsStore } from "../../store/useSettingsStore";
-import { formatMoney } from "../../utils/format";
+import { OVERLAY_OPENER_LABEL } from "@/hooks/useDismissOnOutsideTap";
+import { formatGuarani } from "../../utils/format";
 import type { FooterProps } from "@/types/footerTypes";
 import {
   PAD_X,
@@ -55,8 +56,8 @@ export function Footer({ balance, totalBet }: FooterProps) {
       >
         {/* Left: stats */}
         <PixiLayout layout={{ flexDirection: "row", gap: LEFT_GAP }}>
-          <StatBlock label="Balance" value={formatMoney(balance)} />
-          <StatBlock label="Total Bet" value={formatMoney(totalBet)} />
+          <StatBlock label="Balance" value={formatGuarani(balance)} />
+          <StatBlock label="Total Bet" value={formatGuarani(totalBet)} />
         </PixiLayout>
 
         {/* Right: controls */}
@@ -82,6 +83,8 @@ export function Footer({ balance, totalBet }: FooterProps) {
             pressed={commonTheme.buttons.info.pressed}
             active={activeOverlay === "info"}
             size={ICON_SIZE}
+            // Skipped by the tap-outside dismiss so this toggle closes the card, not re-opens it.
+            label={OVERLAY_OPENER_LABEL}
             layout={{ width: ICON_SIZE, height: ICON_SIZE }}
             onPress={() => toggleOverlay("info")}
           />

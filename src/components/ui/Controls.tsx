@@ -11,13 +11,16 @@ import {
   MAX_BET,
 } from "@/store/useGameControlsStore";
 import { useNavigationStore } from "@/store/useNavigationStore";
+import { OVERLAY_OPENER_LABEL } from "@/hooks/useDismissOnOutsideTap";
 import type { SpinButtonArt } from "@/types/theme";
 
 export interface ControlsProps {
   /** This game's spin-button art (game-specific; from the theme). */
   spin: SpinButtonArt;
-  /** Spin action — reels/spin flow is wired later. */
+  /** Spin action (manual spin, or stop autoplay). */
   onSpin?: () => void;
+  /** Show the spin orb as disabled / ignore taps (e.g. mid-spin). */
+  spinDisabled?: boolean;
 }
 
 interface Center {
@@ -34,7 +37,7 @@ interface Center {
  * IconButton is top-left anchored, so each is placed by (center - size/2); SpinButton is
  * center-anchored and placed by its center.
  */
-export function Controls({ spin, onSpin }: ControlsProps) {
+export function Controls({ spin, onSpin, spinDisabled }: ControlsProps) {
   const { w, h, mode } = useStage();
   const c = CONTROLS[mode];
 
@@ -44,20 +47,27 @@ export function Controls({ spin, onSpin }: ControlsProps) {
   const increaseBet = useGameControlsStore((s) => s.increaseBet);
   const decreaseBet = useGameControlsStore((s) => s.decreaseBet);
   const cycleSpeed = useGameControlsStore((s) => s.cycleSpeed);
-  const showOverlay = useNavigationStore((s) => s.showOverlay);
+  const setAutoplay = useGameControlsStore((s) => s.setAutoplay);
+  const toggleOverlay = useNavigationStore((s) => s.toggleOverlay);
 
   const speedArt = commonTheme.buttons.speed[speed - 1];
   const autoplayArt = commonTheme.buttons.autoplay;
   const betSettingsArt = commonTheme.buttons.betSettings;
 
   // The 3 small round buttons, left → right: autoplay, speed, bet-settings.
+  // The two overlay openers carry OVERLAY_OPENER_LABEL so the tap-outside dismiss skips them and
+  // their own toggle closes the card (otherwise it would dismiss then immediately re-open).
   const smallButtons = [
     {
       idle: autoplayArt.idle,
       hover: autoplayArt.hover,
       pressed: autoplayArt.active, // "active" art shown while held / when engaged
-      active: autoplay,
-      onPress: () => showOverlay("settings"), // open the Autospin Settings drawer
+      active: autoplay, // stays lit for the whole run — this IS the stop affordance
+      label: OVERLAY_OPENER_LABEL,
+      // START / STOP. Idle it opens the drawer to pick a count (whose START AUTOSPIN sets the flag);
+      // mid-run it ends the run, which also means a run can't be reconfigured while it's going.
+      onPress: () =>
+        autoplay ? setAutoplay(false) : toggleOverlay("settings"),
     },
     {
       idle: speedArt.idle,
@@ -68,7 +78,9 @@ export function Controls({ spin, onSpin }: ControlsProps) {
       idle: betSettingsArt.idle,
       hover: betSettingsArt.hover,
       pressed: betSettingsArt.pressed,
-      onPress: () => showOverlay("bet-settings"), // open the Betting Settings drawer
+      label: OVERLAY_OPENER_LABEL,
+      disabled: autoplay, // the stake is fixed for the duration of a run
+      onPress: () => toggleOverlay("bet-settings"), // Betting Settings drawer
     },
   ];
 
@@ -127,21 +139,24 @@ export function Controls({ spin, onSpin }: ControlsProps) {
         y={spinC.y}
         size={c.spinSize}
         active={autoplay}
+        disabled={spinDisabled}
         onPress={onSpin}
       />
 
+      {/* Locked during a run: the stake a chained spin uses is read at dispatch time, so letting the
+          bet move mid-run would silently change what the remaining autospins cost. */}
       <IconButton
         {...commonTheme.buttons.betMinus}
         size={c.betBtnSize}
         {...topLeft(minusC, c.betBtnSize)}
-        disabled={bet <= MIN_BET}
+        disabled={autoplay || bet <= MIN_BET}
         onPress={decreaseBet}
       />
       <IconButton
         {...commonTheme.buttons.betPlus}
         size={c.betBtnSize}
         {...topLeft(plusC, c.betBtnSize)}
-        disabled={bet >= MAX_BET}
+        disabled={autoplay || bet >= MAX_BET}
         onPress={increaseBet}
       />
 
@@ -152,6 +167,8 @@ export function Controls({ spin, onSpin }: ControlsProps) {
           hover={b.hover}
           pressed={b.pressed}
           active={b.active}
+          label={b.label}
+          disabled={b.disabled}
           width={c.smallBtnWidth}
           height={c.smallBtnHeight}
           {...topLeft(smallCenters[i], c.smallBtnWidth)}

@@ -1,0 +1,127 @@
+{"frames": {
+
+"candle_bounce00.png":
+{
+	"frame": {"x":0,"y":0,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce01.png":
+{
+	"frame": {"x":308,"y":0,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce02.png":
+{
+	"frame": {"x":616,"y":0,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce03.png":
+{
+	"frame": {"x":0,"y":308,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce04.png":
+{
+	"frame": {"x":308,"y":308,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce05.png":
+{
+	"frame": {"x":616,"y":308,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce06.png":
+{
+	"frame": {"x":0,"y":616,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce07.png":
+{
+	"frame": {"x":308,"y":616,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce08.png":
+{
+	"frame": {"x":616,"y":616,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce09.png":
+{
+	"frame": {"x":0,"y":924,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce10.png":
+{
+	"frame": {"x":308,"y":924,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce11.png":
+{
+	"frame": {"x":616,"y":924,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce12.png":
+{
+	"frame": {"x":0,"y":1232,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"candle_bounce13.png":
+{
+	"frame": {"x":308,"y":1232,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+}},
+"animations": {
+	"candle_bounce": ["candle_bounce00.png","candle_bounce01.png","candle_bounce02.png","candle_bounce03.png","candle_bounce04.png","candle_bounce05.png","candle_bounce06.png","candle_bounce07.png","candle_bounce08.png","candle_bounce09.png","candle_bounce10.png","candle_bounce11.png","candle_bounce12.png","candle_bounce13.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "candle_bounce.png",
+	"format": "RGBA8888",
+	"size": {"w":924,"h":1540},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a9e24b3795d25ece4a6afd380352170f:c7c6e3059bf2f19ed6cb16ff382e0ceb:8e88ec218179c91631c067ab7d590022$"
+}
+}

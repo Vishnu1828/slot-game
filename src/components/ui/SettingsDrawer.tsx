@@ -1,39 +1,46 @@
 import type { ReactNode } from "react";
-import { extend } from "@pixi/react";
-import { Graphics } from "pixi.js";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
-import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
+import PanelSurface from "../pixi/PanelSurface";
+import DesignStage from "../pixi/DesignStage";
 import IconButton from "./IconButton";
 import Button from "./Button";
 import OverlayScrim from "../pixi/OverlayScrim";
 import { useScreen } from "@/hooks/useScreen";
+import { useStage } from "@/hooks/useStage";
+import { OVERLAY_PANEL_LABEL } from "@/hooks/useDismissOnOutsideTap";
 import { commonTheme } from "@/constants/commonTheme";
+import { BAR_H } from "@/constants/footer";
 
-// <pixiGraphics> for the rounded-top sheet + header divider (the backdrop is <OverlayScrim>).
-extend({ Graphics });
-
-const clamp = (v: number, min: number, max: number) =>
-  Math.min(max, Math.max(min, v));
-
-// Portrait bottom-sheet background: rounded TOP corners only (matches `menu_container`'s fill).
 const SHEET_RADIUS = 16;
 const SHEET_BG = 0x020617;
+// Landscape/desktop card is slightly see-through so the game still reads behind it.
+const CARD_ALPHA = 0.92;
 
-// Per-mode sizing for the shared drawer chrome + rows.
+/**
+ * Per-mode chrome + row sizing. Landscape/desktop values are DESIGN-canvas units (see DESIGN in
+ * constants/design.ts) — <DesignStage> scales them to the real screen exactly like the reel frame,
+ * so the card is proportionally identical on every window size and nothing needs re-tuning per
+ * breakpoint. `cardW` is the card's fixed design width. Portrait values are real px (full-bleed sheet).
+ */
 const MODE = {
   portrait: {
+    cardW: 0, // unused — the sheet is full-bleed
     pad: 50, headerH: 50, closeIconPad: 12, close: 18, title: 22,
     label: 16, controlFont: 16, rowH: 48, labelGap: 14, sectionGap: 30,
     footerH: 52, footerFont: 18,
   },
+  // Design canvas 844x390; minus the footer bar that leaves 338 for the card.
   "mobile-landscape": {
-    pad: 40, headerH: 40, closeIconPad: 12, close: 14, title: 16,
-    label: 13, controlFont: 13, rowH: 36, labelGap: 10, sectionGap: 18,
-    footerH: 40, footerFont: 14,
+    cardW: 320,
+    pad: 28, headerH: 36, closeIconPad: 12, close: 14, title: 16,
+    label: 13, controlFont: 13, rowH: 36, labelGap: 8, sectionGap: 12,
+    footerH: 36, footerFont: 14,
   },
+  // Design canvas 1280x720; minus the footer bar that leaves 668 for the card.
   desktop: {
-    pad: 70, headerH: 65, closeIconPad: 12, close: 18, title: 22,
+    cardW: 360,
+    pad: 56, headerH: 65, closeIconPad: 12, close: 18, title: 22,
     label: 16, controlFont: 16, rowH: 48, labelGap: 18, sectionGap: 30,
     footerH: 52, footerFont: 18,
   },
@@ -64,10 +71,12 @@ export interface SettingsDrawerProps {
 
 /**
  * Shared settings-drawer shell for AutospinScreen / BettingScreen (and future settings panels).
- * Owns ALL the chrome + layout: dim backdrop, panel background (portrait = rounded-top bottom sheet,
- * landscape/desktop = full-height right-side `menu_container` drawer), close button, title, header
- * divider, the labelled vertical stack of `sections`, and the footer button. Each section renders its
- * control into the rect this shell computes, so the screens only declare their rows + a footer.
+ * Owns ALL the chrome + layout: panel background (portrait = dimmed, blocking, rounded-top bottom
+ * sheet on the REAL screen; landscape/desktop = a centred, translucent, NON-blocking card laid out in
+ * the DESIGN canvas and uniformly scaled by <DesignStage>, so it grows and shrinks with the reel frame
+ * — see useDismissOnOutsideTap), close button, title, header divider, the labelled vertical stack of
+ * `sections`, and the footer button. Each section renders its control into the rect this shell
+ * computes, so the screens only declare their rows + a footer.
  */
 export function SettingsDrawer({
   title,
@@ -75,14 +84,18 @@ export function SettingsDrawer({
   sections,
   footer,
 }: SettingsDrawerProps) {
-  const { w, h, mode } = useScreen();
+  const screen = useScreen();
+  const stage = useStage();
+  const { mode } = stage;
   const cfg = MODE[mode];
 
-  // Portrait = bottom sheet (full width, anchored to the bottom, sized to content);
-  // landscape/desktop = full-height right-side drawer.
+  // Portrait sheet is full-bleed chrome → real screen coords. The card lives in the design canvas.
   const isSheet = mode === "portrait";
-  const panelW = isSheet ? w : clamp(w * 0.3, 320, 460);
-  const panelX = isSheet ? 0 : w - panelW;
+  const w = isSheet ? screen.w : stage.w;
+  const h = isSheet ? screen.h : stage.h;
+
+  const panelW = isSheet ? w : cfg.cardW;
+  const panelX = isSheet ? 0 : (w - panelW) / 2;
   const innerX = panelX + cfg.pad;
   const innerW = panelW - 2 * cfg.pad;
   const cx = panelX + panelW / 2;
@@ -96,8 +109,10 @@ export function SettingsDrawer({
   );
   const contentH =
     cfg.headerH + topGap + stackH + cfg.footerH + bottomGap;
-  const panelH = isSheet ? contentH : h;
-  const panelY = isSheet ? h - panelH : 0;
+  const panelH = contentH;
+  // Sheet sits on the bottom edge. The card centres in the band ABOVE the footer bar (BAR_H is
+  // treated as design units here, same as the Controls cluster does).
+  const panelY = isSheet ? h - panelH : (h - BAR_H - panelH) / 2;
 
   // Lay out the labelled rows top→bottom (cy accumulates through the map).
   let cy = panelY + cfg.headerH + topGap;
@@ -129,38 +144,20 @@ export function SettingsDrawer({
   });
   const footerY = cy + cfg.footerH / 2;
 
-  return (
-    <PixiContainer>
-      {/* Dim backdrop (real screen) */}
-      <OverlayScrim alpha={0.55} />
-
-      {/* Panel background (blocks click-through) — full REAL screen size (not the design canvas).
-          Portrait sheet is drawn `SHEET_RADIUS` taller so
-          its bottom corners fall off-screen and only the top corners are rounded. */}
-      {isSheet ? (
-        <pixiGraphics
-          eventMode="static"
-          draw={(g) => {
-            g.clear();
-            g.roundRect(
-              panelX,
-              panelY,
-              panelW,
-              panelH + SHEET_RADIUS,
-              SHEET_RADIUS,
-            ).fill({ color: SHEET_BG });
-          }}
-        />
-      ) : (
-        <PixiNineSliceSprite
-          texture={commonTheme.overlay.container}
-          x={panelX}
-          y={panelY}
-          width={panelW}
-          height={panelH}
-          eventMode="static"
-        />
-      )}
+  const panel = (
+    <>
+      {/* Panel background (blocks click-through). The portrait sheet is drawn `SHEET_RADIUS` taller
+          so its bottom corners fall off-screen and only the top corners round. */}
+      <PanelSurface
+        x={panelX}
+        y={panelY}
+        width={panelW}
+        height={isSheet ? panelH + SHEET_RADIUS : panelH}
+        radius={SHEET_RADIUS}
+        color={SHEET_BG}
+        alpha={isSheet ? 1 : CARD_ALPHA}
+        dividerY={panelY + cfg.headerH}
+      />
 
       {/* Header: close (top-left) + centered title */}
       <IconButton
@@ -180,19 +177,6 @@ export function SettingsDrawer({
         y={panelY + cfg.headerH / 2}
       />
 
-      {/* Header divider (portrait sheet only) */}
-      {isSheet && (
-        <pixiGraphics
-          draw={(g) => {
-            g.clear();
-            g.rect(panelX, panelY + cfg.headerH, panelW, 1).fill({
-              color: 0xffffff,
-              alpha: 0.12,
-            });
-          }}
-        />
-      )}
-
       {/* Body rows */}
       {sectionEls}
 
@@ -205,6 +189,16 @@ export function SettingsDrawer({
         textSize={cfg.footerFont}
         onPress={footer.onPress}
       />
+    </>
+  );
+
+  return (
+    <PixiContainer label={OVERLAY_PANEL_LABEL}>
+      {/* Portrait stays modal: dim + block the game behind the sheet. Landscape/desktop has no
+          backdrop at all — the game stays lit and playable underneath. */}
+      {isSheet && <OverlayScrim />}
+
+      {isSheet ? panel : <DesignStage>{panel}</DesignStage>}
     </PixiContainer>
   );
 }

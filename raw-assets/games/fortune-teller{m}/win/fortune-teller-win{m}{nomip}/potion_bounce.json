@@ -1,0 +1,127 @@
+{"frames": {
+
+"potion_bounce00.png":
+{
+	"frame": {"x":0,"y":0,"w":270,"h":282},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":13,"w":270,"h":282},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce01.png":
+{
+	"frame": {"x":270,"y":0,"w":271,"h":282},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":13,"w":271,"h":282},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce02.png":
+{
+	"frame": {"x":541,"y":0,"w":273,"h":281},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":16,"y":14,"w":273,"h":281},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce03.png":
+{
+	"frame": {"x":814,"y":0,"w":275,"h":279},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":16,"w":275,"h":279},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce04.png":
+{
+	"frame": {"x":1089,"y":0,"w":275,"h":278},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":17,"w":275,"h":278},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce05.png":
+{
+	"frame": {"x":1364,"y":0,"w":275,"h":277},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":18,"w":275,"h":277},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce06.png":
+{
+	"frame": {"x":1639,"y":0,"w":275,"h":278},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":17,"w":275,"h":278},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce07.png":
+{
+	"frame": {"x":0,"y":282,"w":273,"h":281},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":16,"y":14,"w":273,"h":281},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce08.png":
+{
+	"frame": {"x":273,"y":282,"w":269,"h":285},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":11,"w":269,"h":285},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce09.png":
+{
+	"frame": {"x":542,"y":282,"w":267,"h":288},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":8,"w":267,"h":288},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce10.png":
+{
+	"frame": {"x":809,"y":282,"w":265,"h":289},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":20,"y":7,"w":265,"h":289},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce11.png":
+{
+	"frame": {"x":1074,"y":282,"w":265,"h":289},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":20,"y":7,"w":265,"h":289},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce12.png":
+{
+	"frame": {"x":1339,"y":282,"w":267,"h":287},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":9,"w":267,"h":287},
+	"sourceSize": {"w":308,"h":308}
+},
+"potion_bounce13.png":
+{
+	"frame": {"x":1606,"y":282,"w":269,"h":286},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":10,"w":269,"h":286},
+	"sourceSize": {"w":308,"h":308}
+}},
+"animations": {
+	"potion_bounce": ["potion_bounce00.png","potion_bounce01.png","potion_bounce02.png","potion_bounce03.png","potion_bounce04.png","potion_bounce05.png","potion_bounce06.png","potion_bounce07.png","potion_bounce08.png","potion_bounce09.png","potion_bounce10.png","potion_bounce11.png","potion_bounce12.png","potion_bounce13.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "potion_bounce.png",
+	"format": "RGBA8888",
+	"size": {"w":1914,"h":571},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:655a81970ac17749ea0e1a4554a12633:977fb2eafa04aa11aa9d126e814d6f40:d58be6b9cf23fb7ee7d82db4d4887ff9$"
+}
+}

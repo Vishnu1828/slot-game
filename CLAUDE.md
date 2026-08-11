@@ -15,6 +15,10 @@ overlays.
 - `npm run dev` — runs the AssetPack watcher **and** Vite together (via `concurrently`). Use this.
 - `npm run build` — lint → clean production asset build (`assets:prod`) → `vite build`.
 - `npm run lint` — ESLint. Keep it clean.
+- `npm run check:animations` — **run after adding/changing any animation sheet.** Read-only; catches
+  the two ways they break: over the ~4096px GPU limit (black screen on mobile) and loop *drift* (the
+  art slides across and snaps back). `npm run fit:animations` is the fix for both — it shrinks sheets
+  frame-by-frame, which is the only correct way. See `docs/animations.md`.
 - `npm run assets` — one-shot asset generation (dev: stable filenames, no cache-bust).
 - `npm run assets:prod` — clean + cache-busted generation (used by `build`).
 
@@ -30,8 +34,12 @@ There is **no test suite**. Verify changes by running `npm run dev` and exercisi
   **page reload** to pick up the new manifest.
 - **Folder tags** drive processing: `{m}` = a loadable manifest **bundle**; `{tps}` = pack a folder
   of small images into a **texture atlas**; `{nomip}` / `{nc}` = no mipmap / no compress (used on
-  bitmap-font folders). Bundles: `common`, `<game>`, and `<game>-preload` (nested in the game
-  folder). Bundle name = game id = the string passed to `loadGame(id)`.
+  bitmap-font and pre-baked animation folders). Bundles: `common`, `<game>`, and the nested
+  `<game>-preload` / `<game>-win`. Bundle name = game id = the string passed to `loadGame(id)`.
+- **A nested `{m}` folder is its own bundle and its assets LEAVE the parent.** That is how
+  `games/<id>{m}/win/<id>-win{m}{nomip}/` (the bounce / winning-glow / win-popup sheets — by far the
+  heaviest art a slot ships) stays out of `loadGame`. Keep the game-id prefix: AssetPack names a
+  bundle after its folder basename, so a shared name warns and gets rewritten once a second game ships.
 - **Resolutions**: source is treated as the highest tier; AssetPack only scales **down**
   (`{ default:1, medium:0.5, low:0.25 }`). Author big; never upscale (upscaling = blur).
 - **Atlas rule**: small buttons/icons go in a `{tps}` group; **large panels/backgrounds stay
@@ -52,6 +60,14 @@ loads `<id>-preload`. `basePath` is set to `/assets`, so asset `src` resolves co
 of the current route. Access loaded assets by their **alias** via `Assets.get('alias')` — atlas
 frames are addressable by their frame name (e.g. `sound_idle`), loose images by their short alias
 (e.g. `footer`, `bg_horizontal`).
+
+**Win-presentation art is demand-loaded, not bundle-loaded.** Its beats run in sequence and never
+overlap, and a spin only lights the symbols that won, so `src/game/winAssets.ts` fetches per win and
+frees per beat (bounce warmed at mount and kept; glows freed when the popup opens; popup sheets freed
+when the presentation ends). Startup animation memory ~691 MB → ~164 MB, peak ~324 MB. Every list is
+derived from the theme (`symbols[*].bounce`/`winning`, `winAnimation`) and orchestrated by the shared
+`useWinPresentation`, so a new game gets it by folder convention + theme fields, with no code. Nothing
+calls `loadBundle` on `<id>-win`; individual aliases are loaded and unloaded. See `docs/assets.md`.
 
 ## App structure & rendering flow
 

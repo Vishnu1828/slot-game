@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { extend } from "@pixi/react";
 import "@pixi/layout"; // enables the optional `layout` prop
-import { Assets, Sprite, Texture } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
+import { getAsset } from "@/utils/assets";
 import type { LayoutStyle } from "../pixi/PixiLayout";
 import { PixiSprite } from "../pixi/PixiSprite";
 
@@ -27,7 +28,7 @@ export interface IconButtonProps {
 
 function resolveTex(tex?: string | Texture): Texture | undefined {
   if (!tex) return undefined;
-  return typeof tex === "string" ? Assets.get<Texture>(tex) : tex;
+  return typeof tex === "string" ? getAsset<Texture>(tex) : tex;
 }
 
 export function IconButton({

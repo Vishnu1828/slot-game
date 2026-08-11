@@ -1,0 +1,207 @@
+{
+  "frames": {
+    "win_popup_animation_mobile05": {
+      "frame": {
+        "x": 1,
+        "y": 1,
+        "w": 840,
+        "h": 505
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 22,
+        "w": 840,
+        "h": 505
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup_animation_mobile35": {
+      "frame": {
+        "x": 1,
+        "y": 507,
+        "w": 839,
+        "h": 506
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 11,
+        "y": 21,
+        "w": 839,
+        "h": 506
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup_animation_mobile26": {
+      "frame": {
+        "x": 841,
+        "y": 507,
+        "w": 838,
+        "h": 506
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 21,
+        "w": 838,
+        "h": 506
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup_animation_mobile61": {
+      "frame": {
+        "x": 1,
+        "y": 1014,
+        "w": 837,
+        "h": 506
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 13,
+        "y": 21,
+        "w": 837,
+        "h": 506
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup_animation_mobile62": {
+      "frame": {
+        "x": 508,
+        "y": 1014,
+        "w": 837,
+        "h": 506
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 13,
+        "y": 21,
+        "w": 837,
+        "h": 506
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup_animation_mobile63": {
+      "frame": {
+        "x": 1015,
+        "y": 1014,
+        "w": 836,
+        "h": 506
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 13,
+        "y": 21,
+        "w": 836,
+        "h": 506
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup_animation_mobile57": {
+      "frame": {
+        "x": 1015,
+        "y": 1521,
+        "w": 836,
+        "h": 506
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 14,
+        "y": 21,
+        "w": 836,
+        "h": 506
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup_animation_mobile04": {
+      "frame": {
+        "x": 842,
+        "y": 1,
+        "w": 829,
+        "h": 504
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 13,
+        "y": 23,
+        "w": 829,
+        "h": 504
+      },
+      "sourceSize": {
+        "w": 867,
+        "h": 527
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "https://www.flintbyte.com/",
+    "version": "1.0.0",
+    "image": "win-7.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 2048,
+      "h": 2048
+    },
+    "scale": 1
+  }
+}

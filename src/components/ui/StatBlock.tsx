@@ -5,7 +5,7 @@ import { commonTheme } from "@/constants/commonTheme";
 export interface StatBlockProps {
   /** Small dim caption, e.g. "Balance". Rendered in Inter-Regular. */
   label: string;
-  /** Bold value, e.g. "$100.000". Rendered in Inter-Bold. */
+  /** Bold value, e.g. "₲100.000". Rendered in Inter-Bold. */
   value: string;
 }
 

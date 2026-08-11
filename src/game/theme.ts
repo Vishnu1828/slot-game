@@ -3,7 +3,10 @@ import type {
   ReelArt,
   ReelExtraAnim,
   SpinButtonArt,
+  SymbolArt,
   ThemeAssets,
+  WinAnimation,
+  WinAnimationArt,
 } from "@/types/theme";
 
 /**
@@ -15,7 +18,16 @@ const LOOSE_DEFAULTS = {
   header: "ui/logo",
   background_h: "images/bg_horizontal",
   background_v: "images/bg_vertical",
+  winFrame: "win/win_popup_frame",
 };
+
+/**
+ * Bitmap-font FACE name for win/celebration text. NOT a path and NOT game-scoped: Pixi installs a
+ * bitmap font under the `face` name baked into its `.fnt`, so this must match that string exactly
+ * (`win_font.fnt` declares `info face="win_font"`). A game overrides it by shipping its own `.fnt`
+ * with a different face and passing that name.
+ */
+const FONT_DEFAULT = "win_font";
 
 /**
  * Atlas FRAME names for the spin button. Frames are looked up by name (not by path), so they are
@@ -72,14 +84,83 @@ export interface ThemeOverrides {
   background_v?: string;
   /** Atlas FRAME names (bare, not scoped). */
   spin?: Partial<SpinButtonArt>;
-  symbols?: Record<string, string>;
+  /**
+   * SymbolId → art. `asset` is a bare atlas frame name; `bounce`/`winning` are sheet base names
+   * relative to `games/<id>/win/<id>-win/` and get scoped by makeTheme.
+   */
+  symbols?: Record<string, SymbolArt>;
   /** Reel playfield overrides (frame/bg paths get game-scoped; animation sheets stay bare). */
   reel?: ReelOverride;
+  winFrame?: string;
+  /** Celebration animation behind the win frame; sheet names get game-scoped by makeTheme. */
+  winAnimation?: WinAnimationArt;
+  font?: string;
 }
 
 /**
+ * Game-scope each symbol's ANIMATION SHEET names while leaving its still atlas frame bare.
+ *
+ * The sheets are referenced path-scoped rather than by bare basename on purpose: the bare shortcut is
+ * global across every loaded bundle, and AssetPack *silently drops* a shortcut two assets both claim — so
+ * a second game shipping its own `crystal_winning` would make the alias vanish with no error at all.
+ * `PixiGameAnimation` appends `.json`/`.png`, and the path-scoped extension-qualified aliases exist, so a
+ * scoped base name resolves unchanged.
+ */
+/**
+ * Where a game's win-presentation sheets live: `games/<id>/win/<id>-win/`.
+ *
+ * The `{m}` on that folder makes it its OWN AssetPack bundle, deliberately NOT part of the game
+ * bundle, so `loadGame` doesn't pull hundreds of MB of celebration art into memory before a single
+ * spin — the sheets are fetched per win instead (see `src/game/winAssets.ts`).
+ *
+ * The folder name carries the game id because AssetPack names a bundle after its folder BASENAME and
+ * ignores the path (`nameStyle: 'short'`). A shared name like `animation-win` in every game builds
+ * fine, but each extra game emits a "Duplicate bundle name" warning and AssetPack rewrites them all to
+ * relative names — so the bundle's name would change shape the day a second game shipped. Prefixing
+ * with the id keeps it unique, stable and warning-free.
+ */
+export const winAnimPath = (gameId: string, rel: string) =>
+  `games/${gameId}/win/${gameId}-win/${rel}`;
+
+/**
+ * Expand a win animation's sheet declaration into the scoped aliases `PixiGameAnimation` resolves.
+ * `sheets: n` means the sequence is split across `${sheet}-0` … `${sheet}-${n-1}`; omitting it (or
+ * `1`) means the whole thing is one sheet. The player pools and re-orders them by frame number, so
+ * the count is the only thing a game with differently-sliced art has to change.
+ */
+const scopeWinAnimation = (
+  gameId: string,
+  a?: WinAnimationArt,
+): WinAnimation | undefined => {
+  if (!a) return undefined;
+  const { sheet, sheets = 1, ...rest } = a;
+  const names =
+    sheets > 1
+      ? Array.from({ length: sheets }, (_, i) => `${sheet}-${i}`)
+      : [sheet];
+  return { ...rest, sheets: names.map((n) => winAnimPath(gameId, n)) };
+};
+
+const scopeSymbols = (
+  gameId: string,
+  symbols: Record<string, SymbolArt> = {},
+): Record<string, SymbolArt> => {
+  const winAnim = (rel: string) => winAnimPath(gameId, rel);
+  return Object.fromEntries(
+    Object.entries(symbols).map(([id, art]) => [
+      id,
+      {
+        ...art,
+        ...(art.bounce ? { bounce: winAnim(art.bounce) } : {}),
+        ...(art.winning ? { winning: winAnim(art.winning) } : {}),
+      },
+    ]),
+  );
+};
+
+/**
  * Build a game's ThemeAssets. LOOSE images (header, backgrounds) are GAME-SCOPED to
- * `games/<id>/<path>` so their aliases never collide across games; atlas frames (spin, symbols)
+ * `games/<id>/<path>` so their aliases never collide across games; atlas frames (spin, symbol `asset`)
  * stay bare frame names. Games override only what differs from the defaults above.
  */
 export const makeTheme = (
@@ -102,7 +183,10 @@ export const makeTheme = (
     background_h: scope(o.background_h ?? LOOSE_DEFAULTS.background_h),
     background_v: scope(o.background_v ?? LOOSE_DEFAULTS.background_v),
     spin: { ...SPIN_DEFAULTS, ...(o.spin ?? {}) },
-    symbols: { ...(o.symbols ?? {}) },
+    symbols: scopeSymbols(gameId, o.symbols),
+    winFrame: scope(o.winFrame ?? LOOSE_DEFAULTS.winFrame),
+    winAnimation: scopeWinAnimation(gameId, o.winAnimation),
+    font: o.font ?? FONT_DEFAULT, // bare face name — never scoped (see FONT_DEFAULT)
     reel: {
       rows: r?.rows ?? REEL_DEFAULTS.rows,
       cols: r?.cols ?? REEL_DEFAULTS.cols,

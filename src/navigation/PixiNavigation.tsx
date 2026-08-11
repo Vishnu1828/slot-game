@@ -7,6 +7,8 @@ import AutospinScreen from "@/components/ui/AutospinScreen";
 import BettingScreen from "@/components/ui/BettingScreen";
 import PopupModal from "@/components/ui/PopupModal";
 import Toast from "@/components/ui/Toast";
+import { useScreen } from "@/hooks/useScreen";
+import { useDismissOnOutsideTap } from "@/hooks/useDismissOnOutsideTap";
 
 export interface PixiNavigationProps {
   /** The active game id — selects which game's screen renders (see src/game/registry.ts). */
@@ -24,9 +26,18 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
   const hideOverlay = useNavigationStore((s) => s.hideOverlay);
   const toast = useToastStore((s) => s.toast);
   const clearToast = useToastStore((s) => s.clearToast);
+  const { portrait } = useScreen();
   // Show the "ARE YOU STILL THERE" popup after a stretch of no user activity.
   // add this back in once full code done
   // useInactivityOverlay();
+
+  // The settings/rules cards are non-blocking in landscape/desktop: tapping the game dismisses them
+  // (and the tapped control still fires). The PopupModals stay modal — they need a deliberate choice.
+  const dismissible =
+    activeOverlay === "settings" ||
+    activeOverlay === "bet-settings" ||
+    activeOverlay === "info";
+  useDismissOnOutsideTap(!portrait && dismissible, hideOverlay);
 
   const GameScreen = isGameId(game) ? GAMES[game]?.Screen : undefined;
 
@@ -86,8 +97,13 @@ const PixiNavigation = ({ game }: PixiNavigationProps) => {
         />
       )}
 
-      {/* Add as it's specced:
-          {activeOverlay === "repeat-insufficient" && <PopupModal … />} */}
+      {activeOverlay === "repeat-insufficient" && (
+        <PopupModal
+          title="YOU'VE RUN OUT OF MONEY"
+          message="Add more to your balance to continue playing."
+          buttons={[{ label: "GO BACK TO LOBBY", onPress: hideOverlay }]}
+        />
+      )}
     </>
   );
 };

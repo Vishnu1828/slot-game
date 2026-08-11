@@ -1,0 +1,127 @@
+{"frames": {
+
+"crystals_bounce00.png":
+{
+	"frame": {"x":0,"y":0,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce01.png":
+{
+	"frame": {"x":308,"y":0,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce02.png":
+{
+	"frame": {"x":616,"y":0,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce03.png":
+{
+	"frame": {"x":0,"y":308,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce04.png":
+{
+	"frame": {"x":308,"y":308,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce05.png":
+{
+	"frame": {"x":616,"y":308,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce06.png":
+{
+	"frame": {"x":0,"y":616,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce07.png":
+{
+	"frame": {"x":308,"y":616,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce08.png":
+{
+	"frame": {"x":616,"y":616,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce09.png":
+{
+	"frame": {"x":0,"y":924,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce10.png":
+{
+	"frame": {"x":308,"y":924,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce11.png":
+{
+	"frame": {"x":616,"y":924,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce12.png":
+{
+	"frame": {"x":0,"y":1232,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+},
+"crystals_bounce13.png":
+{
+	"frame": {"x":308,"y":1232,"w":308,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":308},
+	"sourceSize": {"w":308,"h":308}
+}},
+"animations": {
+	"crystals_bounce": ["crystals_bounce00.png","crystals_bounce01.png","crystals_bounce02.png","crystals_bounce03.png","crystals_bounce04.png","crystals_bounce05.png","crystals_bounce06.png","crystals_bounce07.png","crystals_bounce08.png","crystals_bounce09.png","crystals_bounce10.png","crystals_bounce11.png","crystals_bounce12.png","crystals_bounce13.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "crystal_bounce.png",
+	"format": "RGBA8888",
+	"size": {"w":924,"h":1540},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cb61a51582b90e59ccf2f42dc4ff69a2:1a29b85a601e30d65d99c2c130c549c5:02ac8cdad5f9c59e2fb44cbdca838a4e$"
+}
+}

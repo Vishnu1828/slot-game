@@ -1,0 +1,735 @@
+{"frames": {
+
+"potion_winning00.png":
+{
+	"frame": {"x":0,"y":0,"w":270,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":59,"y":54,"w":270,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning01.png":
+{
+	"frame": {"x":270,"y":0,"w":286,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":46,"w":286,"h":300},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning02.png":
+{
+	"frame": {"x":556,"y":0,"w":290,"h":305},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":47,"y":44,"w":290,"h":305},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning03.png":
+{
+	"frame": {"x":846,"y":0,"w":291,"h":307},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":44,"y":43,"w":291,"h":307},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning04.png":
+{
+	"frame": {"x":1137,"y":0,"w":292,"h":308},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":41,"y":43,"w":292,"h":308},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning05.png":
+{
+	"frame": {"x":1429,"y":0,"w":295,"h":309},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":39,"y":43,"w":295,"h":309},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning06.png":
+{
+	"frame": {"x":1724,"y":0,"w":297,"h":309},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":37,"y":43,"w":297,"h":309},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning07.png":
+{
+	"frame": {"x":2021,"y":0,"w":299,"h":309},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":43,"w":299,"h":309},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning08.png":
+{
+	"frame": {"x":2320,"y":0,"w":301,"h":309},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":43,"w":301,"h":309},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning09.png":
+{
+	"frame": {"x":2621,"y":0,"w":301,"h":308},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":44,"w":301,"h":308},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning10.png":
+{
+	"frame": {"x":2922,"y":0,"w":301,"h":308},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":44,"w":301,"h":308},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning11.png":
+{
+	"frame": {"x":3223,"y":0,"w":301,"h":308},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":44,"w":301,"h":308},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning12.png":
+{
+	"frame": {"x":3524,"y":0,"w":303,"h":310},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":43,"w":303,"h":310},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning13.png":
+{
+	"frame": {"x":0,"y":310,"w":303,"h":311},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":42,"w":303,"h":311},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning14.png":
+{
+	"frame": {"x":303,"y":310,"w":302,"h":312},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":41,"w":302,"h":312},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning15.png":
+{
+	"frame": {"x":605,"y":310,"w":300,"h":312},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":41,"w":300,"h":312},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning16.png":
+{
+	"frame": {"x":905,"y":310,"w":298,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":38,"y":40,"w":298,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning17.png":
+{
+	"frame": {"x":1203,"y":310,"w":297,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":40,"y":40,"w":297,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning18.png":
+{
+	"frame": {"x":1500,"y":310,"w":301,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":42,"y":39,"w":301,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning19.png":
+{
+	"frame": {"x":1801,"y":310,"w":304,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":45,"y":38,"w":304,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning20.png":
+{
+	"frame": {"x":2105,"y":310,"w":308,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":48,"y":38,"w":308,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning21.png":
+{
+	"frame": {"x":2413,"y":310,"w":312,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":50,"y":37,"w":312,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning22.png":
+{
+	"frame": {"x":2725,"y":310,"w":316,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":53,"y":36,"w":316,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning23.png":
+{
+	"frame": {"x":3041,"y":310,"w":323,"h":317},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":34,"w":323,"h":317},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning24.png":
+{
+	"frame": {"x":3364,"y":310,"w":328,"h":317},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":33,"w":328,"h":317},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning25.png":
+{
+	"frame": {"x":3692,"y":310,"w":333,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":33,"w":333,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning26.png":
+{
+	"frame": {"x":0,"y":627,"w":338,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":32,"w":338,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning27.png":
+{
+	"frame": {"x":338,"y":627,"w":339,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":31,"w":339,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning28.png":
+{
+	"frame": {"x":677,"y":627,"w":339,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":31,"w":339,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning29.png":
+{
+	"frame": {"x":1016,"y":627,"w":339,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":31,"w":339,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning30.png":
+{
+	"frame": {"x":1355,"y":627,"w":339,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":31,"w":339,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning31.png":
+{
+	"frame": {"x":1694,"y":627,"w":339,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":31,"w":339,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning32.png":
+{
+	"frame": {"x":2033,"y":627,"w":339,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":31,"w":339,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning33.png":
+{
+	"frame": {"x":2372,"y":627,"w":339,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":31,"w":339,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning34.png":
+{
+	"frame": {"x":2711,"y":627,"w":339,"h":315},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":32,"w":339,"h":315},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning35.png":
+{
+	"frame": {"x":3050,"y":627,"w":337,"h":316},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":32,"w":337,"h":316},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning36.png":
+{
+	"frame": {"x":3387,"y":627,"w":333,"h":317},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":33,"w":333,"h":317},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning37.png":
+{
+	"frame": {"x":0,"y":944,"w":329,"h":319},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":33,"w":329,"h":319},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning38.png":
+{
+	"frame": {"x":329,"y":944,"w":325,"h":319},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":34,"w":325,"h":319},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning39.png":
+{
+	"frame": {"x":654,"y":944,"w":320,"h":321},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":34,"w":320,"h":321},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning40.png":
+{
+	"frame": {"x":974,"y":944,"w":317,"h":321},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":50,"y":35,"w":317,"h":321},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning41.png":
+{
+	"frame": {"x":1291,"y":944,"w":315,"h":321},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":47,"y":36,"w":315,"h":321},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning42.png":
+{
+	"frame": {"x":1606,"y":944,"w":311,"h":322},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":45,"y":36,"w":311,"h":322},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning43.png":
+{
+	"frame": {"x":1917,"y":944,"w":309,"h":323},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":42,"y":37,"w":309,"h":323},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning44.png":
+{
+	"frame": {"x":2226,"y":944,"w":306,"h":323},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":40,"y":38,"w":306,"h":323},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning45.png":
+{
+	"frame": {"x":2532,"y":944,"w":302,"h":322},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":38,"y":39,"w":302,"h":322},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning46.png":
+{
+	"frame": {"x":2834,"y":944,"w":302,"h":323},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":39,"w":302,"h":323},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning47.png":
+{
+	"frame": {"x":3136,"y":944,"w":303,"h":322},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":40,"w":303,"h":322},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning48.png":
+{
+	"frame": {"x":3439,"y":944,"w":303,"h":320},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":41,"w":303,"h":320},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning49.png":
+{
+	"frame": {"x":3742,"y":944,"w":304,"h":320},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":32,"y":42,"w":304,"h":320},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning50.png":
+{
+	"frame": {"x":0,"y":1267,"w":305,"h":320},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":42,"w":305,"h":320},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning51.png":
+{
+	"frame": {"x":305,"y":1267,"w":306,"h":319},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":43,"w":306,"h":319},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning52.png":
+{
+	"frame": {"x":611,"y":1267,"w":306,"h":319},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":43,"w":306,"h":319},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning53.png":
+{
+	"frame": {"x":917,"y":1267,"w":306,"h":319},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":43,"w":306,"h":319},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning54.png":
+{
+	"frame": {"x":1223,"y":1267,"w":306,"h":319},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":43,"w":306,"h":319},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning55.png":
+{
+	"frame": {"x":1529,"y":1267,"w":304,"h":317},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":44,"w":304,"h":317},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning56.png":
+{
+	"frame": {"x":1833,"y":1267,"w":304,"h":317},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":44,"w":304,"h":317},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning57.png":
+{
+	"frame": {"x":2137,"y":1267,"w":301,"h":316},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":44,"w":301,"h":316},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning58.png":
+{
+	"frame": {"x":2438,"y":1267,"w":300,"h":314},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":44,"w":300,"h":314},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning59.png":
+{
+	"frame": {"x":2738,"y":1267,"w":297,"h":312},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":45,"w":297,"h":312},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning60.png":
+{
+	"frame": {"x":3035,"y":1267,"w":290,"h":307},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":41,"y":46,"w":290,"h":307},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning61.png":
+{
+	"frame": {"x":3325,"y":1267,"w":266,"h":286},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":53,"y":56,"w":266,"h":286},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning62.png":
+{
+	"frame": {"x":3591,"y":1267,"w":264,"h":285},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":55,"y":56,"w":264,"h":285},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning63.png":
+{
+	"frame": {"x":0,"y":1587,"w":266,"h":284},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":57,"y":55,"w":266,"h":284},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning64.png":
+{
+	"frame": {"x":266,"y":1587,"w":268,"h":284},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":59,"y":54,"w":268,"h":284},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning65.png":
+{
+	"frame": {"x":534,"y":1587,"w":269,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":61,"y":54,"w":269,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning66.png":
+{
+	"frame": {"x":803,"y":1587,"w":271,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":62,"y":53,"w":271,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning67.png":
+{
+	"frame": {"x":1074,"y":1587,"w":273,"h":282},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":273,"h":282},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning68.png":
+{
+	"frame": {"x":1347,"y":1587,"w":274,"h":281},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":274,"h":281},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning69.png":
+{
+	"frame": {"x":1621,"y":1587,"w":275,"h":281},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":275,"h":281},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning70.png":
+{
+	"frame": {"x":1896,"y":1587,"w":274,"h":281},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":274,"h":281},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning71.png":
+{
+	"frame": {"x":2170,"y":1587,"w":274,"h":281},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":274,"h":281},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning72.png":
+{
+	"frame": {"x":2444,"y":1587,"w":273,"h":281},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":273,"h":281},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning73.png":
+{
+	"frame": {"x":2717,"y":1587,"w":272,"h":282},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":272,"h":282},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning74.png":
+{
+	"frame": {"x":2989,"y":1587,"w":271,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":53,"w":271,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning75.png":
+{
+	"frame": {"x":3260,"y":1587,"w":270,"h":282},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":270,"h":282},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning76.png":
+{
+	"frame": {"x":3530,"y":1587,"w":269,"h":282},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":269,"h":282},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning77.png":
+{
+	"frame": {"x":0,"y":1871,"w":267,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":267,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning78.png":
+{
+	"frame": {"x":267,"y":1871,"w":267,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":267,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning79.png":
+{
+	"frame": {"x":534,"y":1871,"w":266,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":266,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning80.png":
+{
+	"frame": {"x":800,"y":1871,"w":266,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":266,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning81.png":
+{
+	"frame": {"x":1066,"y":1871,"w":266,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":266,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning82.png":
+{
+	"frame": {"x":1332,"y":1871,"w":266,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":63,"y":54,"w":266,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning83.png":
+{
+	"frame": {"x":1598,"y":1871,"w":267,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":62,"y":54,"w":267,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning84.png":
+{
+	"frame": {"x":1865,"y":1871,"w":267,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":62,"y":54,"w":267,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning85.png":
+{
+	"frame": {"x":2132,"y":1871,"w":268,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":61,"y":54,"w":268,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning86.png":
+{
+	"frame": {"x":2400,"y":1871,"w":268,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":61,"y":54,"w":268,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning87.png":
+{
+	"frame": {"x":2668,"y":1871,"w":269,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":60,"y":54,"w":269,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning88.png":
+{
+	"frame": {"x":2937,"y":1871,"w":269,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":60,"y":54,"w":269,"h":283},
+	"sourceSize": {"w":391,"h":391}
+},
+"potion_winning89.png":
+{
+	"frame": {"x":3206,"y":1871,"w":270,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":59,"y":54,"w":270,"h":283},
+	"sourceSize": {"w":391,"h":391}
+}},
+"animations": {
+	"potion_winning": ["potion_winning00.png","potion_winning01.png","potion_winning02.png","potion_winning03.png","potion_winning04.png","potion_winning05.png","potion_winning06.png","potion_winning07.png","potion_winning08.png","potion_winning09.png","potion_winning10.png","potion_winning11.png","potion_winning12.png","potion_winning13.png","potion_winning14.png","potion_winning15.png","potion_winning16.png","potion_winning17.png","potion_winning18.png","potion_winning19.png","potion_winning20.png","potion_winning21.png","potion_winning22.png","potion_winning23.png","potion_winning24.png","potion_winning25.png","potion_winning26.png","potion_winning27.png","potion_winning28.png","potion_winning29.png","potion_winning30.png","potion_winning31.png","potion_winning32.png","potion_winning33.png","potion_winning34.png","potion_winning35.png","potion_winning36.png","potion_winning37.png","potion_winning38.png","potion_winning39.png","potion_winning40.png","potion_winning41.png","potion_winning42.png","potion_winning43.png","potion_winning44.png","potion_winning45.png","potion_winning46.png","potion_winning47.png","potion_winning48.png","potion_winning49.png","potion_winning50.png","potion_winning51.png","potion_winning52.png","potion_winning53.png","potion_winning54.png","potion_winning55.png","potion_winning56.png","potion_winning57.png","potion_winning58.png","potion_winning59.png","potion_winning60.png","potion_winning61.png","potion_winning62.png","potion_winning63.png","potion_winning64.png","potion_winning65.png","potion_winning66.png","potion_winning67.png","potion_winning68.png","potion_winning69.png","potion_winning70.png","potion_winning71.png","potion_winning72.png","potion_winning73.png","potion_winning74.png","potion_winning75.png","potion_winning76.png","potion_winning77.png","potion_winning78.png","potion_winning79.png","potion_winning80.png","potion_winning81.png","potion_winning82.png","potion_winning83.png","potion_winning84.png","potion_winning85.png","potion_winning86.png","potion_winning87.png","potion_winning88.png","potion_winning89.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "potion_winning.png",
+	"format": "RGBA8888",
+	"size": {"w":4046,"h":2154},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9d7c26d6c8b1a3186ddfe168beb74143:caecc6f806ab5436b70ab377ddcd267f:387619b19b6d28e323790a96185a8e62$"
+}
+}

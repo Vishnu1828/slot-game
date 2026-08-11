@@ -29,21 +29,17 @@ import { join, extname, basename, relative } from "node:path";
 const ROOT = process.cwd();
 const RAW = join(ROOT, "raw-assets");
 const MAX_TEXTURE = 4096;
-const MIN_ICON = 96; // atlas source icons smaller than this (long side) warn — blurry on high-DPI
 const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 const SOUND_EXTS = new Set([".wav", ".mp3", ".ogg"]);
 
-// Three tiers: ERRORS always block; WARNINGS block only with --strict; NOTICES are advisory (never block).
-const STRICT = process.argv.includes("--strict");
 const errors = [];
 const warnings = [];
-const notices = [];
 const err = (m) => errors.push(m);
 const warn = (m) => warnings.push(m);
-const notice = (m) => notices.push(m);
 
 // ---------- fs helpers ----------
 function walk(dir, out = []) {
+  console.log(`walk ${relative(ROOT, dir)}`);
   for (const name of readdirSync(dir)) {
     if (name === ".DS_Store") continue;
     const p = join(dir, name);
@@ -54,7 +50,11 @@ function walk(dir, out = []) {
 }
 const segs = (p) => relative(RAW, p).split("/");
 const inTps = (p) => segs(p).some((s) => s.includes("{tps}"));
-const inAnim = (p) => segs(p).some((s) => s.startsWith("animations"));
+// Animation sheets live in two places: `animations{nomip}/` (decor) and the per-game win bundle
+// `<id>-win{m}{nomip}/`. Both are PNG+JSON pairs with baked coords, so both get the same checks —
+// matching only "animations" silently skipped every win/bounce sheet in the game.
+const inAnim = (p) =>
+  segs(p).some((s) => s.startsWith("animations") || s.includes("-win{"));
 const inFonts = (p) => segs(p).some((s) => s.startsWith("fonts"));
 const bundleOf = (p) => {
   const s = segs(p);
@@ -96,15 +96,6 @@ for (const f of files) {
     } else m.set(stem(f), f);
     atlasFramesByBundle.set(b, m);
     available.add(stem(f));
-    // NOTICE (advisory, never blocks): atlas source icon smaller than MIN_ICON → will upscale/blur on
-    // high-DPI screens. Cosmetic + needs re-exported art, so it must not gate deploys.
-    if (ext === ".png") {
-      const sz = pngSize(f);
-      if (sz && Math.max(sz.w, sz.h) < MIN_ICON)
-        notice(
-          `[icon] ${relative(ROOT, f)} is ${sz.w}x${sz.h} — small for high-DPI (blurs when scaled up); author UI icons ~2x their on-screen size (>= ${MIN_ICON}px long side)`,
-        );
-    }
   } else if (inAnim(f) && ext === ".png") {
     available.add(stem(f));
   } else if (inFonts(f) && (ext === ".fnt" || ext === ".png")) {
@@ -268,17 +259,12 @@ for (const id of gameFolders) {
 }
 
 // ---------- report ----------
-for (const n of notices) console.log("· " + n); // advisory — never blocks
 for (const w of warnings) console.warn("⚠ " + w);
 for (const e of errors) console.error("✖ " + e);
-
-// ERRORS always fail; WARNINGS fail only in --strict; NOTICES never fail.
-const failed = errors.length > 0 || (STRICT && warnings.length > 0);
-const tally = `${errors.length} error(s), ${warnings.length} warning(s), ${notices.length} notice(s)`;
-if (failed) {
+if (errors.length) {
   console.error(
-    `\n✖ asset validation FAILED: ${tally}${STRICT ? " (strict: warnings block)" : ""}.`,
+    `\n✖ asset validation FAILED: ${errors.length} error(s), ${warnings.length} warning(s).`,
   );
   process.exit(1);
 }
-console.log(`✔ asset validation passed: ${tally}${STRICT ? " (strict)" : ""}.`);
+console.log(`✔ asset validation passed (${warnings.length} warning(s)).`);

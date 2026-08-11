@@ -2,20 +2,20 @@ import type { Ref } from 'react'
 import { extend } from '@pixi/react'
 import '@pixi/layout' // enables the optional `layout` prop even if PixiLayout isn't imported
 import {
-  Assets,
   NineSliceSprite,
   Texture,
   type ColorSource,
   type EventMode,
   type PointData,
 } from 'pixi.js'
+import { getAsset } from '@/utils/assets'
 import type { LayoutStyle } from './PixiLayout'
 
 // Register <pixiNineSliceSprite> as a JSX element (idempotent).
 extend({ NineSliceSprite })
 
 export interface PixiNineSliceSpriteProps {
-  /** A Texture, or an asset alias to resolve via `Assets.get` (the asset must be loaded). */
+  /** A Texture, or an asset alias to resolve via `getAsset` (the asset must be loaded). */
   texture: Texture | string
   /**
    * Corner inset sizes in px. The four corners keep their size, the edges stretch along one axis,
@@ -58,7 +58,7 @@ export interface PixiNineSliceSpriteProps {
  * />
  */
 export function PixiNineSliceSprite({ texture, ref, ...props }: PixiNineSliceSpriteProps) {
-  const tex = typeof texture === 'string' ? Assets.get<Texture>(texture) : texture
+  const tex = typeof texture === 'string' ? getAsset<Texture>(texture) : texture
   if (!tex) return null
   return <pixiNineSliceSprite ref={ref} texture={tex} {...props} />
 }

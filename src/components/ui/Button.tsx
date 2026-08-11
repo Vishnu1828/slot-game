@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { extend } from "@pixi/react";
-import { Assets, Container, Texture } from "pixi.js";
+import { Container, Texture } from "pixi.js";
+import { getAsset } from "@/utils/assets";
 import PixiContainer from "../pixi/PixiContainer";
 import PixiBitmapText from "../pixi/PixiBitmapText";
 import { PixiNineSliceSprite } from "../pixi/PixiNineSliceSprite";
@@ -58,7 +59,7 @@ export function Button({
   });
 
   const art = commonTheme.buttons.popup;
-  const tex = Assets.get<Texture>(held ? art.pressed : art.idle);
+  const tex = getAsset<Texture>(held ? art.pressed : art.idle);
   if (!tex) return null; // art not loaded yet
 
   const srcH = tex.height;

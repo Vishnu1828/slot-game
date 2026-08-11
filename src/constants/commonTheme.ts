@@ -70,6 +70,13 @@ export const commonTheme = {
     close: "x_button",
     popup: "popup_message_container",
   },
+  // Winning-payline art (common/ui/payline atlas). `straight` is a flat glowing bar reused for all
+  // three straight rows; `vDown`/`vUp` are the two zig-zags. These are STILL images — the glow is a
+  // code-driven alpha pulse in `PaylineOverlay`, not a spritesheet. Flipbook versions of these were
+  // tried and dropped: every frame was the identical shape at a different brightness, so they cost
+  // ~62x the memory to encode something one line of code does, and had to be authored far too small
+  // to fit in memory (164px art stretched ~9x -> visibly blurry).
+  payline: { straight: "line123", vDown: "line4", vUp: "line5" },
   sfx: { click: "click_spin" },
   input: {
     idle: "input_field",

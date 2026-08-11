@@ -2,7 +2,6 @@ import type { Ref } from "react";
 import { extend } from "@pixi/react";
 import "@pixi/layout"; // enables the optional `layout` prop even if PixiLayout isn't imported
 import {
-  Assets,
   Sprite,
   Texture,
   type ColorSource,
@@ -10,6 +9,7 @@ import {
   type FederatedPointerEvent,
   type PointData,
 } from "pixi.js";
+import { getAsset } from "@/utils/assets";
 import type { LayoutStyle } from "./PixiLayout";
 
 // Register <pixiSprite> as a JSX element (idempotent).
@@ -18,7 +18,7 @@ extend({ Sprite });
 type PointerHandler = (event: FederatedPointerEvent) => void;
 
 export interface PixiSpriteProps {
-  /** A Texture, or an asset alias to resolve via `Assets.get` (the asset must be loaded). */
+  /** A Texture, or an asset alias to resolve via `getAsset` (the asset must be loaded). */
   texture: Texture | string;
   x?: number;
   y?: number;
@@ -56,7 +56,7 @@ export interface PixiSpriteProps {
 
 /**
  * Reusable Pixi Sprite for @pixi/react. Accepts either a Texture or an asset alias string
- * (resolved via Assets.get) and renders nothing until that texture is available — so it won't
+ * (resolved via getAsset) and renders nothing until that texture is available — so it won't
  * flash an empty/broken sprite before the bundle finishes loading.
  *
  * @example
@@ -65,7 +65,7 @@ export interface PixiSpriteProps {
  */
 export function PixiSprite({ texture, ref, ...props }: PixiSpriteProps) {
   const tex =
-    typeof texture === "string" ? Assets.get<Texture>(texture) : texture;
+    typeof texture === "string" ? getAsset<Texture>(texture) : texture;
   if (!tex) return null;
   return <pixiSprite ref={ref} texture={tex} {...props} />;
 }
