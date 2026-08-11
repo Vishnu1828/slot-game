@@ -6,7 +6,7 @@ import Header from "@/components/ui/Header";
 import Controls from "@/components/ui/Controls";
 import Footer from "@/components/ui/Footer";
 import WinPopup from "@/components/ui/WinPopup";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useScreen } from "@/hooks/useScreen";
 import { useGameControlsStore, BET_LINES } from "@/store/useGameControlsStore";
 import { useNavigationStore, isModalOverlay } from "@/store/useNavigationStore";
@@ -17,6 +17,7 @@ import { useMathConfig } from "@/api/useMathConfig";
 import { useSpin } from "@/api/useSpin";
 import { useBalance } from "@/api/useBalance";
 import { buildStrips } from "@/game/math/engine";
+import type { SpinResult } from "@/game/math/types";
 import { formatGuarani } from "@/utils/format";
 import GameState from "@/components/ui/GameState";
 import { PixiGameAnimation } from "@/components/pixi/PixiGameAnimation";
@@ -93,6 +94,11 @@ export function GameScreen() {
     [spinMutation],
   );
 
+  // `useWinPresentation` needs `isSpinning` from `useReelSpin`, and `useReelSpin` needs to call back into
+  // the presentation the moment a result arrives — a cycle. A ref breaks it: `useReelSpin` reads its
+  // options at fire time, so the indirection costs nothing and the order of the two hooks stays free.
+  const prefetchWinRef = useRef<((result: SpinResult) => void) | null>(null);
+
   const { spinId, finalStops, isSpinning, spin, handleSettled } = useReelSpin({
     reelLengths: config.reelLengths,
     balance,
@@ -102,6 +108,9 @@ export function GameScreen() {
     onInsufficient: () => showOverlay("repeat-insufficient"),
     onCommit: (bet) => deduct(bet), // remove the stake at spin start
     onAbort: (bet) => credit(bet), // refund if the request fails
+    // Result known, reels still spinning: start pulling the celebration art now. Player-invisible —
+    // it only warms the cache, so the outcome stays secret until the reels land.
+    onResult: (result) => prefetchWinRef.current?.(result),
     onSettle: (result) => {
       credit(result.totalWinTokens); // pay the win when the reels stop
       settleRound(result); // stores it AND starts the win presentation when it paid
@@ -110,7 +119,10 @@ export function GameScreen() {
 
   // Win presentation (lines glow -> win screen -> idle). Shared across all games; the phase itself
   // lives in `useRoundStore` so the overlay and the win screen can read it too.
-  const { phase, dismiss } = useWinPresentation(isSpinning, theme);
+  const { phase, dismiss, prefetchWin } = useWinPresentation(isSpinning, theme);
+  useEffect(() => {
+    prefetchWinRef.current = prefetchWin;
+  });
 
   // Blur the scene behind anything modal — the win screen, and any overlay that blocks the game. The
   // landscape settings/rules cards are deliberately excluded: they stay playable, so blurring the game
