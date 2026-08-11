@@ -1,0 +1,825 @@
+{"frames": {
+
+"crystals_winning00.png":
+{
+	"frame": {"x":0,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning01.png":
+{
+	"frame": {"x":391,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning02.png":
+{
+	"frame": {"x":782,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning03.png":
+{
+	"frame": {"x":1173,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning04.png":
+{
+	"frame": {"x":1564,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning05.png":
+{
+	"frame": {"x":1955,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning06.png":
+{
+	"frame": {"x":2346,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning07.png":
+{
+	"frame": {"x":2737,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning08.png":
+{
+	"frame": {"x":3128,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning09.png":
+{
+	"frame": {"x":3519,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning10.png":
+{
+	"frame": {"x":0,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning11.png":
+{
+	"frame": {"x":391,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning12.png":
+{
+	"frame": {"x":782,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning13.png":
+{
+	"frame": {"x":1173,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning14.png":
+{
+	"frame": {"x":1564,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning15.png":
+{
+	"frame": {"x":1955,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning16.png":
+{
+	"frame": {"x":2346,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning17.png":
+{
+	"frame": {"x":2737,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning18.png":
+{
+	"frame": {"x":3128,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning19.png":
+{
+	"frame": {"x":3519,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning20.png":
+{
+	"frame": {"x":0,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning21.png":
+{
+	"frame": {"x":391,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning22.png":
+{
+	"frame": {"x":782,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning23.png":
+{
+	"frame": {"x":1173,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning24.png":
+{
+	"frame": {"x":1564,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning25.png":
+{
+	"frame": {"x":1955,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning26.png":
+{
+	"frame": {"x":2346,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning27.png":
+{
+	"frame": {"x":2737,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning28.png":
+{
+	"frame": {"x":3128,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning29.png":
+{
+	"frame": {"x":3519,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning30.png":
+{
+	"frame": {"x":0,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning31.png":
+{
+	"frame": {"x":391,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning32.png":
+{
+	"frame": {"x":782,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning33.png":
+{
+	"frame": {"x":1173,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning34.png":
+{
+	"frame": {"x":1564,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning35.png":
+{
+	"frame": {"x":1955,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning36.png":
+{
+	"frame": {"x":2346,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning37.png":
+{
+	"frame": {"x":2737,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning38.png":
+{
+	"frame": {"x":3128,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning39.png":
+{
+	"frame": {"x":3519,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning40.png":
+{
+	"frame": {"x":0,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning41.png":
+{
+	"frame": {"x":391,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning42.png":
+{
+	"frame": {"x":782,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning43.png":
+{
+	"frame": {"x":1173,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning44.png":
+{
+	"frame": {"x":1564,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning45.png":
+{
+	"frame": {"x":1955,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning46.png":
+{
+	"frame": {"x":2346,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning47.png":
+{
+	"frame": {"x":2737,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning48.png":
+{
+	"frame": {"x":3128,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning49.png":
+{
+	"frame": {"x":3519,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning50.png":
+{
+	"frame": {"x":0,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning51.png":
+{
+	"frame": {"x":391,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning52.png":
+{
+	"frame": {"x":782,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning53.png":
+{
+	"frame": {"x":1173,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning54.png":
+{
+	"frame": {"x":1564,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning55.png":
+{
+	"frame": {"x":1955,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning56.png":
+{
+	"frame": {"x":2346,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning57.png":
+{
+	"frame": {"x":2737,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning58.png":
+{
+	"frame": {"x":3128,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning59.png":
+{
+	"frame": {"x":3519,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning60.png":
+{
+	"frame": {"x":0,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning61.png":
+{
+	"frame": {"x":391,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning62.png":
+{
+	"frame": {"x":782,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning63.png":
+{
+	"frame": {"x":1173,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning64.png":
+{
+	"frame": {"x":1564,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning65.png":
+{
+	"frame": {"x":1955,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning66.png":
+{
+	"frame": {"x":2346,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning67.png":
+{
+	"frame": {"x":2737,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning68.png":
+{
+	"frame": {"x":3128,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning69.png":
+{
+	"frame": {"x":3519,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning70.png":
+{
+	"frame": {"x":0,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning71.png":
+{
+	"frame": {"x":391,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning72.png":
+{
+	"frame": {"x":782,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning73.png":
+{
+	"frame": {"x":1173,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning74.png":
+{
+	"frame": {"x":1564,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning75.png":
+{
+	"frame": {"x":1955,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning76.png":
+{
+	"frame": {"x":2346,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning77.png":
+{
+	"frame": {"x":2737,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning78.png":
+{
+	"frame": {"x":3128,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning79.png":
+{
+	"frame": {"x":3519,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning80.png":
+{
+	"frame": {"x":0,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning81.png":
+{
+	"frame": {"x":391,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning82.png":
+{
+	"frame": {"x":782,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning83.png":
+{
+	"frame": {"x":1173,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning84.png":
+{
+	"frame": {"x":1564,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning85.png":
+{
+	"frame": {"x":1955,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning86.png":
+{
+	"frame": {"x":2346,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning87.png":
+{
+	"frame": {"x":2737,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning88.png":
+{
+	"frame": {"x":3128,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"crystals_winning89.png":
+{
+	"frame": {"x":3519,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391},
+	"anchor": {"x":0.5,"y":0.5}
+}},
+"animations": {
+	"crystals_winning": ["crystals_winning00.png","crystals_winning01.png","crystals_winning02.png","crystals_winning03.png","crystals_winning04.png","crystals_winning05.png","crystals_winning06.png","crystals_winning07.png","crystals_winning08.png","crystals_winning09.png","crystals_winning10.png","crystals_winning11.png","crystals_winning12.png","crystals_winning13.png","crystals_winning14.png","crystals_winning15.png","crystals_winning16.png","crystals_winning17.png","crystals_winning18.png","crystals_winning19.png","crystals_winning20.png","crystals_winning21.png","crystals_winning22.png","crystals_winning23.png","crystals_winning24.png","crystals_winning25.png","crystals_winning26.png","crystals_winning27.png","crystals_winning28.png","crystals_winning29.png","crystals_winning30.png","crystals_winning31.png","crystals_winning32.png","crystals_winning33.png","crystals_winning34.png","crystals_winning35.png","crystals_winning36.png","crystals_winning37.png","crystals_winning38.png","crystals_winning39.png","crystals_winning40.png","crystals_winning41.png","crystals_winning42.png","crystals_winning43.png","crystals_winning44.png","crystals_winning45.png","crystals_winning46.png","crystals_winning47.png","crystals_winning48.png","crystals_winning49.png","crystals_winning50.png","crystals_winning51.png","crystals_winning52.png","crystals_winning53.png","crystals_winning54.png","crystals_winning55.png","crystals_winning56.png","crystals_winning57.png","crystals_winning58.png","crystals_winning59.png","crystals_winning60.png","crystals_winning61.png","crystals_winning62.png","crystals_winning63.png","crystals_winning64.png","crystals_winning65.png","crystals_winning66.png","crystals_winning67.png","crystals_winning68.png","crystals_winning69.png","crystals_winning70.png","crystals_winning71.png","crystals_winning72.png","crystals_winning73.png","crystals_winning74.png","crystals_winning75.png","crystals_winning76.png","crystals_winning77.png","crystals_winning78.png","crystals_winning79.png","crystals_winning80.png","crystals_winning81.png","crystals_winning82.png","crystals_winning83.png","crystals_winning84.png","crystals_winning85.png","crystals_winning86.png","crystals_winning87.png","crystals_winning88.png","crystals_winning89.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "crystal_winning.png",
+	"format": "RGBA8888",
+	"size": {"w":3910,"h":3519},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:bff37fdb7004a7fb313aa3ac1f6e32e1:dcb76899d111ebd4cafd218bad01b5ff:20518bb5281fd0e6615180756701885e$"
+}
+}

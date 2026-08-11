@@ -75,11 +75,69 @@ export interface ReelArt {
   extraAnimations?: ReelExtraAnim[];
 }
 
+/**
+ * All the art for one reel symbol. `asset` is the still frame the reels scroll; the two optional sheets
+ * are the win presentation's beats. Both are optional and independently so — a symbol with no `winning`
+ * sheet simply stays static during the glow, and one with no `bounce` sheet gets a code-driven squash.
+ */
+export interface SymbolArt {
+  /** Still atlas FRAME name (bare, from `symbols{tps}`) — what the reels scroll. */
+  asset: string;
+  /** Bounce sheet base name (no extension), game-scoped by `makeTheme`. */
+  bounce?: string;
+  /** Winning sheet base name (no extension), game-scoped by `makeTheme`. */
+  winning?: string;
+  /**
+   * Render box as a multiple of the cell box, per animation. The sheets are authored larger than the
+   * still symbol (e.g. 391 vs 280) so an effect can overshoot the cell; without this the animation would
+   * be squeezed into the still symbol's footprint and the overshoot would be lost. Default 1.
+   */
+  bounceSizeFrac?: number;
+  winningSizeFrac?: number;
+}
+
+/**
+ * The celebration animation that plays behind the win frame. Declared per game because the art
+ * differs in every way that matters: a sequence may ship as one sheet or be split across many (this
+ * game's is 80 frames over 10), and its frame count and aspect are the artist's call, not ours.
+ * Nothing here is a frame count — playback is driven by `durationMs`, so a re-export with more or
+ * fewer frames needs no code change.
+ */
+export interface WinAnimationArt {
+  /** Sheet base name, relative to `games/<id>/win/<id>-win/`. Game-scoped by `makeTheme`. */
+  sheet: string;
+  /**
+   * How many numbered sheets the sequence spans: `${sheet}-0` … `${sheet}-${sheets-1}`. Omit (or 1)
+   * when the whole sequence is a single sheet named `sheet`.
+   */
+  sheets?: number;
+  /** Named animation inside the sheet, when the export declares one. Omit → numeric frame order. */
+  animation?: string;
+  /** Aspect (width / height) of one frame's source size — the sprite is sized to match. */
+  aspect: number;
+  /** Animation width as a multiple of the win-frame panel width. Default 1. */
+  widthFrac?: number;
+  /** Centre offset from the panel centre, in panel HEIGHTS. Negative moves it up. Default 0. */
+  offsetYFrac?: number;
+  /** One full pass in ms. Defaults to the popup's scale-in + count-up, so both land together. */
+  durationMs?: number;
+}
+
+/** `WinAnimationArt` after `makeTheme` — `sheet`/`sheets` resolved to game-scoped sheet aliases. */
+export type WinAnimation = Omit<WinAnimationArt, "sheet" | "sheets"> & {
+  sheets: string[];
+};
+
 export interface ThemeAssets {
   background_h: string;
   background_v: string;
   header: string;
   spin: SpinButtonArt;
-  symbols: Record<string, string>;
+  /** SymbolId → all of that symbol's art. Keys MUST match the ids in the game's `math.ts`. */
+  symbols: Record<string, SymbolArt>;
   reel: ReelArt;
+  winFrame: string;
+  /** Celebration animation behind the win frame. Omit → the popup shows the frame alone. */
+  winAnimation?: WinAnimation;
+  font: string;
 }

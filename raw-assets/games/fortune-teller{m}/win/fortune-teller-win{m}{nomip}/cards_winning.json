@@ -1,0 +1,735 @@
+{"frames": {
+
+"cards_winning00.png":
+{
+	"frame": {"x":0,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning01.png":
+{
+	"frame": {"x":391,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning02.png":
+{
+	"frame": {"x":782,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning03.png":
+{
+	"frame": {"x":1173,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning04.png":
+{
+	"frame": {"x":1564,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning05.png":
+{
+	"frame": {"x":1955,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning06.png":
+{
+	"frame": {"x":2346,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning07.png":
+{
+	"frame": {"x":2737,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning08.png":
+{
+	"frame": {"x":3128,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning09.png":
+{
+	"frame": {"x":3519,"y":0,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning10.png":
+{
+	"frame": {"x":0,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning11.png":
+{
+	"frame": {"x":391,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning12.png":
+{
+	"frame": {"x":782,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning13.png":
+{
+	"frame": {"x":1173,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning14.png":
+{
+	"frame": {"x":1564,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning15.png":
+{
+	"frame": {"x":1955,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning16.png":
+{
+	"frame": {"x":2346,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning17.png":
+{
+	"frame": {"x":2737,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning18.png":
+{
+	"frame": {"x":3128,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning19.png":
+{
+	"frame": {"x":3519,"y":391,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning20.png":
+{
+	"frame": {"x":0,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning21.png":
+{
+	"frame": {"x":391,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning22.png":
+{
+	"frame": {"x":782,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning23.png":
+{
+	"frame": {"x":1173,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning24.png":
+{
+	"frame": {"x":1564,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning25.png":
+{
+	"frame": {"x":1955,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning26.png":
+{
+	"frame": {"x":2346,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning27.png":
+{
+	"frame": {"x":2737,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning28.png":
+{
+	"frame": {"x":3128,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning29.png":
+{
+	"frame": {"x":3519,"y":782,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning30.png":
+{
+	"frame": {"x":0,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning31.png":
+{
+	"frame": {"x":391,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning32.png":
+{
+	"frame": {"x":782,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning33.png":
+{
+	"frame": {"x":1173,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning34.png":
+{
+	"frame": {"x":1564,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning35.png":
+{
+	"frame": {"x":1955,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning36.png":
+{
+	"frame": {"x":2346,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning37.png":
+{
+	"frame": {"x":2737,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning38.png":
+{
+	"frame": {"x":3128,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning39.png":
+{
+	"frame": {"x":3519,"y":1173,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning40.png":
+{
+	"frame": {"x":0,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning41.png":
+{
+	"frame": {"x":391,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning42.png":
+{
+	"frame": {"x":782,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning43.png":
+{
+	"frame": {"x":1173,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning44.png":
+{
+	"frame": {"x":1564,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning45.png":
+{
+	"frame": {"x":1955,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning46.png":
+{
+	"frame": {"x":2346,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning47.png":
+{
+	"frame": {"x":2737,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning48.png":
+{
+	"frame": {"x":3128,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning49.png":
+{
+	"frame": {"x":3519,"y":1564,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning50.png":
+{
+	"frame": {"x":0,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning51.png":
+{
+	"frame": {"x":391,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning52.png":
+{
+	"frame": {"x":782,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning53.png":
+{
+	"frame": {"x":1173,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning54.png":
+{
+	"frame": {"x":1564,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning55.png":
+{
+	"frame": {"x":1955,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning56.png":
+{
+	"frame": {"x":2346,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning57.png":
+{
+	"frame": {"x":2737,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning58.png":
+{
+	"frame": {"x":3128,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning59.png":
+{
+	"frame": {"x":3519,"y":1955,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning60.png":
+{
+	"frame": {"x":0,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning61.png":
+{
+	"frame": {"x":391,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning62.png":
+{
+	"frame": {"x":782,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning63.png":
+{
+	"frame": {"x":1173,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning64.png":
+{
+	"frame": {"x":1564,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning65.png":
+{
+	"frame": {"x":1955,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning66.png":
+{
+	"frame": {"x":2346,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning67.png":
+{
+	"frame": {"x":2737,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning68.png":
+{
+	"frame": {"x":3128,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning69.png":
+{
+	"frame": {"x":3519,"y":2346,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning70.png":
+{
+	"frame": {"x":0,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning71.png":
+{
+	"frame": {"x":391,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning72.png":
+{
+	"frame": {"x":782,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning73.png":
+{
+	"frame": {"x":1173,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning74.png":
+{
+	"frame": {"x":1564,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning75.png":
+{
+	"frame": {"x":1955,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning76.png":
+{
+	"frame": {"x":2346,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning77.png":
+{
+	"frame": {"x":2737,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning78.png":
+{
+	"frame": {"x":3128,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning79.png":
+{
+	"frame": {"x":3519,"y":2737,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning80.png":
+{
+	"frame": {"x":0,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning81.png":
+{
+	"frame": {"x":391,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning82.png":
+{
+	"frame": {"x":782,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning83.png":
+{
+	"frame": {"x":1173,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning84.png":
+{
+	"frame": {"x":1564,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning85.png":
+{
+	"frame": {"x":1955,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning86.png":
+{
+	"frame": {"x":2346,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning87.png":
+{
+	"frame": {"x":2737,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning88.png":
+{
+	"frame": {"x":3128,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+},
+"cards_winning89.png":
+{
+	"frame": {"x":3519,"y":3128,"w":391,"h":391},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":391},
+	"sourceSize": {"w":391,"h":391}
+}},
+"animations": {
+	"cards_winning": ["cards_winning00.png","cards_winning01.png","cards_winning02.png","cards_winning03.png","cards_winning04.png","cards_winning05.png","cards_winning06.png","cards_winning07.png","cards_winning08.png","cards_winning09.png","cards_winning10.png","cards_winning11.png","cards_winning12.png","cards_winning13.png","cards_winning14.png","cards_winning15.png","cards_winning16.png","cards_winning17.png","cards_winning18.png","cards_winning19.png","cards_winning20.png","cards_winning21.png","cards_winning22.png","cards_winning23.png","cards_winning24.png","cards_winning25.png","cards_winning26.png","cards_winning27.png","cards_winning28.png","cards_winning29.png","cards_winning30.png","cards_winning31.png","cards_winning32.png","cards_winning33.png","cards_winning34.png","cards_winning35.png","cards_winning36.png","cards_winning37.png","cards_winning38.png","cards_winning39.png","cards_winning40.png","cards_winning41.png","cards_winning42.png","cards_winning43.png","cards_winning44.png","cards_winning45.png","cards_winning46.png","cards_winning47.png","cards_winning48.png","cards_winning49.png","cards_winning50.png","cards_winning51.png","cards_winning52.png","cards_winning53.png","cards_winning54.png","cards_winning55.png","cards_winning56.png","cards_winning57.png","cards_winning58.png","cards_winning59.png","cards_winning60.png","cards_winning61.png","cards_winning62.png","cards_winning63.png","cards_winning64.png","cards_winning65.png","cards_winning66.png","cards_winning67.png","cards_winning68.png","cards_winning69.png","cards_winning70.png","cards_winning71.png","cards_winning72.png","cards_winning73.png","cards_winning74.png","cards_winning75.png","cards_winning76.png","cards_winning77.png","cards_winning78.png","cards_winning79.png","cards_winning80.png","cards_winning81.png","cards_winning82.png","cards_winning83.png","cards_winning84.png","cards_winning85.png","cards_winning86.png","cards_winning87.png","cards_winning88.png","cards_winning89.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "cards_winning.png",
+	"format": "RGBA8888",
+	"size": {"w":3910,"h":3519},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:1a06672a4a6cfad95c3e07505d057ce7:0362f1948de74bfb8cadb86965d4ec67:9a88c43900fa35249264e442fb6ca0a1$"
+}
+}

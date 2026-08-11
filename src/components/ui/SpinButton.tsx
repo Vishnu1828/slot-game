@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Assets, Texture } from "pixi.js";
+import { Texture } from "pixi.js";
+import { getAsset } from "@/utils/assets";
 import type { LayoutStyle } from "../pixi/PixiLayout";
 import type { SpinButtonArt } from "@/types/theme";
 import { PixiSprite } from "../pixi/PixiSprite";
@@ -21,7 +22,7 @@ export interface SpinButtonProps {
 }
 
 const resolveTex = (a?: string): Texture | undefined =>
-  a ? Assets.get<Texture>(a) : undefined;
+  a ? getAsset<Texture>(a) : undefined;
 
 /**
  * Generic spin button with four theme-driven states (idle / active / pressed / disabled). Each

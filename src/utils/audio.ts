@@ -1,4 +1,4 @@
-import { Assets } from "pixi.js";
+import { getAsset } from "@/utils/assets";
 import { Sound, sound, type PlayOptions } from "@pixi/sound";
 import gsap from "gsap";
 
@@ -14,7 +14,7 @@ const getAudioContext = () =>
  * caches the Sound under *every* alias (incl. the short "click_spin"), so resolve through it first.
  */
 const findSound = (alias: string): Sound | undefined =>
-  Assets.get<Sound>(alias) ?? (sound.exists(alias) ? sound.find(alias) : undefined);
+  getAsset<Sound>(alias) ?? (sound.exists(alias) ? sound.find(alias) : undefined);
 
 /**
  * A class to handle background music within the game.

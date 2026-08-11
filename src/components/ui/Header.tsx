@@ -1,4 +1,5 @@
-import { Assets, Texture } from "pixi.js";
+import { Texture } from "pixi.js";
+import { getAsset } from "@/utils/assets";
 import PixiSprite from "../pixi/PixiSprite";
 import { useStage } from "@/hooks/useStage";
 
@@ -19,7 +20,7 @@ const clamp = (v: number, min: number, max: number) =>
  */
 export function Header({ art, alpha, visible }: HeaderProps) {
   const { w, h, mode } = useStage();
-  const tex = Assets.get<Texture>(art);
+  const tex = getAsset<Texture>(art);
   if (!tex) return null;
 
   // Target width (as a fraction of the viewport, clamped) + top offset, per layout mode.

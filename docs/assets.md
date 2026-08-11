@@ -46,22 +46,29 @@ raw-assets/
 │  ├─ fonts{nomip}{nc}/           pre-baked bitmap fonts (Name.fnt + Name.png pairs)
 │  ├─ images/                     loose shared images (footer.png)
 │  └─ ui/
-│     ├─ audio{tps}/              ← {tps} = pack these small images into ONE atlas
-│     ├─ betButton{tps}/          bet +/- + bet-settings icon states
-│     ├─ setting{tps}/            sound / info / exit icon states
-│     ├─ speedButton{tps}/        autoplay + speed 1..3 states
-│     ├─ tabBox{tps}/  infoButton{tps}/  buttonIcons{tps}/
+│     ├─ audio{tps}{fix}/         ← {tps} = pack into ONE atlas; {fix} = full-res only (no blurry tier)
+│     ├─ betButton{tps}{fix}/     bet +/- + bet-settings icon states
+│     ├─ setting{tps}{fix}/       sound / info / exit icon states
+│     ├─ speedButton{tps}{fix}/   autoplay + speed 1..3 states
+│     ├─ tabBox{tps}{fix}/  infoButton{tps}{fix}/  buttonIcons{tps}{fix}/
 │     ├─ popupButton/             LOOSE nine-slice button (atlas trim would cut its caps)
 │     └─ menu_container.png  popup_message_container.png   ← loose nine-slice panels
 │
 └─ games/
    └─ <game>{m}/                  ← one bundle per game (folder name = game id = registry key)
-      ├─ animations{nomip}/       custom sprite-sheets (<name>.png + <name>.json), single-res
+      ├─ animations{nomip}/       decor sprite-sheets (<name>.png + <name>.json), single-res
+      ├─ fonts{nomip}{nc}/        the game's win font (win_font.fnt + .png)
       ├─ frame/                   LOOSE big art: reel_frame_*, reel_bg_*
       ├─ images/                  LOOSE backgrounds: bg_horizontal, bg_vertical
-      └─ ui/
-         ├─ logo.png              loose
-         └─ spinButton{tps}/      the game's spin-button states (atlas)
+      ├─ symbols{tps}/            the still symbols the reels scroll
+      ├─ ui/
+      │  ├─ logo.png              loose
+      │  └─ spinButton{tps}{fix}/ the game's spin-button states (atlas)
+      └─ win/
+         ├─ win_popup_frame.png   LOOSE panel behind "YOU WIN!"
+         └─ <game>-win{m}{nomip}/ ← SEPARATE bundle: symbol bounce/winning + win-popup sheets.
+                                    NOT loaded by loadGame — fetched per win, freed per beat.
+                                    See "Win-presentation art" below.
 ```
 
 ---
@@ -78,9 +85,15 @@ per-game prefix on any nested preload folder.
 | `common{m}/` | `common` | shared, once (with every game) |
 | `games/<game>{m}/` | `<game>` | that game |
 | `games/<game>{m}/<game>-preload{m}/` | `<game>-preload` | that game's loading UI |
+| `games/<game>{m}/win/<game>-win{m}{nomip}/` | `<game>-win` | **never as a bundle** — individual sheets are fetched per win |
 
-The preload bundle (if used) lives **inside** its game folder. Add a game by copying the whole
-`games/<game>{m}/` folder (incl. its `<game>-preload{m}` child, if any) with a new unique prefix.
+Nested bundles live **inside** their game folder. Add a game by copying the whole
+`games/<game>{m}/` folder (incl. its `{m}` children) with a new unique prefix.
+
+> The `<game>-win` bundle exists only to keep its contents **out** of the game bundle; nothing calls
+> `loadBundle` on it. The game-id prefix is still required: with a shared name like `animation-win`,
+> AssetPack warns `Duplicate bundle name` on the second game and rewrites every duplicate to a
+> relative name, so the bundle's name would change shape the day a second game shipped.
 
 ### Tag cheat-sheet
 
@@ -101,9 +114,49 @@ The preload bundle (if used) lives **inside** its game folder. Add a game by cop
 | Symbols | `reels{tps}/` | `{tps}` | atlas |
 | Large panel / background | `images/` or `frame/` | none (loose) | a big image in an atlas can exceed `maximumTextureSize` (4096) → blur/fail; loose is still mipmapped |
 | Nine-slice button/panel | loose (e.g. `popupButton/`) | none | atlas trimming cuts nine-slice caps → keep loose |
-| Custom frame animation | `animations{nomip}/` | `{nomip}` | JSON coords baked to one resolution; tiers would misalign — see [animations.md](animations.md) |
+| Decor frame animation | `animations{nomip}/` | `{nomip}` | JSON coords baked to one resolution; tiers would misalign — see [animations.md](animations.md) |
+| Win-presentation animation | `win/<game>-win{m}{nomip}/` | `{m}{nomip}` | same baked-coord rule, plus `{m}` to keep it out of the game bundle — see below |
 | Bitmap font | `fonts{nomip}{nc}/` | `{nomip}{nc}` | glyph coords baked to the exact `.png`; no resize/compress/rename |
 | Sound | `audio/` | none | transcoded to `.mp3` + `.ogg` |
+
+### Win-presentation art (the `<game>-win` bundle)
+
+Celebration art dwarfs everything else a slot ships. For `fortune-teller` it is **~570 MB of decoded
+texture** against ~125 MB for all the decor combined — 8 winning-glow sheets at ~33–52 MB each, 8
+bounce sheets, and a 10-sheet win-popup sequence at 160 MB. Loading that with the game bundle put a
+phone over its texture budget before the first spin.
+
+It doesn't need to be resident. The presentation beats run in sequence and never overlap, and a spin
+only lights the handful of symbols that actually won:
+
+```
+reels land → bounce → payline glow → win popup
+             bounce   winning        win-* sheets
+             sheets   sheets
+```
+
+So the folder is tagged `{m}`, which excludes it from the game bundle, and
+[`src/game/winAssets.ts`](../src/game/winAssets.ts) fetches and frees per beat:
+
+| sheets | loaded | freed |
+|---|---|---|
+| bounce (all symbols) | once at game-screen mount, in background | never — small, and its beat starts ~470 ms after the reels land, too soon to fetch against |
+| winning glows | when a spin pays, for **only** the symbols that won | when the popup opens, and again when the presentation ends |
+| win popup | same moment | when the presentation ends |
+
+Startup animation memory drops from ~691 MB to ~164 MB, with a peak around ~324 MB during a win.
+
+Nothing is hardcoded per game: the lists are derived from the theme's `symbols[*].bounce` /
+`symbols[*].winning` and `winAnimation`, and the orchestration lives in the shared
+[`useWinPresentation`](../src/game/useWinPresentation.ts). A game that skips the `{m}` tag still works —
+its sheets just load eagerly with the game bundle.
+
+**To adopt it in a new game:** put the sheets in `games/<id>{m}/win/<id>-win{m}{nomip}/` and declare
+them in the theme. That's the whole contract.
+
+A sheet that misses its beat degrades rather than breaking: `hasSheet` falls back to the code-driven
+bounce, and `PixiGameAnimation` renders nothing until its frames resolve, leaving the symbol static.
+The next win finds it cached.
 
 ### Bitmap fonts (important)
 
@@ -156,6 +209,13 @@ Common loose images stay bare (`footer`) because the `common` bundle is unique.
 `animations{nomip}/chandelier.png` + `chandelier.json` are loaded by the base alias **`chandelier`**
 (the component resolves the `.png`+`.json` pair). See [animations.md](animations.md).
 
+Win-presentation sheets are the exception: they are referenced **path-scoped**, as
+`games/<id>/win/<id>-win/<name>`, built by `winAnimPath` in [`theme.ts`](../src/game/theme.ts). Bare
+shortcuts are global across every loaded bundle and AssetPack *silently drops* one that two assets both
+claim — so a second game shipping its own `crystal_winning` would make the alias vanish with no error.
+`PixiGameAnimation` appends `.json`/`.png`, and the path-scoped extension-qualified aliases always
+exist, so a scoped base name resolves unchanged.
+
 ### 4. Bitmap fonts → the `.fnt`'s internal `face`, not the filename (see above).
 
 ### Names that MUST be identical across games (the "theme contract")
@@ -181,7 +241,10 @@ filenames differ — pass overrides to `makeTheme`.
 - **Per-game (scoped aliases):** each game's `theme.ts` calls `makeTheme(id, overrides)`
   ([`src/game/fortune-teller/theme.ts`](../src/game/fortune-teller/theme.ts)), producing a `ThemeAssets`
   descriptor ([`src/types/theme.ts`](../src/types/theme.ts)) with `header`, `background_*`, `spin`,
-  `symbols`, `reel`. Registered in [`src/game/registry.ts`](../src/game/registry.ts).
+  `symbols`, `reel`, `winFrame`, `winAnimation`. Registered in
+  [`src/game/registry.ts`](../src/game/registry.ts).
+- **Win-presentation sheet lists:** derived from the theme by
+  [`src/game/winAssets.ts`](../src/game/winAssets.ts) — nothing enumerates them by hand.
 
 A component never invents an alias string — it reads `commonTheme.*` (shared) or `theme.*` (this game)
 and passes that to a `PixiSprite`.
@@ -203,7 +266,9 @@ and passes that to a `PixiSprite`.
 - Under the hood they call `Assets.get(alias)`; atlas frames resolve by frame name, loose images by
   their (scoped) short alias.
 - `loadGame(id)` loads the `common` + `<id>` bundles before the game's screen shows, so every alias in
-  `commonTheme` and the game's `theme` is resolvable.
+  `commonTheme` and the game's `theme` is resolvable — **except** the `<id>-win` sheets, which are their
+  own bundle and arrive per win (see "Win-presentation art"). Components already render nothing until an
+  alias resolves, which is what makes that safe.
 
 ---
 
@@ -219,11 +284,15 @@ and passes that to a `PixiSprite`.
 
 1. Copy `games/<existing>{m}/` to `games/<new-id>{m}/`; replace the art (keep the **canonical
    filenames** above so shared components resolve them). Small buttons → `{tps}`, big art → loose.
-2. Add `src/game/<new-id>/theme.ts` calling `makeTheme('<new-id>', { …overrides… })`, and
-   `src/game/<new-id>/GameScreen.tsx`.
-3. Register it in [`registry.ts`](../src/game/registry.ts) — **the key must equal the folder/bundle name
+2. **Rename the nested `{m}` folders to the new id** — `win/<new-id>-win{m}{nomip}` (and
+   `<new-id>-preload{m}`, if used). A duplicated bundle name builds, but warns and renames every
+   duplicate; see the bundle table above.
+3. Add `src/game/<new-id>/theme.ts` calling `makeTheme('<new-id>', { …overrides… })`, and
+   `src/game/<new-id>/GameScreen.tsx`. Declare `symbols[*].bounce` / `winning` and `winAnimation` to get
+   the per-win loading for free.
+4. Register it in [`registry.ts`](../src/game/registry.ts) — **the key must equal the folder/bundle name
    `<new-id>`** (that string is what `loadGame` loads).
-4. `npm run assets` → reload.
+5. `npm run assets` → reload, then `npm run validate:assets`.
 
 ---
 
@@ -236,14 +305,14 @@ and passes that to a `PixiSprite`.
 - **Big image blurry / won't load** → it's in a `{tps}` atlas and exceeded `maximumTextureSize` (4096),
   forcing a downscale. Move it to a loose folder. (Loose animation sheets have no such cap — keep them
   ≤ 4096 yourself; see [animations.md](animations.md).)
-- **Nine-slice edges look cut** → the texture is in a `{tps}` atlas (trim eats the caps). Keep
-  nine-slice art loose (like `popupButton/`).
 - **UI icons blurry — and blurrier in production than local** → the app's `texturePreference.resolution`
   (`min(dpr, 2)`) matches no available tier, so Pixi falls back to the **first `src` in the manifest**,
   and that order differs between dev (stable names) and prod (content-hashed) → a *lower* tier loads in
   prod (`@0.25x`) than local (`@0.5x`). Fix: tag small UI atlases **`{fix}`** so only the full-res exists
   → nothing blurry to fall back to. (Truly crisp still needs source art authored ≥ ~2× its on-screen
   size; the validator warns on atlas icons < 96px.)
+- **Nine-slice edges look cut** → the texture is in a `{tps}` atlas (trim eats the caps). Keep
+  nine-slice art loose (like `popupButton/`).
 - **New asset not showing** → you didn't reload after the repack, or the alias is wrong. Confirm it
   exists in `public/assets/manifest.json`.
 - **BitmapText renders nothing** → `fontFamily` must be the `.fnt`'s internal `face`, not the filename.

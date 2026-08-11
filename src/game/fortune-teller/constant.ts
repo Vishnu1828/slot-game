@@ -28,6 +28,21 @@ const CHANDELIER_Y_FRAC = 0.02;
 const CHANDELIER_H_FRAC = 0.25; // width as a fraction of screen width
 const CHANDELIER_ASPECT = 674 / 620; // width / height
 
+// Spinning ball: sits ON the orb painted into the reel frame's top-centre scrollwork. Unlike the decor
+// above these are fractions of the FRAME RECT, not the screen, so the ball stays glued to the frame at
+// any size (see SpinningBall.tsx — it derives that rect from the same helper ReelFrame does).
+//
+// Measured off the frame art: the orb is a 269px circle centred at (1810, 163) in 3632px-wide art, and
+// the sheet's frames are 269x269 filling 99.6% — so WIDTH_FRAC maps 1:1 with no fudge factor. Y differs
+// per orientation ONLY because the two frames differ in height; the orb is at the same absolute spot.
+const BALL_X_FRAC = 0.4983; // 1810 / 3632
+const BALL_Y_FRAC_H = 0.0718; // 163 / 2270 — landscape frame is 3632x2270
+const BALL_Y_FRAC_V = 0.0608; // 163 / 2680 — portrait frame is 3632x2680
+const BALL_WIDTH_FRAC = 0.0741; // 269 / 3632
+// 48 frames / 60fps ≈ 0.8s per rotation. The 0.4 default would be 2.0s — longer than a whole fast spin
+// (~490ms), so the ball would barely turn a quarter before stopping.
+const BALL_SPEED = 1;
+
 export {
   theme,
   CANDLE_FX,
@@ -44,4 +59,9 @@ export {
   CHANDELIER_Y_FRAC,
   CHANDELIER_H_FRAC,
   CHANDELIER_ASPECT,
+  BALL_X_FRAC,
+  BALL_Y_FRAC_H,
+  BALL_Y_FRAC_V,
+  BALL_WIDTH_FRAC,
+  BALL_SPEED,
 };

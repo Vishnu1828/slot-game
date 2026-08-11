@@ -10,15 +10,17 @@ import {
   MIN_COIN_VALUE,
   MAX_COIN_VALUE,
 } from "@/store/useGameControlsStore";
+import { formatGuarani } from "@/utils/format";
 
 export interface BettingScreenProps {
   onClose: () => void;
 }
 
 /**
- * Betting settings: Coins per line, Coin value, and Total bet steppers, plus a BET MAX button. Total
- * bet is the shared footer `bet`; coins per line and coin value are independent placeholders (no
- * payline math yet). All chrome/layout lives in SettingsDrawer; this just declares the rows.
+ * Betting settings: Coins per line, Coin value, and Total bet steppers, plus a BET MAX button. The
+ * three are coupled by the spec formula (total = coinValue × coinsPerLine × BET_LINES) in the store,
+ * so editing any row updates the others live. All chrome/layout lives in SettingsDrawer; this just
+ * declares the rows.
  */
 export function BettingScreen({ onClose }: BettingScreenProps) {
   const bet = useGameControlsStore((s) => s.bet);
@@ -59,7 +61,7 @@ export function BettingScreen({ onClose }: BettingScreenProps) {
           label: "Coin value",
           render: (r) => (
             <Stepper
-              value={`$${coinValue}`}
+              value={formatGuarani(coinValue)}
               onDecrease={decreaseCoinValue}
               onIncrease={increaseCoinValue}
               decDisabled={coinValue <= MIN_COIN_VALUE}
@@ -72,9 +74,9 @@ export function BettingScreen({ onClose }: BettingScreenProps) {
           label: "Total bet",
           render: (r) => (
             <Stepper
-              value={`$${bet}`}
-              onDecrease={decreaseBet}
-              onIncrease={increaseBet}
+              value={formatGuarani(bet)}
+              onDecrease={() => decreaseBet(true)}
+              onIncrease={() => increaseBet(true)}
               decDisabled={bet <= MIN_BET}
               incDisabled={bet >= MAX_BET}
               {...r}

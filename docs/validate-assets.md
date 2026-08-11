@@ -25,18 +25,18 @@ Node built-ins — no `sharp`, no npm install — so it runs anywhere.
 | Local — on demand | `npm run validate:assets` | Run before pushing |
 
 In CI it is fail-fast: if validation fails, AssetPack never builds and nothing is uploaded to the runtime
-bucket. It runs in the CI `check` job (`.github/workflows/ci.yml`) on **every PR and push**, with
-`--strict` — see [deployment.md](deployment.md).
+bucket. (It is not yet wired into `pull_request`, `npm run build`, or a git hook — see
+[asset-pipeline.md](asset-pipeline.md) §9 for recommended additions.)
 
 ## How to run
 
 ```
-npm run validate:assets          # errors block; warnings + notices only reported
-npm run validate:assets:strict   # errors AND warnings block (this is what CI runs)
+npm run validate:assets
+# or
+node scripts/validate-assets.mjs
 ```
 
-**Three tiers.** Exit `1` if any **ERROR** (always), or any **WARNING** under `--strict`; **NOTICES**
-never fail. Exit `0` otherwise.
+Exit codes: `0` = passed (warnings allowed); `1` = one or more errors (build should stop).
 
 Example output:
 
@@ -56,23 +56,17 @@ Example output:
 
 | # | Check | Fails when | Fix |
 |---|---|---|---|
-| 1 | **Animation sheets** | `<name>.png` has no sibling `<name>.json` (or vice-versa); PNG > 4096px per side; JSON `spriteSheetWidth/Height` ≠ PNG dims; unreadable PNG / invalid JSON | Keep the `.png`+`.json` pair together; run `scripts/fit-animation-sheets.mjs` to downscale + rewrite coords |
+| 1 | **Animation sheets** — folders named `animations…` **or** `…-win{…}` (the per-game win bundle) | `<name>.png` has no sibling `<name>.json` (or vice-versa); PNG > 4096px per side; JSON `spriteSheetWidth/Height` ≠ PNG dims; unreadable PNG / invalid JSON | Keep the `.png`+`.json` pair together; run `scripts/fit-animation-sheets.mjs` to downscale + rewrite coords |
 | 2 | **Atlas frame uniqueness** | Two images in `{tps}` folders of the same bundle share a filename (nameStyle:'short' → same alias → `already has key`) | Rename one file so frame names are unique within the bundle |
 | 3 | **Bitmap fonts** | A `.fnt` has no `file=` page / missing sibling `.png` / `file=` has a space; **or** its `face=` has a space or doesn't equal the filename | Keep the `.fnt`/`.png` pair together; `file=` names the sibling; **`face=` must equal the filename** (e.g. `Alexandria_Medium`, not `Alexandria Medium`) — it's the `fontFamily` the code uses |
 | 4 | **Bundle ↔ registry** | A `raw-assets/games/<id>{m}/` folder has no `registry.ts` GAMES key, or a registry game has no folder | Keep the game id, folder name, and registry key identical |
 | 5 | **commonTheme aliases** | An alias string in `src/constants/commonTheme.ts` doesn't resolve to any source asset | Add the missing asset, or fix the alias string |
 
-### Warnings (block only with `--strict`)
+### Warnings (reported, do not fail)
 
 | # | Check | Warns when |
 |---|---|---|
 | 6 | **Per-game theme contract** | A game is missing a default file (`images/bg_horizontal|vertical`, `ui/logo`, `frame/reel_frame_*`, `frame/reel_bg_*`) or a spin frame (`spin_active/pressed/disabled`). OK if the game overrides these in its `theme.ts`. |
-
-### Notices (advisory — never block, even with `--strict`)
-
-| # | Check | Notes |
-|---|---|---|
-| 7 | **Under-res atlas icon** | An atlas source image's long side is `< 96px` → it upscales/blurs on high-DPI. Cosmetic + needs re-exported art, so it must not gate deploys. Fix by authoring the icon ~2× its on-screen size. |
 
 ---
 
@@ -81,7 +75,9 @@ Example output:
 1. **Walk** `raw-assets/` recursively, skipping `.DS_Store`.
 2. **Classify** each file by its folder tags in the path:
    - `{tps}` → atlas frame (alias = filename without extension)
-   - `animations…` → animation sheet (`.png` needs a `.json` pair)
+   - `animations…` or `…-win{…}` → animation sheet (`.png` needs a `.json` pair). Both prefixes are
+     matched: the win sheets live in `win/<game>-win{m}{nomip}/`, and matching only `animations` used to
+     skip every bounce/glow/popup sheet in the game — the largest art there is.
    - `fonts…` → bitmap font (`.fnt`/`.png`)
    - other image/sound → loose asset (alias = filename without extension)
 3. **Build the "available alias" set** — every atlas frame, loose image, animation, sound, and font face

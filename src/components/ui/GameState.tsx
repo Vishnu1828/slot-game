@@ -6,28 +6,29 @@ import { useScreen } from "@/hooks/useScreen";
 import { BAR_H } from "@/constants/footer";
 import { measureBitmapText } from "@/utils/measureBitmapText";
 
-// Text size + gap above the footer, per layout mode.
-const SIZE = { portrait: 20, "mobile-landscape": 18, desktop: 24 } as const;
+// Text size + gap above the footer, per layout mode. Mobile (portrait + landscape) is kept small so
+// the win row ("YOU WON … LINE n PAYS …") fits comfortably on narrow screens.
+const SIZE = { portrait: 14, "mobile-landscape": 13, desktop: 24 } as const;
 const GAP_ABOVE_FOOTER = {
   portrait: 30,
-  "mobile-landscape": -18,
+  "mobile-landscape": BAR_H / 2 - 50,
   desktop: 24,
 } as const;
 const PART_GAP = 10; // gap between message / icon / detail in a win row
 
 export interface GameStateProps {
-  /** Main status line, e.g. "PLACE YOUR BET!" or "YOU WON $2". */
+  /** Main status line, e.g. "PLACE YOUR BET!" or "YOU WON ₲2.000". */
   message?: string;
-  /** Optional symbol icon (win rows), shown between message and detail. */
+  /** Optional symbol icon alias (win rows), shown between message and detail. */
   icon?: string;
-  /** Optional secondary line, e.g. "LINE 2 PAYS $2". */
+  /** Optional secondary line, e.g. "LINE 2 PAYS ₲2.000". */
   detail?: string;
 }
 
 /**
  * Game status line shown centered just above the footer (all modes). Renders either a single
  * message ("PLACE YOUR BET!") or a win row: message + optional symbol icon + detail
- * ("YOU WON $2 [icon] LINE 2 PAYS $2"). The whole row is measured and centered on the screen.
+ * ("YOU WON ₲2.000 [icon] LINE 2 PAYS ₲2.000"). The whole row is measured and centered on the screen.
  */
 export function GameState({
   message = "PLACE YOUR BET!",

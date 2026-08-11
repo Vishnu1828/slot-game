@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import { extend } from "@pixi/react";
 import {
-  Assets,
   Container,
   Sprite,
   Texture,
   type FederatedPointerEvent,
 } from "pixi.js";
+import { getAsset } from "@/utils/assets";
 import { useSettingsStore } from "../../store/useSettingsStore";
 import { commonTheme } from "@/constants/commonTheme";
 
@@ -28,7 +28,7 @@ const PAD_RIGHT = 40;
 const PANEL_W = 300;
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-const getTex = (alias: string) => Assets.get<Texture>(alias);
+const getTex = (alias: string) => getAsset<Texture>(alias);
 
 export interface VolumeSliderProps {
   x?: number;

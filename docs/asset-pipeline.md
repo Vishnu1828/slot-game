@@ -25,13 +25,13 @@ changes only endpoints, credentials, and the CDN cache-purge command.
 
 ## 2. The two kinds of asset
 
-| | Source artwork | Runtime assets |
-|---|---|---|
-| Folder | raw-assets/ | public/assets/ |
-| In version control | Yes (via GitHub LFS) | No (generated, git-ignored) |
-| Consumed by | Developers and CI | Players' browsers |
-| Stored / delivered by | GitHub LFS | Cloudflare R2 + CDN (future: S3 + CloudFront) |
-| Primary concern | Repository size, versioning | Delivery speed and egress cost |
+|                       | Source artwork              | Runtime assets                                |
+| --------------------- | --------------------------- | --------------------------------------------- |
+| Folder                | raw-assets/                 | public/assets/                                |
+| In version control    | Yes (via GitHub LFS)        | No (generated, git-ignored)                   |
+| Consumed by           | Developers and CI           | Players' browsers                             |
+| Stored / delivered by | GitHub LFS                  | Cloudflare R2 + CDN (future: S3 + CloudFront) |
+| Primary concern       | Repository size, versioning | Delivery speed and egress cost                |
 
 These use different, independent systems and must not be conflated: source art is private and
 version-controlled; runtime assets are public and cache-optimized.
@@ -129,17 +129,18 @@ to serve locally in development. No code change is needed to switch origins.
 
 Because the pipeline is S3-compatible and env-driven, moving to AWS changes only three things:
 
-| Concern | Cloudflare (now) | AWS (future) |
-|---|---|---|
-| Runtime bucket | R2 (`--endpoint-url` set) | S3 (no endpoint override) |
-| CDN | Cloudflare CDN + cache purge | CloudFront + create-invalidation |
-| CI auth | R2 API token (secrets) | GitHub OIDC → IAM role (no static keys) |
-| App | `VITE_ASSETS_BASE` = CDN URL | `VITE_ASSETS_BASE` = CloudFront URL |
+| Concern        | Cloudflare (now)             | AWS (future)                            |
+| -------------- | ---------------------------- | --------------------------------------- |
+| Runtime bucket | R2 (`--endpoint-url` set)    | S3 (no endpoint override)               |
+| CDN            | Cloudflare CDN + cache purge | CloudFront + create-invalidation        |
+| CI auth        | R2 API token (secrets)       | GitHub OIDC → IAM role (no static keys) |
+| App            | `VITE_ASSETS_BASE` = CDN URL | `VITE_ASSETS_BASE` = CloudFront URL     |
 
 AWS specifics when migrating: create a private S3 runtime bucket; put CloudFront in front with Origin
 Access Control (OAC); register GitHub's OIDC provider and an IAM role scoped to `s3:PutObject/ListBucket`
-+ `cloudfront:CreateInvalidation`; update the workflow's publish + purge steps (see comments in
-`.github/workflows/assets.yml`). Source-art LFS and the validator are unaffected.
+
+- `cloudfront:CreateInvalidation`; update the workflow's publish + purge steps (see comments in
+  `.github/workflows/assets.yml`). Source-art LFS and the validator are unaffected.
 
 ## 7. AssetPack configuration
 
@@ -149,12 +150,15 @@ Source art is processed by AssetPack (`.assetpack.js`) into `public/assets/` plu
   upscaled. The client requests the tier matching its device (DPR capped at 2).
 - **Texture atlases** for `{tps}` folders, `maximumTextureSize: 4096`, `nameStyle: 'short'`,
   `removeFileExtension: true` — frames are addressed by bare name (e.g. `spin_active`).
-- **Bundles** from `{m}` folders: `common`, `<game>`, `<game>-preload`.
+- **Bundles** from `{m}` folders: `common`, `<game>`, `<game>-preload`, `<game>-win`. A nested `{m}` is
+  its own bundle and its assets leave the parent — which is how `<game>-win` (the celebration sheets,
+  by far the heaviest thing a slot ships) stays out of `loadGame` and is fetched per win instead.
 - **Cache-bust** content-hashed filenames only in production (`AP_CACHEBUST=1`); dev uses stable names.
 - **Incremental cache** (`cache: true`, `.assetpack/`) — the basis for fast CI rebuilds.
 
-Fonts (`{nomip}{nc}`) and custom animations (`{nomip}`) ship single-resolution so their baked coordinates
-stay valid. See docs/assets.md and docs/animations.md for placement/naming rules.
+Fonts (`{nomip}{nc}`) and custom animations (`{nomip}`, both `animations…` and `<game>-win…`) ship
+single-resolution so their baked coordinates stay valid. See docs/assets.md and docs/animations.md for
+placement/naming rules.
 
 ## 8. Asset validation
 
@@ -224,18 +228,18 @@ negligible on any provider**. The variable cost is **egress** (player downloads)
 
 Source-art LFS:
 
-| | GitHub LFS (chosen) | Self-hosted LFS on R2 |
-|---|---|---|
-| Server | none (managed) | small server you run |
-| Cost | free 1 GB + 1 GB/mo, then ~$5/mo per 50 GB pack | ~$5/mo server + ~$0 R2 storage, free egress |
-| Ops | none | you maintain it |
+|        | GitHub LFS (chosen)                             | Self-hosted LFS on R2                       |
+| ------ | ----------------------------------------------- | ------------------------------------------- |
+| Server | none (managed)                                  | small server you run                        |
+| Cost   | free 1 GB + 1 GB/mo, then ~$5/mo per 50 GB pack | ~$5/mo server + ~$0 R2 storage, free egress |
+| Ops    | none                                            | you maintain it                             |
 
 Runtime delivery (egress-driven; ~5 MB per new session):
 
-| Monthly new sessions | Egress | Cloudflare R2 + CDN | AWS S3 + CloudFront |
-|---|---|---|---|
-| 100,000 | ~500 GB | $0 (free egress) | ~$42 |
-| 1,000,000 | ~5 TB | $0 (free egress) | ~$425 |
+| Monthly new sessions | Egress  | Cloudflare R2 + CDN | AWS S3 + CloudFront |
+| -------------------- | ------- | ------------------- | ------------------- |
+| 100,000              | ~500 GB | $0 (free egress)    | ~$42                |
+| 1,000,000            | ~5 TB   | $0 (free egress)    | ~$425               |
 
 Cloudflare R2's free egress is the reason it is the current runtime target; AWS remains the documented
 future target for organizations standardizing on AWS.
@@ -255,35 +259,35 @@ future target for organizations standardizing on AWS.
 
 ### 14.1 Repository files
 
-| File | Purpose |
-|---|---|
-| .gitattributes | GitHub LFS tracking for raw-assets binaries |
-| scripts/validate-assets.mjs | Asset validator (run in CI and locally) |
-| .github/workflows/assets.yml | Validate → build → upload to R2 → purge CDN |
-| src/assets/loader.ts | Runtime asset loading; reads VITE_ASSETS_BASE |
-| .assetpack.js | AssetPack pipeline configuration |
-| package.json | Scripts: assets, assets:ci, validate:assets |
+| File                         | Purpose                                       |
+| ---------------------------- | --------------------------------------------- |
+| .gitattributes               | GitHub LFS tracking for raw-assets binaries   |
+| scripts/validate-assets.mjs  | Asset validator (run in CI and locally)       |
+| .github/workflows/assets.yml | Validate → build → upload to R2 → purge CDN   |
+| src/assets/loader.ts         | Runtime asset loading; reads VITE_ASSETS_BASE |
+| .assetpack.js                | AssetPack pipeline configuration              |
+| package.json                 | Scripts: assets, assets:ci, validate:assets   |
 
 ### 14.2 npm scripts
 
-| Script | Purpose |
-|---|---|
-| npm run dev | AssetPack watcher + Vite (local development) |
-| npm run assets | One-shot asset build (stable names) |
-| npm run assets:ci | Incremental, cache-busted build (CI) |
-| npm run assets:prod | Clean, cache-busted build (app release) |
-| npm run validate:assets | Run the asset validator |
-| npm run build | lint → assets:prod → vite build |
+| Script                  | Purpose                                      |
+| ----------------------- | -------------------------------------------- |
+| npm run dev             | AssetPack watcher + Vite (local development) |
+| npm run assets          | One-shot asset build (stable names)          |
+| npm run assets:ci       | Incremental, cache-busted build (CI)         |
+| npm run assets:prod     | Clean, cache-busted build (app release)      |
+| npm run validate:assets | Run the asset validator                      |
+| npm run build           | lint → assets:prod → vite build              |
 
 ### 14.3 Environment variables
 
-| Name | Where | Purpose |
-|---|---|---|
-| VITE_ASSETS_BASE | app build | CDN URL for runtime assets (unset = local /assets) |
-| R2_ENDPOINT | CI | R2 S3-compatible endpoint |
-| R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY | CI | R2 API token credentials |
-| R2_RUNTIME_BUCKET | CI | Runtime bucket name |
-| CF_API_TOKEN / CF_ZONE_ID | CI | Cloudflare cache-purge auth |
+| Name                                    | Where     | Purpose                                            |
+| --------------------------------------- | --------- | -------------------------------------------------- |
+| VITE_ASSETS_BASE                        | app build | CDN URL for runtime assets (unset = local /assets) |
+| R2_ENDPOINT                             | CI        | R2 S3-compatible endpoint                          |
+| R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY | CI        | R2 API token credentials                           |
+| R2_RUNTIME_BUCKET                       | CI        | Runtime bucket name                                |
+| CF_API_TOKEN / CF_ZONE_ID               | CI        | Cloudflare cache-purge auth                        |
 
 ## 15. Glossary
 

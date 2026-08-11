@@ -155,7 +155,7 @@ export function PopupModal({ title, message, buttons }: PopupModalProps) {
   return (
     <PixiContainer>
       {/* Dim backdrop (real screen) — blocks input; no tap-to-close (must choose an action). */}
-      <OverlayScrim alpha={0.6} />
+      <OverlayScrim />
 
       {/* Panel (asset) — sized to the REAL screen (not the design canvas) */}
       <PixiNineSliceSprite
