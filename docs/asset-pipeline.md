@@ -172,19 +172,32 @@ differently in `.assetpack.js`:
 | Asset | Names what, where | Handling |
 |---|---|---|
 | Bitmap font `.fnt` | its `.png`, via `file="…"` | cache-buster **passthrough** — the font keeps its filename, so the reference stays valid |
-| Pre-baked TexturePacker `.json` | its atlas, via `meta.image` | **`texturePackerCacheBuster`'s test is widened** so the name inside the JSON is rewritten to the hashed one |
+| Pre-baked TexturePacker `.json` | its atlas, via `meta.image` | **`prebakedSheetImageFixer`** (in `assetpack/prebakedSheetTiers.mjs`) rewrites it to the hashed name of *that tier's* atlas |
 
-**Why the TexturePacker case needed a fix.** AssetPack already ships `texturePackerCacheBuster`, which
-rewrites `meta.image` in its `finish` hook — but it only tests `{tps}`-tagged assets:
+**Why AssetPack's built-in cannot do this.** AssetPack ships `texturePackerCacheBuster`, which rewrites
+`meta.image` in its `finish` hook — but it only tests `{tps}`-tagged assets:
 
 ```js
 test: (asset) => asset.allMetaData['tps'] && checkExt(asset.path, '.json')
 ```
 
 Our win/animation sheets are exported from TexturePacker *already packed*, so they are deliberately **not**
-`{tps}` (that tag would make AssetPack re-pack them, and they already sit near the 4096px limit). They were
-therefore renamed with nothing correcting the reference. `.assetpack.js` widens that test to **any JSON
-carrying `meta.image`**, keying off file content rather than folder or tag.
+`{tps}` (that tag would make AssetPack re-pack them, and they already sit near the 4096px limit).
+
+An earlier fix simply widened that test to any JSON carrying `meta.image`. **That no longer works**, and the
+reason is worth understanding before touching this area. Each sheet now has three resolution tiers, and the
+built-in resolves *one* atlas per sheet:
+
+```js
+const cacheBustedTexture = textureAssets[0].getFinalTransformedChildren()[0]   // ← [0]
+```
+
+Tiers are created as transform **children** of the base asset, so `getFinalTransformedChildren()` on a base
+sheet returns the leaves of the whole subtree — the base's own compressed/hashed files *and* every tier's.
+Taking the first therefore hands the full-resolution JSON a **half-resolution atlas**. That file exists, so
+an existence check passes; only comparing the atlas's real dimensions against the JSON's `meta.size` catches
+it. `prebakedSheetImageFixer` instead records each `{ json, png }` pair **by reference** as it creates them,
+so a tier can only ever be paired with its own atlas. The built-in stays scoped to `{tps}` as designed.
 
 **How it fails, and why it only fails in production.** Pixi's spritesheet loader does not look `meta.image`
 up in the manifest — it fetches it relative to the JSON's own URL
@@ -207,15 +220,17 @@ Two consequences worth remembering:
   `spriteSheetWidth`, see `PixiGameAnimation`) names no atlas and can never go stale — which is why
   `animations/hanging_lamps` was unaffected while every sheet in `win/` broke. The split followed the
   folders only by coincidence of which tool exported them.
-- **Adding a TexturePacker-exported sheet anywhere is now safe**, because the widened test inspects the
-  file, not its location.
+- **A `finish` hook must write the file itself.** By the time it runs, the pipeline has already written every
+  asset to disk. Rewriting a buffer changes the content hash and the manifest is built from `asset.path`
+  afterwards — so you must rename the path, delete the file written under the old hash, **and** write the new
+  one by hand. Omitting the last two steps produces a manifest pointing at names that do not exist on disk.
 
-Verify after any change here — every emitted sheet must point at an atlas that exists:
-
-```
-find public/assets -name '*.json' ! -name manifest.json
-# for each: meta.image must name a file present in the same directory
-```
+**Do not verify this by hand.** `npm run check:built`
+([`scripts/check-built-assets.mjs`](../scripts/check-built-assets.mjs)) is the gate, and it compares each
+atlas's real **dimensions** against the JSON's declared `meta.size` rather than merely checking the file
+exists — because the realistic bug is mis-pairing, not a dangling reference. It runs inside `npm run build`
+and in CI **before** the R2 upload, so a broken pipeline cannot reach players. `validate:assets` cannot cover
+this: it inspects `raw-assets/` *before* AssetPack runs.
 
 ## 8. Asset validation
 
@@ -333,13 +348,21 @@ future target for organizations standardizing on AWS.
 
 ### 14.2 npm scripts
 
-| Script                  | Purpose                                      |
-| ----------------------- | -------------------------------------------- |
-| npm run dev             | AssetPack watcher + Vite (local development) |
-| npm run assets          | One-shot asset build (stable names)          |
-| npm run assets:prod     | Clean, cache-busted build (CI and release)   |
-| npm run validate:assets | Run the asset validator                      |
-| npm run build           | lint → assets:prod → vite build              |
+| Script                                    | Purpose                                                                  |
+| ----------------------------------------- | ------------------------------------------------------------------------ |
+| npm run dev                               | AssetPack watcher + Vite (local development)                             |
+| npm run assets                            | One-shot asset build (stable names)                                      |
+| npm run assets:prod                       | Clean, cache-busted build (CI and release)                               |
+| npm run validate:assets                   | Validate **source** art in `raw-assets/`, before AssetPack               |
+| npm run check:built                       | Validate the **generated** tree in `public/assets/`, after AssetPack     |
+| npm run check:animations                  | Sheet health: GPU size limit + loop drift, sources **and** emitted tiers |
+| npm run fit:animations                    | Shrink a sheet that exceeds the 4096px GPU limit                         |
+| node scripts/crop-animation-sheets.mjs    | One-off: strip shared transparent padding from decor sheets (`--dry` first) |
+| npm run build                             | lint → assets:prod → **check:built** → vite build                        |
+
+The two validators are complements, not duplicates: `validate:assets` reads source art and cannot see
+anything the pipeline itself gets wrong; `check:built` reads output and is the only thing that catches a
+cache-bust reference break, which is invisible in dev.
 
 ### 14.3 Environment variables
 

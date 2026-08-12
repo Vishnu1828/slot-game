@@ -93,7 +93,7 @@ export default makeTheme("fortune-teller", {
     sheets: 10,
     aspect: 867 / 527,
     widthFrac: 0.95,
-    offsetYFrac: -0.73,
+    offsetYFrac: -1,
     durationMs: 3000,
   },
 });

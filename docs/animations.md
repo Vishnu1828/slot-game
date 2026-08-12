@@ -102,29 +102,86 @@ re-exporting with more or fewer frames needs no change. See the win-presentation
 
 ## The killer detail: resolution tiers and `k`
 
-AssetPack generates **multiple resolution tiers** of every image (`@0.5x`, `@0.25x`) so small devices
-download small images; Pixi serves whichever tier fits. But the JSON coordinates are always in the
-**original** image's pixel space (2794 wide). If Pixi loaded the 1397-wide `@0.5x` copy and you cut a
-rectangle at the original `x=254`, you slice the **wrong pixels**.
-
-Fix: convert JSON coords into the *loaded* image's space with a scale factor
+A sheet may be served at a **lower resolution tier** than it was authored at (`@0.5x`, `@0.25x`) so small
+devices hold less texture — see "Resolution tiers" below for who generates those. The JSON's coordinates
+and the served image may therefore be in different pixel spaces, so they have to be reconciled:
 
 ```
-k = atlas.source.pixelWidth / json.spriteSheetWidth
+k = atlas.source.width / json.spriteSheetWidth      // LOGICAL width — see the warning below
 ```
 
-| Tier served | pixelWidth | k | frame.x = 254·k |
-|---|---|---|---|
-| full | 2794 | 1.0 | 254 ✅ |
-| @0.5x | 1397 | 0.5 | 127 ✅ |
-| @0.25x | 699 | 0.25 | 63.5 ✅ |
+**Use `source.width`, never `source.pixelWidth`.** They are not the same thing, and the difference is a
+real bug this repo has shipped:
 
-Because Pixi tags each tier with a `resolution`, the sliced frame still **displays** at the original
-254×196 logical size — so you get correct frames *and* correct size at any tier.
+- `pixelWidth` is the true pixel count of the file that loaded (1397 for an `@0.5x` copy).
+- `width` is `pixelWidth / resolution` — and Pixi stamps `resolution: 0.5` on any file whose name carries
+  `@0.5x` (`loadTextures` → `getResolutionOfUrl`). So `width` stays **2794**.
 
-> **This is why a naive slicer (`Rectangle(sprite.x, sprite.y, …)` with no `k`) only works when there
-> is a single, full-size image** (`k = 1`). The moment a multi-resolution build serves a smaller tier,
-> it breaks. Always derive from `source.pixelWidth`, never assume the original size.
+A `Texture`'s `frame` is measured in those **logical** units — which is exactly why Pixi's own
+`Spritesheet` divides raw sheet coordinates by its resolution before building frames. Using `pixelWidth`
+gives `k = 1` for a tiered sheet whose JSON was tiered alongside it, and then **every frame is cut from
+the top-left quarter of the atlas at four times its intended area.** The animation plays visibly wrong.
+It hides in review because an untiered sheet has `resolution: 1`, where the two values are identical.
+
+| JSON coords are in | Served file | pixelWidth | resolution | `source.width` | k |
+|---|---|---|---|---|---|
+| full space (2794) | full | 2794 | 1 | 2794 | 1 |
+| full space (2794) | `@0.5x` | 1397 | 0.5 | 2794 | 1 |
+| tier space (1397) | `@0.5x` | 1397 | 0.5 | 2794 | 2 |
+
+The last row is the normal case for a tiered sheet, because the tier generator rewrites the JSON to match
+the image it produced. All three rows land on the right pixels, and because the frame is expressed
+logically the sprite still **displays** at its original size — correct frames *and* correct size at any
+tier, with no call site aware that a tier is in play.
+
+> A naive slicer (`Rectangle(sprite.x, sprite.y, …)` with no `k`) only works for a single full-size image.
+> So does a `pixelWidth`-based one, which is worse: it looks correct right up until a tier is served.
+
+## Resolution tiers — who makes them, and for which sheets
+
+AssetPack's `mipmap` pipe generates `@0.5x` / `@0.25x` copies of **loose images** only. It cannot do it for
+these sheets, for two independent reasons — and both are why their folders keep the `{nomip}` tag:
+
+1. It resizes the **whole sheet**, and it only touches **images** — the sibling `.json` is left describing
+   the original, so the generated copy would be paired with coordinates that point outside it.
+2. For a pre-baked TexturePacker sheet it would not even be loaded: such a sheet names its atlas *inside
+   itself* (`meta.image`) and Pixi fetches that filename directly, bypassing the manifest and the resolver.
+   A tier nothing requests is pure deployed weight.
+
+So tiers for sheets are produced by `assetpack/prebakedSheetTiers.mjs`, which emits both halves — a rewritten
+`.json` **and** its own atlas — cutting and rescaling every frame individually onto an exact grid. For the
+TexturePacker dialect it also sets `meta.scale`, which makes a tier report *identical logical geometry* to
+the original, so nothing downstream needs to know.
+
+**Which sheets get tiers** is decided by location and declaration, never by filename (names are per-game
+data on a multi-game platform):
+
+- everything in a game's win bundle (`games/<id>/win/<id>-win/`) tiers by default;
+- any sheet opts in or out with a top-level `"tier": true | false` in its own JSON.
+
+Tier a sheet only when it is **drawn smaller than its frames**. `chandelier` and `hanging_lamps` are drawn
+*larger* than their source art, so a tier would visibly blur them — they use the lossless crop below instead.
+
+## Trimming — `sourceSize` and `offset`
+
+`scripts/crop-animation-sheets.mjs` strips transparent padding that every frame shares (a third of the
+chandelier's cell area was empty). It is lossless: no resolution and no frames are lost.
+
+A cropped frame is smaller than the cell the caller sized against, so the crop records what it removed:
+
+```json
+"sourceSize": { "w": 256, "h": 235 },   // the cell BEFORE cropping
+"offset":     { "x": 3,   "y": 71  }    // where the kept box sat inside it
+```
+
+`PixiGameAnimation` treats `width`/`height` as the size of the `sourceSize` box and places the frame at
+`offset` inside it — the same trim semantics Pixi already applies to TexturePacker sheets via
+`spriteSourceSize`. So a crop never moves art on screen and no layout constant needs retuning. Sheets
+without these fields behave exactly as before. Both fields scale with a tier, since a sheet can be cropped
+*and* tiered (`gem_shine` is).
+
+The crop uses **one union bounding box across every frame**, not a tight box per frame — a per-frame crop
+would move each frame relative to its own cell, which is drift.
 
 ## Drift — why a swing turns into a slide
 
@@ -136,12 +193,11 @@ hardest to spot by eye.
 ### Where it comes from
 
 A sheet is a grid, and the JSON says how big one cell is. That number must be a **whole** pixel — you
-cannot have a cell 235.5px tall. So when a sheet is shrunk to fit the GPU limit, the cell size gets
-rounded.
+cannot have a cell 235.5px tall. So when a sheet is shrunk, the cell size gets rounded.
 
-If you then resize the *whole image* in one go, the artwork is scaled by a factor that does **not**
-match that rounded cell. Row 1 is off by half a pixel, row 2 by one, row 3 by one and a half — the
-error adds up all the way down the sheet:
+Drift comes from **rewriting the JSON with that rounded cell size** while the artwork was scaled by the
+exact factor. The JSON then computes row *n* at `n × 117` while the art actually sits at `n × 117.5`, and
+because every row is one cell further down, the error accumulates:
 
 ```
 what the JSON thinks          where the art actually is
@@ -152,9 +208,16 @@ what the JSON thinks          where the art actually is
 └──────────┘                  └──────────┘      and frame 0 snaps it back
 ```
 
-`fit-animation-sheets.mjs` avoids this by cutting **each frame out first, scaling it on its own, and
-placing it on an exact grid** — so there is no rounding left to accumulate. Never shrink one of these
-sheets in an image editor; use that script.
+`fit-animation-sheets.mjs`, `crop-animation-sheets.mjs` and the tier pipe all avoid this the same way: cut
+**each frame out first, scale it on its own, and place it on an exact grid** — so the grid is exact by
+construction and there is nothing left to accumulate. Never shrink one of these sheets in an image editor;
+use the scripts.
+
+> **What does *not* drift:** resizing the whole image while leaving the JSON alone. Measured on the
+> 239-frame chandelier at 0.5, the centroid directness is **0.034** — far below the 0.30 threshold. The
+> runtime scales coordinates proportionally through `k`, so the error stays sub-pixel per row instead of
+> accumulating. Worth knowing, because it means drift is a hazard of *rewriting sheets*, not of serving a
+> smaller tier.
 
 ### How the check finds it
 

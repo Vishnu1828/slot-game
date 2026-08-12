@@ -1,4 +1,4 @@
-import { Assets } from "pixi.js";
+import { Assets, type Spritesheet, type Texture } from "pixi.js";
 
 /**
  * `Assets.get` for aliases that MAY not be loaded yet.
@@ -16,5 +16,45 @@ import { Assets } from "pixi.js";
 export const getAsset = <T = unknown>(alias: string): T | undefined =>
   Assets.cache.has(alias) ? Assets.cache.get<T>(alias) : undefined;
 
-/** Is this alias loaded? Warning-free, unlike a truthiness check on `Assets.get`. */
-export const hasAsset = (alias: string): boolean => Assets.cache.has(alias);
+/**
+ * Has any part of this asset's GPU memory been destroyed?
+ *
+ * Being in the cache is not the same as being usable. `Assets.unload` removes the cache entry and destroys
+ * the texture, but if an unload lands on a load that is still IN FLIGHT the two interleave badly:
+ * `Cache.remove` runs first and finds nothing (the load has not finished), then `loader.unload` awaits that
+ * same load, the load's own continuation wins the race and calls `Cache.set`, and only then does the unload
+ * destroy the texture. The alias is left in the cache pointing at a dead `TextureSource`, and nothing will
+ * ever clean it up.
+ *
+ * The consequences are exactly the "win animation sometimes doesn't show" symptom: `PixiGameAnimation`
+ * builds its frames over `atlas.source`, whose `pixelWidth` is now 0, so every frame rect collapses and the
+ * sprite draws nothing — silently, with no error. Worse, a sprite still bound to a destroyed source makes
+ * the renderer bind a deleted GL texture, which is a route to losing the WebGL context outright.
+ *
+ * So liveness has to be part of "is this loaded", or `ensureSheets` skips re-fetching a sheet that can never
+ * render again and the symbol stays broken for the rest of the session.
+ */
+const isDead = (asset: unknown): boolean => {
+  if (!asset || typeof asset !== "object") return false;
+
+  const texture = asset as Partial<Texture>;
+  if (texture.destroyed) return true;
+  // A destroyed source leaves the Texture object itself intact, so it has to be checked separately.
+  if (texture.source && (texture.source.destroyed || texture.source.pixelWidth === 0)) return true;
+
+  // A Spritesheet holds its own reference; its textures are worthless once the shared source is gone.
+  const sheet = asset as Partial<Spritesheet>;
+  if (sheet.textureSource && (sheet.textureSource.destroyed || sheet.textureSource.pixelWidth === 0))
+    return true;
+
+  return false;
+};
+
+/**
+ * Is this alias loaded AND still usable? Warning-free, unlike a truthiness check on `Assets.get`.
+ *
+ * Reports `false` for a cached-but-destroyed asset (see `isDead`), which is what lets a lost load/unload
+ * race repair itself on the next attempt instead of leaving the art permanently missing.
+ */
+export const hasAsset = (alias: string): boolean =>
+  Assets.cache.has(alias) && !isDead(Assets.cache.get(alias));

@@ -19,8 +19,22 @@ overlays.
   the two ways they break: over the ~4096px GPU limit (black screen on mobile) and loop *drift* (the
   art slides across and snaps back). `npm run fit:animations` is the fix for both — it shrinks sheets
   frame-by-frame, which is the only correct way. See `docs/animations.md`.
+- `npm run check:built` — **run after any asset build.** Validates the *generated* tree in
+  `public/assets/`: every sheet's `meta.image` names a file that exists **and is the right size**, every
+  manifest `src` is on disk, each `src` list is ordered highest-resolution first, nothing exceeds 4096px.
+  `validate:assets` only inspects `raw-assets/` *before* AssetPack, so it structurally cannot catch a
+  mistake the pipeline itself makes — and the worst of those is invisible in dev and only 404s after a
+  cache-busted deploy. Wired into `build` and into CI before the R2 upload.
 - `npm run assets` — one-shot asset generation (dev: stable filenames, no cache-bust).
 - `npm run assets:prod` — clean + cache-busted generation (used by `build`).
+- `node scripts/crop-animation-sheets.mjs` — one-off, when adding a decor animation sheet. Strips
+  transparent padding shared by every frame (lossless). `--dry` reports first. Rewrites `raw-assets/`, so
+  it is deliberately manual, not part of a build. See `docs/animations.md`.
+
+**Adding a new game needs a clean asset build.** Sheets added to an *existing* folder tier incrementally,
+but when the whole `games/<id>{m}/…{nomip}/` tree is new, AssetPack's incremental pass does not apply the
+folder tags and you get output with no resolution tiers. Run `rm -rf public/assets .assetpack && npm run
+assets`. CI is unaffected — `assets:prod` already starts clean.
 
 There is **no test suite**. Verify changes by running `npm run dev` and exercising the UI, plus
 `npm run lint`. For type-checking, `tsc` currently fails on a pre-existing invalid
@@ -53,12 +67,25 @@ There is **no test suite**. Verify changes by running `npm run dev` and exercisi
   its name and the `.fnt`'s `file=` reference stays valid. A BitmapText's `fontFamily` must equal
   the `.fnt`'s internal `face` name (e.g. `Inter_Regular`), not the filename.
 - **Pre-baked TexturePacker sheets** (the `<game>-win` bounce/winning/win-N art) name their atlas *inside*
-  the JSON (`meta.image`), and Pixi fetches that name directly rather than through the manifest. AssetPack's
-  `texturePackerCacheBuster` fixes exactly this but only tests `{tps}` folders — these are deliberately
-  untagged (already packed) — so `.assetpack.js` widens the test to any JSON carrying `meta.image`.
-  **The failure is invisible in dev** (stable filenames) and 404s only after a cache-busted deploy.
-  Custom-dialect sheets (`sprites[]`, in `animations{nomip}/`) name no atlas and are unaffected.
+  the JSON (`meta.image`), and Pixi fetches that name directly rather than through the manifest — so the
+  cache-buster's rename must be reflected there or the sheet 404s. **The failure is invisible in dev**
+  (stable filenames) and only appears after a cache-busted deploy. `assetpack/prebakedSheetTiers.mjs` owns
+  that rewrite, pairing each JSON with its **own** atlas by reference. AssetPack's built-in
+  `texturePackerCacheBuster` cannot be used here: it resolves one atlas per sheet via
+  `getFinalTransformedChildren()[0]`, so with three resolution tiers it points every tier at the same PNG —
+  a file that exists, so only a size comparison catches it. It stays scoped to `{tps}` folders.
+  `npm run check:built` fails the build if any reference is wrong regardless.
+  Custom-dialect sheets (`sprites[]`, in `animations{nomip}/`) name no atlas and need no fixup.
   See `docs/asset-pipeline.md` § 7.1.
+- **Sheets get resolution tiers from our own pipe, not from `mipmap`.** `{nomip}` must stay on the sheet
+  folders (`mipmap` resizes whole sheets and never touches the sibling `.json`), so
+  `assetpack/prebakedSheetTiers.mjs` generates `@0.5x`/`@0.25x` for **both halves** — rescaling every frame
+  individually onto an exact grid, and setting `meta.scale` so a tier reports identical logical geometry.
+  Which sheets tier is **never name-based** (names are per-game data): everything in a game's win bundle
+  tiers by default, and any sheet opts in or out with a top-level `"tier": true | false` in its own JSON.
+  Tier only what is drawn *smaller* than its frames — `chandelier` is drawn larger, so it is cropped
+  instead. `.assetpack.js` also sorts each manifest `src` **highest-resolution first**, because a plain
+  `.json` carries no resolution and Pixi's tier-1 fallback takes `src[0]`. See `docs/animations.md`.
 
 ## Runtime asset loading — `src/assets/loader.ts`
 
@@ -68,13 +95,36 @@ of the current route. Access loaded assets by their **alias** via `Assets.get('a
 frames are addressable by their frame name (e.g. `sound_idle`), loose images by their short alias
 (e.g. `footer`, `bg_horizontal`).
 
-**Win-presentation art is demand-loaded, not bundle-loaded.** Its beats run in sequence and never
-overlap, and a spin only lights the symbols that won, so `src/game/winAssets.ts` fetches per win and
-frees per beat (bounce warmed at mount and kept; glows freed when the popup opens; popup sheets freed
-when the presentation ends). Startup animation memory ~691 MB → ~164 MB, peak ~324 MB. Every list is
+**`initAssets()` picks a resolution tier, and the value must be a REAL tier.** Pixi applies
+`texturePreference.resolution` as an **exact-value filter, not a nearest match**: it keeps only variants
+whose resolution equals one of the given values, and falls through to `src[0]` if none do. Two traps, both
+of which have bitten this file — (1) passing a number that is not a tier (the old
+`Math.min(devicePixelRatio, 2)` = 2) makes the preference do *nothing*; (2) passing **fallback** values
+narrows rather than backing off, so `[1, 0.5]` returns the half-resolution sheet. Hence a **single** value,
+derived from the renderer's pixel budget against the 4K authoring size and stepped down on low-RAM devices.
+`?tier=0.5` / `localStorage.tier` pins one — screen size and `deviceMemory` cannot be faked in devtools, so
+that switch is the only way to compare tiers on the device that is actually struggling. `PerfOverlay` shows
+the live tier.
+
+**Win-presentation art is demand-loaded, not bundle-loaded.** Its beats run in sequence, and a spin only
+lights the symbols that won, so `src/game/winAssets.ts` fetches per win and frees per beat. Every list is
 derived from the theme (`symbols[*].bounce`/`winning`, `winAnimation`) and orchestrated by the shared
 `useWinPresentation`, so a new game gets it by folder convention + theme fields, with no code. Nothing
-calls `loadBundle` on `<id>-win`; individual aliases are loaded and unloaded. See `docs/assets.md`.
+calls `loadBundle` on `<id>-win`; individual aliases are loaded and unloaded. On a phone (tier 0.5) idle
+texture is ~80 MB and peak ~130 MB. Three rules in that file are load-bearing:
+
+- **Load the `.json` only.** A TexturePacker sheet fetches its own atlas via `meta.image`, so also loading
+  `<base>.png` decodes the same pixels a second time under a different URL *and* format — doubling every
+  byte of win art for a copy nothing reads. Only the custom `sprites[]` dialect needs its atlas by alias.
+- **Load and free of one sheet take turns** (one promise chain per sheet). They must not overlap:
+  `Assets.unload` awaits an in-flight load and then destroys what it produced, while the load's own
+  continuation has already run `Cache.set` — leaving the alias **cached but destroyed**, which renders
+  nothing and never self-repairs. Do not "fix" this by *skipping* a colliding free: that drops it with
+  nothing to retry, and the art accumulates spin after spin until the tab dies.
+- **`hasAsset` checks liveness, not just presence** (`src/utils/assets.ts`), so a cached-but-destroyed sheet
+  reports missing and the next win re-fetches it.
+
+See `docs/assets.md`.
 
 ## App structure & rendering flow
 

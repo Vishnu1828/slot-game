@@ -2,848 +2,856 @@
   "sprites": [
     {
       "fileName": "lamps_000.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
       "y": 0
     },
     {
       "fileName": "lamps_001.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
+      "width": 167,
+      "height": 340,
+      "x": 167,
       "y": 0
     },
     {
       "fileName": "lamps_002.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
+      "width": 167,
+      "height": 340,
+      "x": 334,
       "y": 0
     },
     {
       "fileName": "lamps_003.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
+      "width": 167,
+      "height": 340,
+      "x": 501,
       "y": 0
     },
     {
       "fileName": "lamps_004.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
+      "width": 167,
+      "height": 340,
+      "x": 668,
       "y": 0
     },
     {
       "fileName": "lamps_005.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
+      "width": 167,
+      "height": 340,
+      "x": 835,
       "y": 0
     },
     {
       "fileName": "lamps_006.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
+      "width": 167,
+      "height": 340,
+      "x": 1002,
       "y": 0
     },
     {
       "fileName": "lamps_007.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
+      "width": 167,
+      "height": 340,
+      "x": 1169,
       "y": 0
     },
     {
       "fileName": "lamps_008.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
+      "width": 167,
+      "height": 340,
+      "x": 1336,
       "y": 0
     },
     {
       "fileName": "lamps_009.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
+      "width": 167,
+      "height": 340,
+      "x": 1503,
       "y": 0
     },
     {
       "fileName": "lamps_010.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
+      "width": 167,
+      "height": 340,
+      "x": 1670,
       "y": 0
     },
     {
       "fileName": "lamps_011.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 372
+      "y": 340
     },
     {
       "fileName": "lamps_012.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 340
     },
     {
       "fileName": "lamps_013.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 340
     },
     {
       "fileName": "lamps_014.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 340
     },
     {
       "fileName": "lamps_015.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 340
     },
     {
       "fileName": "lamps_016.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 340
     },
     {
       "fileName": "lamps_017.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 340
     },
     {
       "fileName": "lamps_018.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 340
     },
     {
       "fileName": "lamps_019.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 340
     },
     {
       "fileName": "lamps_020.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 340
     },
     {
       "fileName": "lamps_021.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 372
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 340
     },
     {
       "fileName": "lamps_022.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 744
+      "y": 680
     },
     {
       "fileName": "lamps_023.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 680
     },
     {
       "fileName": "lamps_024.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 680
     },
     {
       "fileName": "lamps_025.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 680
     },
     {
       "fileName": "lamps_026.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 680
     },
     {
       "fileName": "lamps_027.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 680
     },
     {
       "fileName": "lamps_028.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 680
     },
     {
       "fileName": "lamps_029.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 680
     },
     {
       "fileName": "lamps_030.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 680
     },
     {
       "fileName": "lamps_031.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 680
     },
     {
       "fileName": "lamps_032.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 744
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 680
     },
     {
       "fileName": "lamps_033.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 1116
+      "y": 1020
     },
     {
       "fileName": "lamps_034.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 1020
     },
     {
       "fileName": "lamps_035.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 1020
     },
     {
       "fileName": "lamps_036.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 1020
     },
     {
       "fileName": "lamps_037.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 1020
     },
     {
       "fileName": "lamps_038.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 1020
     },
     {
       "fileName": "lamps_039.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 1020
     },
     {
       "fileName": "lamps_040.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 1020
     },
     {
       "fileName": "lamps_041.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 1020
     },
     {
       "fileName": "lamps_042.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 1020
     },
     {
       "fileName": "lamps_043.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 1116
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 1020
     },
     {
       "fileName": "lamps_044.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 1488
+      "y": 1360
     },
     {
       "fileName": "lamps_045.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 1360
     },
     {
       "fileName": "lamps_046.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 1360
     },
     {
       "fileName": "lamps_047.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 1360
     },
     {
       "fileName": "lamps_048.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 1360
     },
     {
       "fileName": "lamps_049.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 1360
     },
     {
       "fileName": "lamps_050.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 1360
     },
     {
       "fileName": "lamps_051.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 1360
     },
     {
       "fileName": "lamps_052.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 1360
     },
     {
       "fileName": "lamps_053.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 1360
     },
     {
       "fileName": "lamps_054.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 1488
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 1360
     },
     {
       "fileName": "lamps_055.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 1860
+      "y": 1700
     },
     {
       "fileName": "lamps_056.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 1700
     },
     {
       "fileName": "lamps_057.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 1700
     },
     {
       "fileName": "lamps_058.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 1700
     },
     {
       "fileName": "lamps_059.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 1700
     },
     {
       "fileName": "lamps_060.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 1700
     },
     {
       "fileName": "lamps_061.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 1700
     },
     {
       "fileName": "lamps_062.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 1700
     },
     {
       "fileName": "lamps_063.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 1700
     },
     {
       "fileName": "lamps_064.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 1700
     },
     {
       "fileName": "lamps_065.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 1860
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 1700
     },
     {
       "fileName": "lamps_066.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 2232
+      "y": 2040
     },
     {
       "fileName": "lamps_067.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 2040
     },
     {
       "fileName": "lamps_068.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 2040
     },
     {
       "fileName": "lamps_069.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 2040
     },
     {
       "fileName": "lamps_070.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 2040
     },
     {
       "fileName": "lamps_071.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 2040
     },
     {
       "fileName": "lamps_072.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 2040
     },
     {
       "fileName": "lamps_073.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 2040
     },
     {
       "fileName": "lamps_074.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 2040
     },
     {
       "fileName": "lamps_075.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 2040
     },
     {
       "fileName": "lamps_076.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 2232
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 2040
     },
     {
       "fileName": "lamps_077.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 2604
+      "y": 2380
     },
     {
       "fileName": "lamps_078.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 2380
     },
     {
       "fileName": "lamps_079.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 2380
     },
     {
       "fileName": "lamps_080.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 2380
     },
     {
       "fileName": "lamps_081.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 2380
     },
     {
       "fileName": "lamps_082.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 2380
     },
     {
       "fileName": "lamps_083.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 2380
     },
     {
       "fileName": "lamps_084.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 2380
     },
     {
       "fileName": "lamps_085.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 2380
     },
     {
       "fileName": "lamps_086.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 2380
     },
     {
       "fileName": "lamps_087.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 2604
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 2380
     },
     {
       "fileName": "lamps_088.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 2976
+      "y": 2720
     },
     {
       "fileName": "lamps_089.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 2720
     },
     {
       "fileName": "lamps_090.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 2720
     },
     {
       "fileName": "lamps_091.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 2720
     },
     {
       "fileName": "lamps_092.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 2720
     },
     {
       "fileName": "lamps_093.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 2720
     },
     {
       "fileName": "lamps_094.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 2720
     },
     {
       "fileName": "lamps_095.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 2720
     },
     {
       "fileName": "lamps_096.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 2720
     },
     {
       "fileName": "lamps_097.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 2720
     },
     {
       "fileName": "lamps_098.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 2976
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 2720
     },
     {
       "fileName": "lamps_099.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 3348
+      "y": 3060
     },
     {
       "fileName": "lamps_100.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 3060
     },
     {
       "fileName": "lamps_101.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 3060
     },
     {
       "fileName": "lamps_102.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 3060
     },
     {
       "fileName": "lamps_103.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 3060
     },
     {
       "fileName": "lamps_104.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 3060
     },
     {
       "fileName": "lamps_105.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 3060
     },
     {
       "fileName": "lamps_106.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 3060
     },
     {
       "fileName": "lamps_107.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 3060
     },
     {
       "fileName": "lamps_108.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 3060
     },
     {
       "fileName": "lamps_109.png",
-      "width": 186,
-      "height": 372,
-      "x": 1860,
-      "y": 3348
+      "width": 167,
+      "height": 340,
+      "x": 1670,
+      "y": 3060
     },
     {
       "fileName": "lamps_110.png",
-      "width": 186,
-      "height": 372,
+      "width": 167,
+      "height": 340,
       "x": 0,
-      "y": 3720
+      "y": 3400
     },
     {
       "fileName": "lamps_111.png",
-      "width": 186,
-      "height": 372,
-      "x": 186,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 167,
+      "y": 3400
     },
     {
       "fileName": "lamps_112.png",
-      "width": 186,
-      "height": 372,
-      "x": 372,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 334,
+      "y": 3400
     },
     {
       "fileName": "lamps_113.png",
-      "width": 186,
-      "height": 372,
-      "x": 558,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 501,
+      "y": 3400
     },
     {
       "fileName": "lamps_114.png",
-      "width": 186,
-      "height": 372,
-      "x": 744,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 668,
+      "y": 3400
     },
     {
       "fileName": "lamps_115.png",
-      "width": 186,
-      "height": 372,
-      "x": 930,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 835,
+      "y": 3400
     },
     {
       "fileName": "lamps_116.png",
-      "width": 186,
-      "height": 372,
-      "x": 1116,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 1002,
+      "y": 3400
     },
     {
       "fileName": "lamps_117.png",
-      "width": 186,
-      "height": 372,
-      "x": 1302,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 1169,
+      "y": 3400
     },
     {
       "fileName": "lamps_118.png",
-      "width": 186,
-      "height": 372,
-      "x": 1488,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 1336,
+      "y": 3400
     },
     {
       "fileName": "lamps_119.png",
-      "width": 186,
-      "height": 372,
-      "x": 1674,
-      "y": 3720
+      "width": 167,
+      "height": 340,
+      "x": 1503,
+      "y": 3400
     }
   ],
   "packMode": "grid",
   "padding": 0,
   "backgroundColor": "rgba(0, 0, 0, 0)",
-  "spriteSheetWidth": 2046,
-  "spriteSheetHeight": 4092
+  "spriteSheetWidth": 1837,
+  "spriteSheetHeight": 3740,
+  "sourceSize": {
+    "w": 186,
+    "h": 372
+  },
+  "offset": {
+    "x": 8,
+    "y": 5
+  }
 }
