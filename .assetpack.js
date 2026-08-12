@@ -1,6 +1,9 @@
-import { readFileSync } from 'node:fs'
 import { pixiPipes } from '@assetpack/core/pixi'
 import { createNewAssetAt } from '@assetpack/core'
+import {
+  prebakedSheetImageFixer,
+  prebakedSheetTiers,
+} from './assetpack/prebakedSheetTiers.mjs'
 
 // Single 4K source art -> three downscaled tiers. AssetPack treats the source as the
 // highest resolution and only ever scales DOWN, so no tier is ever upscaled (no blur).
@@ -25,8 +28,43 @@ const pipes = pixiPipes({
     texturePacker: { nameStyle: 'short', removeFileExtension: true, padding: 2, allowTrim: true },
   },
   audio: {}, // transcodes .wav/.mp3/.ogg -> .mp3 + .ogg
-  manifest: { createShortcuts: true, trimExtensions: true, nameStyle: 'short' },
+  manifest: {
+    createShortcuts: true,
+    trimExtensions: true,
+    nameStyle: 'short',
+    // Order each asset's `src` by resolution, HIGHEST FIRST. Pixi's resolver applies
+    // `texturePreference.resolution` as an exact-value filter and falls back to `src[0]` when nothing
+    // matches — and a plain (non-`@Nx`) `.json` carries NO resolution at all, because `resolveJsonUrl`
+    // only tests names containing a retina prefix and `_buildResolvedAsset` does not default one. So a
+    // device asking for tier 1 finds no match among the JSON variants and takes whatever is first;
+    // full-resolution has to be that entry. AssetPack's default alphabetical sort puts `@0.5x` first,
+    // which would quietly hand every device the half-resolution sheet.
+    srcSortOptions: (srcs) =>
+      srcs.sort((a, b) => resolutionOf(b) - resolutionOf(a) || pathOf(a).localeCompare(pathOf(b))),
+  },
 })
+
+const pathOf = (entry) => (typeof entry === 'string' ? entry : entry.src)
+/** `foo@0.5x.webp` -> 0.5; anything without a retina prefix is full resolution. */
+const resolutionOf = (entry) => parseFloat(/@([\d.]+)x/.exec(pathOf(entry))?.[1] ?? '1')
+
+// --- Pre-baked sprite-sheet resolution tiers ---
+// The win/decor sheets are pre-baked outside AssetPack and tagged `{nomip}`, so the mipmap pipe never
+// gives them `@0.5x`/`@0.25x` variants — leaving the heaviest art in the game (160 MB of win-popup frames
+// alone) full-resolution on every device. These two pipes fill that gap; see
+// ./assetpack/prebakedSheetTiers.mjs for why it takes two and why `{nomip}` has to stay.
+//
+// Placement is load-bearing:
+//   * tiers BEFORE `compress`, so generated tiers are compressed and cache-busted like anything else.
+//   * the image fixer AFTER `cache-buster`, because it patches `meta.image` to the renamed atlas.
+const insertBefore = (name, ...added) => {
+  const at = pipes.findIndex((p) => p.name === name)
+  if (at === -1) throw new Error(`[.assetpack.js] expected a '${name}' pipe to order against`)
+  pipes.splice(at, 0, ...added)
+}
+
+insertBefore('compress', prebakedSheetTiers())
+insertBefore('pixi-manifest', prebakedSheetImageFixer())
 
 // --- Pre-baked bitmap fonts (.fnt + .png) ---
 // A bitmap font's .fnt stores glyph coordinates baked to its exact source .png and points at
@@ -54,44 +92,19 @@ if (cacheBuster) {
 }
 
 // --- Pre-baked TexturePacker sheets (.json + .png authored OUTSIDE AssetPack) ---
-// A TexturePacker sheet names its atlas INSIDE the JSON (`meta.image: "keys_bounce.png"`), and Pixi's
+// A pre-baked sheet names its atlas INSIDE the JSON (`meta.image: "keys_bounce.png"`), and Pixi's
 // spritesheet loader fetches that name relative to the JSON's own URL — it does NOT go back through the
 // manifest (pixi.js spritesheetAsset: `loader.load(basePath + asset.meta.image)`). So the sheet issues a
 // THIRD request beyond the manifest-resolved .json and .webp, for a filename the cache-buster renamed.
-// Symptom: `keys_bounce-_fVswg.json` 200, `keys_bounce-wJfZHg.webp` 200, `keys_bounce.png` 404.
+// Symptom: `keys_bounce-_fVswg.json` 200, `keys_bounce-wJfZHg.webp` 200, `keys_bounce.png` 404 — invisible
+// in dev, because dev keeps stable filenames.
 //
-// AssetPack ships the patch — `texturePackerCacheBuster` rewrites `meta.image` to the hashed name in its
-// `finish` hook — but it only tests assets tagged `{tps}`:
-//     test: (asset) => asset.allMetaData['tps'] && checkExt(asset.path, '.json')
-// Our win/animation sheets are already packed, so they are deliberately NOT `{tps}` (that tag would make
-// AssetPack re-pack them, and they sit near the 4096px limit as it is). Result: renamed atlas, stale
-// reference. So widen the test to any JSON that names an atlas; `finish` needs no change, as it looks the
-// texture up by `meta.image` among siblings — exactly how these pairs are laid out.
-//
-// This is invisible in dev and ONLY breaks after deploy: dev keeps stable filenames, so the name baked
-// into the JSON still resolves.
-const isPrebakedSheet = (asset) => {
-  if (asset.extension !== '.json') return false
-  // Runs AFTER the cache-buster, so `asset.path` is the already-hashed file in `.assetpack/cache-buster/`
-  // — a sibling-filename check would compare against renamed files and never match. The reliable marker
-  // is `meta.image` itself. That also excludes the custom sheet dialect (`sprites[]` + `spriteSheetWidth`,
-  // see PixiGameAnimation), which names no atlas: its image is fetched through the manifest by alias and
-  // is already correct (this is why `hanging_lamps` works while `keys_bounce` does not). Matching it here
-  // would crash `finish` on the missing `meta`.
-  try {
-    const raw = asset.buffer ?? readFileSync(asset.path)
-    return typeof JSON.parse(raw.toString())?.meta?.image === 'string'
-  } catch {
-    return false // unreadable / not JSON — leave it to the normal pipeline
-  }
-}
-
-const tpsCacheBuster = pipes.find((p) => p.name === 'texture-packer-cache-buster')
-if (tpsCacheBuster) {
-  const originalTest = tpsCacheBuster.test.bind(tpsCacheBuster)
-  tpsCacheBuster.test = (asset, options) =>
-    originalTest(asset, options) || isPrebakedSheet(asset)
-}
+// This USED to be handled by widening `texturePackerCacheBuster`'s `{tps}`-only test to any JSON carrying
+// `meta.image`. That no longer works: it resolves ONE atlas per sheet via
+// `getFinalTransformedChildren()[0]`, and now that each sheet has `@0.5x`/`@0.25x` tiers it would point
+// every tier at the same PNG. `prebakedSheetImageFixer` (registered above) replaces it and pairs each JSON
+// tier with its own atlas BY REFERENCE, and `npm run check:built` fails the build if any reference is
+// wrong regardless. The built-in stays scoped to `{tps}` folders as it was designed to be.
 
 export default {
   entry: './raw-assets',

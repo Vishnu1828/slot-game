@@ -1,4 +1,5 @@
 {
+  "tier": true,
   "sprites": [
     {
       "fileName": "ball_spinning_00.png",

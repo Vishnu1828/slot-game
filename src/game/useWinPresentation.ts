@@ -121,12 +121,19 @@ export function useWinPresentation(
     void prefetchWin(lastResult);
   }, [phase, lastResult, prefetchWin]);
 
-  // The beats never overlap, so peak memory is one beat's art rather than all of it: the glows are done
-  // by the time the popup opens, and the popup's sheets are dead once the presentation ends. Freeing
-  // ALL the glow sheets (not just this spin's) also sweeps up any left by earlier spins.
+  // The DISPLAY beats never overlap, so the glows are done by the time the popup opens and the popup's
+  // sheets are dead once the presentation ends. Note the loads still overlap by necessity: `prefetchWin`
+  // has to fetch the popup art during the glow beat for it to be ready, which is why `releaseSheets`
+  // refuses to unload anything mid-flight.
+  //
+  // Releasing every symbol's glow (not just this spin's) would also sweep up leftovers from earlier spins,
+  // but it maximises the chance of colliding with art the NEXT spin has already started fetching. The
+  // leftovers it was guarding against cannot accumulate anyway — the `phase === "none"` release below is
+  // unconditional — so scope this to the spin that actually used them.
   useEffect(() => {
-    if (phase === "popup") void releaseSheets(winningSheets(theme));
-  }, [phase, theme]);
+    if (phase === "popup" && lastResult)
+      void releaseSheets(winningSheetsFor(theme, lastResult.wins));
+  }, [phase, lastResult, theme]);
 
   useEffect(() => {
     if (phase === "none")

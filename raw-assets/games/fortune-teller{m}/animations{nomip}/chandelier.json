@@ -2,1681 +2,1689 @@
   "sprites": [
     {
       "fileName": "chandelier_000.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
       "y": 0
     },
     {
       "fileName": "chandelier_001.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
+      "width": 245,
+      "height": 164,
+      "x": 245,
       "y": 0
     },
     {
       "fileName": "chandelier_002.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
+      "width": 245,
+      "height": 164,
+      "x": 490,
       "y": 0
     },
     {
       "fileName": "chandelier_003.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
+      "width": 245,
+      "height": 164,
+      "x": 735,
       "y": 0
     },
     {
       "fileName": "chandelier_004.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
+      "width": 245,
+      "height": 164,
+      "x": 980,
       "y": 0
     },
     {
       "fileName": "chandelier_005.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
+      "width": 245,
+      "height": 164,
+      "x": 1225,
       "y": 0
     },
     {
       "fileName": "chandelier_006.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
+      "width": 245,
+      "height": 164,
+      "x": 1470,
       "y": 0
     },
     {
       "fileName": "chandelier_007.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
+      "width": 245,
+      "height": 164,
+      "x": 1715,
       "y": 0
     },
     {
       "fileName": "chandelier_008.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
+      "width": 245,
+      "height": 164,
+      "x": 1960,
       "y": 0
     },
     {
       "fileName": "chandelier_009.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
+      "width": 245,
+      "height": 164,
+      "x": 2205,
       "y": 0
     },
     {
       "fileName": "chandelier_010.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
+      "width": 245,
+      "height": 164,
+      "x": 2450,
       "y": 0
     },
     {
       "fileName": "chandelier_011.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
+      "width": 245,
+      "height": 164,
+      "x": 2695,
       "y": 0
     },
     {
       "fileName": "chandelier_012.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
+      "width": 245,
+      "height": 164,
+      "x": 2940,
       "y": 0
     },
     {
       "fileName": "chandelier_013.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
+      "width": 245,
+      "height": 164,
+      "x": 3185,
       "y": 0
     },
     {
       "fileName": "chandelier_014.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
+      "width": 245,
+      "height": 164,
+      "x": 3430,
       "y": 0
     },
     {
       "fileName": "chandelier_015.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
+      "width": 245,
+      "height": 164,
+      "x": 3675,
       "y": 0
     },
     {
       "fileName": "chandelier_016.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 235
+      "y": 164
     },
     {
       "fileName": "chandelier_017.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 164
     },
     {
       "fileName": "chandelier_018.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 164
     },
     {
       "fileName": "chandelier_019.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 164
     },
     {
       "fileName": "chandelier_020.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 164
     },
     {
       "fileName": "chandelier_021.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 164
     },
     {
       "fileName": "chandelier_022.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 164
     },
     {
       "fileName": "chandelier_023.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 164
     },
     {
       "fileName": "chandelier_024.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 164
     },
     {
       "fileName": "chandelier_025.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 164
     },
     {
       "fileName": "chandelier_026.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 164
     },
     {
       "fileName": "chandelier_027.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 164
     },
     {
       "fileName": "chandelier_028.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 164
     },
     {
       "fileName": "chandelier_029.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 164
     },
     {
       "fileName": "chandelier_030.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 164
     },
     {
       "fileName": "chandelier_031.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 235
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 164
     },
     {
       "fileName": "chandelier_032.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 470
+      "y": 328
     },
     {
       "fileName": "chandelier_033.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 328
     },
     {
       "fileName": "chandelier_034.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 328
     },
     {
       "fileName": "chandelier_035.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 328
     },
     {
       "fileName": "chandelier_036.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 328
     },
     {
       "fileName": "chandelier_037.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 328
     },
     {
       "fileName": "chandelier_038.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 328
     },
     {
       "fileName": "chandelier_039.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 328
     },
     {
       "fileName": "chandelier_040.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 328
     },
     {
       "fileName": "chandelier_041.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 328
     },
     {
       "fileName": "chandelier_042.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 328
     },
     {
       "fileName": "chandelier_043.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 328
     },
     {
       "fileName": "chandelier_044.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 328
     },
     {
       "fileName": "chandelier_045.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 328
     },
     {
       "fileName": "chandelier_046.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 328
     },
     {
       "fileName": "chandelier_047.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 470
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 328
     },
     {
       "fileName": "chandelier_048.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 705
+      "y": 492
     },
     {
       "fileName": "chandelier_049.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 492
     },
     {
       "fileName": "chandelier_050.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 492
     },
     {
       "fileName": "chandelier_051.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 492
     },
     {
       "fileName": "chandelier_052.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 492
     },
     {
       "fileName": "chandelier_053.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 492
     },
     {
       "fileName": "chandelier_054.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 492
     },
     {
       "fileName": "chandelier_055.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 492
     },
     {
       "fileName": "chandelier_056.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 492
     },
     {
       "fileName": "chandelier_057.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 492
     },
     {
       "fileName": "chandelier_058.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 492
     },
     {
       "fileName": "chandelier_059.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 492
     },
     {
       "fileName": "chandelier_060.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 492
     },
     {
       "fileName": "chandelier_061.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 492
     },
     {
       "fileName": "chandelier_062.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 492
     },
     {
       "fileName": "chandelier_063.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 705
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 492
     },
     {
       "fileName": "chandelier_064.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 940
+      "y": 656
     },
     {
       "fileName": "chandelier_065.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 656
     },
     {
       "fileName": "chandelier_066.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 656
     },
     {
       "fileName": "chandelier_067.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 656
     },
     {
       "fileName": "chandelier_068.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 656
     },
     {
       "fileName": "chandelier_069.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 656
     },
     {
       "fileName": "chandelier_070.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 656
     },
     {
       "fileName": "chandelier_071.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 656
     },
     {
       "fileName": "chandelier_072.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 656
     },
     {
       "fileName": "chandelier_073.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 656
     },
     {
       "fileName": "chandelier_074.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 656
     },
     {
       "fileName": "chandelier_075.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 656
     },
     {
       "fileName": "chandelier_076.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 656
     },
     {
       "fileName": "chandelier_077.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 656
     },
     {
       "fileName": "chandelier_078.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 656
     },
     {
       "fileName": "chandelier_079.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 940
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 656
     },
     {
       "fileName": "chandelier_080.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 1175
+      "y": 820
     },
     {
       "fileName": "chandelier_081.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 820
     },
     {
       "fileName": "chandelier_082.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 820
     },
     {
       "fileName": "chandelier_083.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 820
     },
     {
       "fileName": "chandelier_084.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 820
     },
     {
       "fileName": "chandelier_085.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 820
     },
     {
       "fileName": "chandelier_086.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 820
     },
     {
       "fileName": "chandelier_087.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 820
     },
     {
       "fileName": "chandelier_088.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 820
     },
     {
       "fileName": "chandelier_089.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 820
     },
     {
       "fileName": "chandelier_090.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 820
     },
     {
       "fileName": "chandelier_091.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 820
     },
     {
       "fileName": "chandelier_092.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 820
     },
     {
       "fileName": "chandelier_093.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 820
     },
     {
       "fileName": "chandelier_094.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 820
     },
     {
       "fileName": "chandelier_095.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 1175
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 820
     },
     {
       "fileName": "chandelier_096.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 1410
+      "y": 984
     },
     {
       "fileName": "chandelier_097.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 984
     },
     {
       "fileName": "chandelier_098.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 984
     },
     {
       "fileName": "chandelier_099.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 984
     },
     {
       "fileName": "chandelier_100.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 984
     },
     {
       "fileName": "chandelier_101.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 984
     },
     {
       "fileName": "chandelier_102.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 984
     },
     {
       "fileName": "chandelier_103.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 984
     },
     {
       "fileName": "chandelier_104.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 984
     },
     {
       "fileName": "chandelier_105.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 984
     },
     {
       "fileName": "chandelier_106.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 984
     },
     {
       "fileName": "chandelier_107.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 984
     },
     {
       "fileName": "chandelier_108.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 984
     },
     {
       "fileName": "chandelier_109.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 984
     },
     {
       "fileName": "chandelier_110.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 984
     },
     {
       "fileName": "chandelier_111.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 1410
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 984
     },
     {
       "fileName": "chandelier_112.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 1645
+      "y": 1148
     },
     {
       "fileName": "chandelier_113.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 1148
     },
     {
       "fileName": "chandelier_114.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 1148
     },
     {
       "fileName": "chandelier_115.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 1148
     },
     {
       "fileName": "chandelier_116.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 1148
     },
     {
       "fileName": "chandelier_117.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 1148
     },
     {
       "fileName": "chandelier_118.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 1148
     },
     {
       "fileName": "chandelier_119.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 1148
     },
     {
       "fileName": "chandelier_120.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 1148
     },
     {
       "fileName": "chandelier_121.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 1148
     },
     {
       "fileName": "chandelier_122.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 1148
     },
     {
       "fileName": "chandelier_123.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 1148
     },
     {
       "fileName": "chandelier_124.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 1148
     },
     {
       "fileName": "chandelier_125.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 1148
     },
     {
       "fileName": "chandelier_126.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 1148
     },
     {
       "fileName": "chandelier_127.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 1645
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 1148
     },
     {
       "fileName": "chandelier_128.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 1880
+      "y": 1312
     },
     {
       "fileName": "chandelier_129.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 1312
     },
     {
       "fileName": "chandelier_130.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 1312
     },
     {
       "fileName": "chandelier_131.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 1312
     },
     {
       "fileName": "chandelier_132.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 1312
     },
     {
       "fileName": "chandelier_133.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 1312
     },
     {
       "fileName": "chandelier_134.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 1312
     },
     {
       "fileName": "chandelier_135.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 1312
     },
     {
       "fileName": "chandelier_136.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 1312
     },
     {
       "fileName": "chandelier_137.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 1312
     },
     {
       "fileName": "chandelier_138.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 1312
     },
     {
       "fileName": "chandelier_139.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 1312
     },
     {
       "fileName": "chandelier_140.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 1312
     },
     {
       "fileName": "chandelier_141.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 1312
     },
     {
       "fileName": "chandelier_142.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 1312
     },
     {
       "fileName": "chandelier_143.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 1880
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 1312
     },
     {
       "fileName": "chandelier_144.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 2115
+      "y": 1476
     },
     {
       "fileName": "chandelier_145.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 1476
     },
     {
       "fileName": "chandelier_146.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 1476
     },
     {
       "fileName": "chandelier_147.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 1476
     },
     {
       "fileName": "chandelier_148.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 1476
     },
     {
       "fileName": "chandelier_149.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 1476
     },
     {
       "fileName": "chandelier_150.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 1476
     },
     {
       "fileName": "chandelier_151.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 1476
     },
     {
       "fileName": "chandelier_152.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 1476
     },
     {
       "fileName": "chandelier_153.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 1476
     },
     {
       "fileName": "chandelier_154.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 1476
     },
     {
       "fileName": "chandelier_155.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 1476
     },
     {
       "fileName": "chandelier_156.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 1476
     },
     {
       "fileName": "chandelier_157.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 1476
     },
     {
       "fileName": "chandelier_158.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 1476
     },
     {
       "fileName": "chandelier_159.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 2115
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 1476
     },
     {
       "fileName": "chandelier_160.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 2350
+      "y": 1640
     },
     {
       "fileName": "chandelier_161.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 1640
     },
     {
       "fileName": "chandelier_162.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 1640
     },
     {
       "fileName": "chandelier_163.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 1640
     },
     {
       "fileName": "chandelier_164.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 1640
     },
     {
       "fileName": "chandelier_165.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 1640
     },
     {
       "fileName": "chandelier_166.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 1640
     },
     {
       "fileName": "chandelier_167.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 1640
     },
     {
       "fileName": "chandelier_168.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 1640
     },
     {
       "fileName": "chandelier_169.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 1640
     },
     {
       "fileName": "chandelier_170.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 1640
     },
     {
       "fileName": "chandelier_171.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 1640
     },
     {
       "fileName": "chandelier_172.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 1640
     },
     {
       "fileName": "chandelier_173.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 1640
     },
     {
       "fileName": "chandelier_174.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 1640
     },
     {
       "fileName": "chandelier_175.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 2350
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 1640
     },
     {
       "fileName": "chandelier_176.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 2585
+      "y": 1804
     },
     {
       "fileName": "chandelier_177.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 1804
     },
     {
       "fileName": "chandelier_178.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 1804
     },
     {
       "fileName": "chandelier_179.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 1804
     },
     {
       "fileName": "chandelier_180.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 1804
     },
     {
       "fileName": "chandelier_181.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 1804
     },
     {
       "fileName": "chandelier_182.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 1804
     },
     {
       "fileName": "chandelier_183.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 1804
     },
     {
       "fileName": "chandelier_184.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 1804
     },
     {
       "fileName": "chandelier_185.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 1804
     },
     {
       "fileName": "chandelier_186.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 1804
     },
     {
       "fileName": "chandelier_187.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 1804
     },
     {
       "fileName": "chandelier_188.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 1804
     },
     {
       "fileName": "chandelier_189.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 1804
     },
     {
       "fileName": "chandelier_190.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 1804
     },
     {
       "fileName": "chandelier_191.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 2585
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 1804
     },
     {
       "fileName": "chandelier_192.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 2820
+      "y": 1968
     },
     {
       "fileName": "chandelier_193.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 1968
     },
     {
       "fileName": "chandelier_194.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 1968
     },
     {
       "fileName": "chandelier_195.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 1968
     },
     {
       "fileName": "chandelier_196.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 1968
     },
     {
       "fileName": "chandelier_197.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 1968
     },
     {
       "fileName": "chandelier_198.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 1968
     },
     {
       "fileName": "chandelier_199.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 1968
     },
     {
       "fileName": "chandelier_200.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 1968
     },
     {
       "fileName": "chandelier_201.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 1968
     },
     {
       "fileName": "chandelier_202.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 1968
     },
     {
       "fileName": "chandelier_203.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 1968
     },
     {
       "fileName": "chandelier_204.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 1968
     },
     {
       "fileName": "chandelier_205.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 1968
     },
     {
       "fileName": "chandelier_206.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 1968
     },
     {
       "fileName": "chandelier_207.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 2820
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 1968
     },
     {
       "fileName": "chandelier_208.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 3055
+      "y": 2132
     },
     {
       "fileName": "chandelier_209.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 2132
     },
     {
       "fileName": "chandelier_210.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 2132
     },
     {
       "fileName": "chandelier_211.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 2132
     },
     {
       "fileName": "chandelier_212.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 2132
     },
     {
       "fileName": "chandelier_213.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 2132
     },
     {
       "fileName": "chandelier_214.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 2132
     },
     {
       "fileName": "chandelier_215.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 2132
     },
     {
       "fileName": "chandelier_216.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 2132
     },
     {
       "fileName": "chandelier_217.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 2132
     },
     {
       "fileName": "chandelier_218.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 2132
     },
     {
       "fileName": "chandelier_219.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 2132
     },
     {
       "fileName": "chandelier_220.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 2132
     },
     {
       "fileName": "chandelier_221.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 2132
     },
     {
       "fileName": "chandelier_222.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 2132
     },
     {
       "fileName": "chandelier_223.png",
-      "width": 256,
-      "height": 235,
-      "x": 3840,
-      "y": 3055
+      "width": 245,
+      "height": 164,
+      "x": 3675,
+      "y": 2132
     },
     {
       "fileName": "chandelier_224.png",
-      "width": 256,
-      "height": 235,
+      "width": 245,
+      "height": 164,
       "x": 0,
-      "y": 3290
+      "y": 2296
     },
     {
       "fileName": "chandelier_225.png",
-      "width": 256,
-      "height": 235,
-      "x": 256,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 245,
+      "y": 2296
     },
     {
       "fileName": "chandelier_226.png",
-      "width": 256,
-      "height": 235,
-      "x": 512,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 490,
+      "y": 2296
     },
     {
       "fileName": "chandelier_227.png",
-      "width": 256,
-      "height": 235,
-      "x": 768,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 735,
+      "y": 2296
     },
     {
       "fileName": "chandelier_228.png",
-      "width": 256,
-      "height": 235,
-      "x": 1024,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 980,
+      "y": 2296
     },
     {
       "fileName": "chandelier_229.png",
-      "width": 256,
-      "height": 235,
-      "x": 1280,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 1225,
+      "y": 2296
     },
     {
       "fileName": "chandelier_230.png",
-      "width": 256,
-      "height": 235,
-      "x": 1536,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 1470,
+      "y": 2296
     },
     {
       "fileName": "chandelier_231.png",
-      "width": 256,
-      "height": 235,
-      "x": 1792,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 1715,
+      "y": 2296
     },
     {
       "fileName": "chandelier_232.png",
-      "width": 256,
-      "height": 235,
-      "x": 2048,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 1960,
+      "y": 2296
     },
     {
       "fileName": "chandelier_233.png",
-      "width": 256,
-      "height": 235,
-      "x": 2304,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 2205,
+      "y": 2296
     },
     {
       "fileName": "chandelier_234.png",
-      "width": 256,
-      "height": 235,
-      "x": 2560,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 2450,
+      "y": 2296
     },
     {
       "fileName": "chandelier_235.png",
-      "width": 256,
-      "height": 235,
-      "x": 2816,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 2695,
+      "y": 2296
     },
     {
       "fileName": "chandelier_236.png",
-      "width": 256,
-      "height": 235,
-      "x": 3072,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 2940,
+      "y": 2296
     },
     {
       "fileName": "chandelier_237.png",
-      "width": 256,
-      "height": 235,
-      "x": 3328,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 3185,
+      "y": 2296
     },
     {
       "fileName": "chandelier_238.png",
-      "width": 256,
-      "height": 235,
-      "x": 3584,
-      "y": 3290
+      "width": 245,
+      "height": 164,
+      "x": 3430,
+      "y": 2296
     }
   ],
   "packMode": "grid",
   "padding": 0,
   "backgroundColor": "rgba(0, 0, 0, 0)",
-  "spriteSheetWidth": 4096,
-  "spriteSheetHeight": 3525
+  "spriteSheetWidth": 3920,
+  "spriteSheetHeight": 2460,
+  "sourceSize": {
+    "w": 256,
+    "h": 235
+  },
+  "offset": {
+    "x": 3,
+    "y": 71
+  }
 }

@@ -81,6 +81,13 @@ jobs:
       # A clean build also self-heals R2: it re-emits everything, so the sync restores anything missing.
       - name: Build assets (clean, cache-busted)
         run: npm run assets:prod
+      # Gate the upload on the GENERATED tree. `validate:assets` above only sees `raw-assets/`, so it
+      # cannot catch anything the pipeline itself gets wrong — and the worst of those is invisible until
+      # deploy: a pre-baked sheet names its atlas inside its own JSON (`meta.image`), which Pixi fetches
+      # directly rather than through the manifest, and only the cache-busted prod build renames it. Without
+      # this step a mis-paired or stale reference syncs straight to R2 and 404s for players.
+      - name: Verify generated assets
+        run: npm run check:built
       - name: Upload hashed assets (immutable, long cache)
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}

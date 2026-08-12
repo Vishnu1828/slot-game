@@ -28,6 +28,28 @@ interface CustomSheet {
   sprites: CustomFrame[];
   spriteSheetWidth: number;
   spriteSheetHeight: number;
+  /**
+   * TRIM metadata, written by `scripts/crop-animation-sheets.mjs` when transparent padding was stripped:
+   * the cell size before cropping, and where the kept box sat inside it. Both optional — a sheet without
+   * them behaves exactly as it always has.
+   *
+   * These exist so a crop cannot move the art on screen. A cropped frame is smaller than the cell the
+   * caller sized against, so without them `width`/`height` would be applied to the trimmed box and the
+   * subject would grow and shift. Pixi already does this for TexturePacker sheets via
+   * `spriteSourceSize`/`sourceSize`; this is the same idea for the dialect that has no such fields.
+   */
+  sourceSize?: { w: number; h: number };
+  offset?: { x: number; y: number };
+}
+
+/** How a cropped sheet maps the caller's requested box onto the trimmed frame actually stored. */
+interface Trim {
+  /** Untrimmed cell size, in the sheet's own pixel space. */
+  source: { w: number; h: number };
+  /** Where the kept box sits inside that cell. */
+  offset: { x: number; y: number };
+  /** The kept box's size. */
+  kept: { w: number; h: number };
 }
 
 export interface PixiGameAnimationProps {
@@ -87,6 +109,8 @@ interface FrameSet {
   textures: Texture[];
   /** The Texture objects WE created (custom sheets) and must destroy on cleanup. */
   owned: Texture[];
+  /** Set only for a cropped custom sheet; see `applyTrim`. */
+  trim?: Trim;
 }
 
 /** A frame plus the name it was exported under — the name is what the ordering below sorts on. */
@@ -100,6 +124,44 @@ interface SheetFrames {
   /** True when this source's frames already came out in playback order (named animation / custom sheet). */
   ordered: boolean;
   owned: Texture[];
+  trim?: Trim;
+}
+
+/**
+ * Re-place a cropped frame so it lands exactly where the untrimmed art would have.
+ *
+ * The caller sized and positioned against the FULL cell, so `width`/`height` describe the `sourceSize`
+ * box. The stored frame is the kept sub-box, so it has to be drawn proportionally smaller and shifted by
+ * where that box sat — with the caller's own anchor still applied to the smaller size.
+ *
+ * Returns nothing when there is no trim, or when the caller left the size implicit: with no requested box
+ * there is nothing to map onto, and the natural-size behaviour is already what such a caller expects.
+ */
+function applyTrim(
+  trim: Trim | undefined,
+  x: number | undefined,
+  y: number | undefined,
+  width: number | undefined,
+  height: number | undefined,
+  anchor: number | PointData,
+): { x?: number; y?: number; width: number; height: number } | undefined {
+  if (!trim || width == null || height == null) return undefined;
+
+  const ax = typeof anchor === "number" ? anchor : anchor.x;
+  const ay = typeof anchor === "number" ? anchor : anchor.y;
+
+  const sx = width / trim.source.w;
+  const sy = height / trim.source.h;
+  const w = trim.kept.w * sx;
+  const h = trim.kept.h * sy;
+
+  // Full box's top-left, then into it by the crop offset, then back out by the anchor on the NEW size.
+  return {
+    x: x == null ? undefined : x - ax * width + trim.offset.x * sx + ax * w,
+    y: y == null ? undefined : y - ay * height + trim.offset.y * sy + ay * h,
+    width: w,
+    height: h,
+  };
 }
 
 /** Trailing frame number, ignoring an optional file extension: `walk_07.png` → 7, `anim13` → 13. */
@@ -175,10 +237,20 @@ function resolveSheet(
   const atlas = getAsset<Texture>(`${sheet}.png`);
   if (!json?.sprites?.length || !atlas) return undefined;
 
-  // The JSON coords are in the ORIGINAL sheet's pixel space, but AssetPack may have served a
-  // downscaled tier (@0.5x/@0.25x). Scale every rect by the loaded texture's real pixel size so
-  // the frames line up on any resolution.
-  const k = atlas.source.pixelWidth / json.spriteSheetWidth;
+  // Map the JSON's coordinates into the space `Texture.frame` is measured in.
+  //
+  // Use the source's LOGICAL width (`width`), never `pixelWidth`. A tier is served as `<sheet>@0.5x.png`,
+  // and Pixi stamps `resolution: 0.5` on it from that filename (`loadTextures` -> `getResolutionOfUrl`).
+  // `TextureSource.width` is `pixelWidth / resolution`, so a 1000px tier still measures 2000 logically —
+  // and a `Texture` frame is in those logical units (Pixi's own Spritesheet divides raw sheet rects by the
+  // resolution for exactly this reason). Using `pixelWidth` made `k` come out at 1 for a tiered sheet, so
+  // every frame was cut from the top-left QUARTER of the atlas at four times its intended area: the
+  // animation played visibly wrong. It looked correct only because untiered sheets have resolution 1,
+  // where the two are identical.
+  //
+  // This also covers a tier PNG paired with a full-resolution JSON: logical width equals the original
+  // width, so `k` is 1 and the untouched coordinates are already right.
+  const k = atlas.source.width / json.spriteSheetWidth;
   const frames = json.sprites.map((f) => ({
     name: f.fileName,
     texture: new Texture({
@@ -186,7 +258,20 @@ function resolveSheet(
       frame: new Rectangle(f.x * k, f.y * k, f.width * k, f.height * k),
     }),
   }));
-  return { frames, ordered: true, owned: frames.map((f) => f.texture) };
+
+  // Ratios, not pixels: `k` above already absorbs the tier, so a cropped sheet stays correctly placed at
+  // any resolution without the trim values needing to know which tier was served.
+  const first = json.sprites[0];
+  const trim =
+    json.sourceSize && json.offset
+      ? {
+          source: json.sourceSize,
+          offset: json.offset,
+          kept: { w: first.width, h: first.height },
+        }
+      : undefined;
+
+  return { frames, ordered: true, owned: frames.map((f) => f.texture), trim };
 }
 
 /** Resolve one or more sheets into a single ordered frame sequence. */
@@ -201,6 +286,9 @@ function resolveFrames(
   return {
     textures: orderFrames(sources),
     owned: sources.flatMap((s) => s.owned),
+    // Trim belongs to a sheet, and the multi-sheet form is one sequence split across sheets cropped
+    // together, so they share it.
+    trim: sources.find((s) => s.trim)?.trim,
   };
 }
 
@@ -296,15 +384,19 @@ export function PixiGameAnimation({
       ? textures.length / ((durationMs / 1000) * 60)
       : animationSpeed;
 
+  // A cropped sheet stores less than the caller sized against, so its position and size are remapped to
+  // keep the art exactly where it was. Untouched sheets fall straight through.
+  const placed = applyTrim(frames?.trim, x, y, width, height, anchor);
+
   return (
     <pixiAnimatedSprite
       ref={spriteRef}
       textures={textures}
-      x={x}
-      y={y}
+      x={placed?.x ?? x}
+      y={placed?.y ?? y}
       anchor={anchor}
-      width={width}
-      height={height}
+      width={placed?.width ?? width}
+      height={placed?.height ?? height}
       scale={scale}
       alpha={alpha}
       tint={tint}

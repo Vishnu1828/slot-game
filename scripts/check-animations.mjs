@@ -35,7 +35,7 @@
 // Run:  npm run check:animations                          (everything)
 //       node scripts/check-animations.mjs <sheet.json>     (one sheet — handy for testing)
 
-import { readFileSync, globSync } from "node:fs";
+import { readFileSync, globSync, existsSync } from "node:fs";
 import { dirname, join, basename, relative } from "node:path";
 
 let sharp;
@@ -110,18 +110,48 @@ const jsonFiles = arg
   : [
       ...globSync("raw-assets/games/*/animations*/*.json"), // decor
       ...globSync("raw-assets/games/*/win/*/*.json"), // win: bounce / winning / popup
+      // GENERATED `@0.5x`/`@0.25x` tiers (assetpack/prebakedSheetTiers.mjs). Worth checking even though
+      // the sources above already pass: a tier is a full REPACK — every frame cut out, rescaled and laid
+      // back down on a new grid — which is exactly the operation that reintroduces drift if the grid
+      // arithmetic rounds wrong. The sources cannot tell us anything about that. Only present after a
+      // build, so this silently contributes nothing on a clean checkout.
+      ...globSync("public/assets/games/*/animations*/*@[0-9.]*x.json"),
+      ...globSync("public/assets/games/*/win/*/*@[0-9.]*x.json"),
     ];
 
 const errors = [];
 let sized = 0;
 let drifted = 0;
+let unpaired = 0;
+
+/**
+ * The atlas a sheet's frames are cut from.
+ *
+ * A TexturePacker sheet names it (`meta.image`), which is authoritative and survives cache-busting. The
+ * custom dialect names nothing, so its atlas can only be found by filename — and in a CACHE-BUSTED build
+ * the JSON and PNG get independent content hashes, so there is no name to match. Those are skipped and
+ * counted rather than crashing: the pixel content is identical either way, so a dev build validates the
+ * same sheets, and `npm run check:built` covers the cache-busted tree by a different route.
+ */
+function atlasFor(jsonPath, json) {
+  const dir = dirname(jsonPath);
+  const named =
+    typeof json?.meta?.image === "string" ? join(dir, json.meta.image) : null;
+  if (named && existsSync(named)) return named;
+  const sibling = join(dir, basename(jsonPath, ".json") + ".png");
+  return existsSync(sibling) ? sibling : null;
+}
 
 for (const jsonPath of jsonFiles) {
   const json = JSON.parse(readFileSync(jsonPath, "utf8"));
   const sheet = readSheet(json);
   if (!sheet) continue; // not an animation sheet
   const rel = relative(process.cwd(), jsonPath);
-  const pngPath = join(dirname(jsonPath), basename(jsonPath, ".json") + ".png");
+  const pngPath = atlasFor(jsonPath, json);
+  if (!pngPath) {
+    unpaired++;
+    continue;
+  }
 
   const { data, info } = await sharp(pngPath).raw().toBuffer({ resolveWithObject: true });
   const { width: W, height: H, channels: C } = info;
@@ -187,7 +217,13 @@ for (const jsonPath of jsonFiles) {
   }
 }
 
-console.log(`checked ${sized} sheet(s) for size, ${drifted} of them for drift`);
+console.log(
+  `checked ${sized} sheet(s) for size, ${drifted} of them for drift` +
+    (unpaired
+      ? `\n(${unpaired} generated sheet(s) skipped — cache-busted names cannot be paired to an atlas; ` +
+        `run against a dev build, or use \`npm run check:built\`)`
+      : ""),
+);
 if (errors.length) {
   console.error(`\n${errors.map((e) => "✖ " + e).join("\n\n")}`);
   console.error(`\n✖ animation check FAILED: ${errors.length} problem(s).`);

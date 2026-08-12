@@ -6,6 +6,9 @@ import GameShell from "./game/GameShell";
 import type { GameId } from "./game/registry";
 import { audio } from "./utils/audio";
 import { useSettingsStore } from "./store/useSettingsStore";
+// TEMPORARY — mobile crash diagnostics. Delete this import, the `onInit` below and `<PerfOverlay />`
+// to remove it entirely. Stats show only with `?perf=1`; see the file header.
+import PerfOverlay, { capturePerfApp } from "./components/dev/PerfOverlay";
 
 // The game to boot. Later this comes from the route / lobby selection (e.g. /games/:gameId).
 const GAME: GameId = "fortune-teller";
@@ -25,16 +28,21 @@ function App() {
   }, []);
 
   return (
-    <Application
-      background={0x0b0b12}
-      resizeTo={window}
-      resolution={Math.min(window.devicePixelRatio || 1, 2)}
-      autoDensity
-    >
-      <QueryClientProvider client={queryClient}>
-        <GameShell game={GAME} />
-      </QueryClientProvider>
-    </Application>
+    <>
+      <Application
+        background={0x0b0b12}
+        resizeTo={window}
+        resolution={Math.min(window.devicePixelRatio || 1, 2)}
+        autoDensity
+        onInit={capturePerfApp}
+      >
+        <QueryClientProvider client={queryClient}>
+          <GameShell game={GAME} />
+        </QueryClientProvider>
+      </Application>
+      {/* Sibling of <Application>, not a child: it must render DOM, and it has to survive the canvas. */}
+      <PerfOverlay />
+    </>
   );
 }
 
