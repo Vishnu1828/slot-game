@@ -35,14 +35,15 @@ const LAND_LEAD = 3;
  *  - `cellsPerSec` — vertical scroll speed (symbols pass per second)
  *  - `baseMs`      — when reel 0 stops (from spin start)
  *  - `perReelMs`   — extra delay per following reel (staggered left→right stop)
+ *  - `maxHoldMs`   — how long the reels may keep spinning to cover a slow art download (see `artReady`)
  */
 const TIMING: Record<
   SpeedLevel,
-  { cellsPerSec: number; baseMs: number; perReelMs: number }
+  { cellsPerSec: number; baseMs: number; perReelMs: number; maxHoldMs: number }
 > = {
-  1: { cellsPerSec: 16, baseMs: 650, perReelMs: 260 }, // normal
-  2: { cellsPerSec: 22, baseMs: 360, perReelMs: 150 }, // fast
-  3: { cellsPerSec: 30, baseMs: 170, perReelMs: 80 }, // extra fast
+  1: { cellsPerSec: 16, baseMs: 650, perReelMs: 260, maxHoldMs: 2000 }, // normal
+  2: { cellsPerSec: 22, baseMs: 360, perReelMs: 150, maxHoldMs: 1200 }, // fast
+  3: { cellsPerSec: 30, baseMs: 170, perReelMs: 80, maxHoldMs: 400 }, // extra fast
 };
 
 /** Positive modulo — strip cursors walk backwards, so `%` alone isn't enough. */
@@ -72,6 +73,12 @@ export interface ReelsProps {
    * feedback (bouncing its symbols) while the reels to its right are still turning.
    */
   onReelLanded?: (col: number) => void;
+  /**
+   * Is this spin's win-presentation art loaded? While this returns false the reels keep spinning, up to
+   * `TIMING[speed].maxHoldMs`, so the spin covers the download instead of the glow beat arriving to
+   * nothing. Wire it to `useWinPresentation`'s `winArtReady`. Omit it and timing is unchanged.
+   */
+  artReady?: () => boolean;
   /** How much of a cell a symbol fills (0..1). Default 0.86. */
   fill?: number;
   /**
@@ -111,6 +118,7 @@ export function Reels({
   speed,
   onSettled,
   onReelLanded,
+  artReady,
   fill = REEL_FILL,
   hiddenCells,
 }: ReelsProps) {
@@ -146,6 +154,10 @@ export function Reels({
   onSettledRef.current = onSettled;
   const onReelLandedRef = useRef(onReelLanded);
   onReelLandedRef.current = onReelLanded;
+  const artReadyRef = useRef(artReady);
+  artReadyRef.current = artReady;
+  /** Extra ms this spin has stayed in motion waiting for art. Reset per spin; added to every reel. */
+  const holdMs = useRef(0);
   const blurScaleRef = useRef(stageScale);
   blurScaleRef.current = stageScale;
 
@@ -262,6 +274,7 @@ export function Reels({
   const startSpin = () => {
     const t = TIMING[speedRef.current];
     spinningActive.current = true;
+    holdMs.current = 0;
     for (let c = 0; c < cols; c++) {
       const st = colState.current[c];
       if (!st) continue;
@@ -284,8 +297,32 @@ export function Reels({
     }
 
     const { innerY, cellH } = geomRef.current;
-    const vel = (TIMING[speedRef.current].cellsPerSec / 1000) * cellH; // px per ms
+    const t = TIMING[speedRef.current];
+    const vel = (t.cellsPerSec / 1000) * cellH; // px per ms
     const dt = ticker.deltaMS;
+
+    // COVER THE DOWNLOAD WITH THE SPIN. The winning-symbol glow is per-spin art, so it cannot be preloaded,
+    // and it is needed only BOUNCE_MS after the reels land — at "extra fast" that is under a second from the
+    // result arriving. Rather than let the beat arrive to nothing, keep the reels turning until the art
+    // exists: the spin is a believable loading indicator, and the outcome is already decided (it came from
+    // the backend before this), so nothing about the result changes.
+    //
+    // ONE accumulator for the whole spin, added to every reel's threshold below, so the staggered
+    // left-to-right cascade is preserved exactly — just shifted. Gating each reel independently would let
+    // the later reels' own thresholds elapse during the wait and land them all at once.
+    //
+    // Capped per speed, and the cap is the point: unbounded, a 3G connection would spin the reels for ten
+    // seconds or more, which is far worse than a missing effect. Past the cap the reels land anyway and the
+    // presentation degrades as designed (`PixiGameAnimation` renders nothing rather than a partial
+    // sequence). The cap shrinks as speed rises because a player on "extra fast" has told us they value
+    // pace over spectacle.
+    // `?? true` matters: with no `artReady` wired there is nothing to wait for, so timing must be exactly
+    // as it was. Optional-chaining alone would yield `undefined`, read as "not ready", and hold every spin
+    // for the full cap.
+    const artIsReady = artReadyRef.current?.() ?? true;
+    if (spinningActive.current && holdMs.current < t.maxHoldMs && !artIsReady) {
+      holdMs.current += dt;
+    }
 
     for (let c = 0; c < cols; c++) {
       const st = states[c];
@@ -295,7 +332,7 @@ export function Reels({
       while (st.offset >= cellH) {
         st.offset -= cellH;
         // Reached this reel's stop time? Seed the landing run (see LAND_LEAD).
-        if (st.landLeft < 0 && st.elapsed >= st.stopDelay) {
+        if (st.landLeft < 0 && st.elapsed >= st.stopDelay + holdMs.current) {
           st.landLeft = LAND_LEAD;
           beginLanding(c);
         }

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef } from "react";
-import { extend } from "@pixi/react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { extend, useTick } from "@pixi/react";
 import "@pixi/layout"; // enables the optional `layout` prop even if PixiLayout isn't imported
 import {
   AnimatedSprite,
@@ -9,7 +9,7 @@ import {
   type ColorSource,
   type PointData,
 } from "pixi.js";
-import { getAsset } from "@/utils/assets";
+import { getAsset, hasAsset } from "@/utils/assets";
 import type { LayoutStyle } from "./PixiLayout";
 
 // Register <pixiAnimatedSprite> as a JSX element (idempotent).
@@ -275,14 +275,42 @@ function resolveSheet(
 }
 
 /** Resolve one or more sheets into a single ordered frame sequence. */
+/**
+ * Is this sheet loaded enough to slice? Lookup only — allocates nothing, so it is safe to call on every
+ * tick while waiting for demand-loaded art (see the poll in the component).
+ *
+ * Mirrors `resolveSheet`'s requirements EXACTLY, per dialect. It must not be optimistic: the poll below
+ * treats a `true` here as "resolution will now succeed", so a false positive would leave `frames`
+ * undefined while the readiness check kept saying yes — a re-render every frame. A TexturePacker sheet
+ * carries its atlas internally, but the custom dialect needs BOTH halves and its frame rects.
+ */
+function sheetReady(s: string): boolean {
+  if (getAsset(s) instanceof Spritesheet) return true;
+
+  const json = getAsset(`${s}.json`);
+  if (json instanceof Spritesheet) return true;
+
+  const custom = json as CustomSheet | undefined;
+  return !!custom?.sprites?.length && hasAsset(`${s}.png`);
+}
+
+const sheetsReady = (sheets: string[]): boolean => sheets.every(sheetReady);
+
 function resolveFrames(
   sheets: string[],
   animation?: string,
 ): FrameSet | undefined {
+  // ALL OR NOTHING. An array of sheets is ONE sequence split across files, so a subset is not a shorter
+  // animation — it is a broken one. `durationMs` divides the beat by however many frames were found, so
+  // 3 of the 10 win-popup sheets play 24 scattered poses stretched over the full 3s at ~8fps: it reads as
+  // a hang, at a perfectly healthy 60 FPS, and used to be what a first win looked like on a slow
+  // connection. Rendering nothing is the documented degradation; rendering this is not.
+  if (!sheets.length || !sheetsReady(sheets)) return undefined;
+
   const sources = sheets
     .map((s) => resolveSheet(s, animation))
     .filter((s): s is SheetFrames => s !== undefined);
-  if (!sources.length) return undefined;
+  if (sources.length !== sheets.length) return undefined;
   return {
     textures: orderFrames(sources),
     owned: sources.flatMap((s) => s.owned),
@@ -342,10 +370,37 @@ export function PixiGameAnimation({
   // Key on the joined names, not the array itself: a caller passing an inline `[...]` would otherwise
   // hand us a new identity every render and restart the animation on each one.
   const sheetKey = Array.isArray(sheet) ? sheet.join("\n") : sheet;
+  // Bumped once when demand-loaded art finishes arriving, to re-run the resolve below.
+  const [arrived, setArrived] = useState(0);
   const frames = useMemo(
     () => resolveFrames(sheetKey.split("\n"), animation),
-    [sheetKey, animation],
+    // `arrived` looks unused to the linter because `resolveFrames` reads Pixi's asset cache — state this
+    // hook cannot see. It is load-bearing: bumping it is the ONLY thing that re-resolves a sheet that
+    // finished downloading after mount. Removing it silently reinstates "a late sheet never plays".
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [sheetKey, animation, arrived],
   );
+
+  // Win-presentation art is fetched per spin and can land AFTER this mounts. Without this the sheet is
+  // resolved once at mount and a late arrival is ignored for the whole presentation, so the effect never
+  // plays — and the reel-stop hold that covers the download is CAPPED, so late arrivals are expected by
+  // design rather than exceptional.
+  //
+  // EDGE-TRIGGERED on purpose. `setArrived` must fire only on the false->true transition, never on every
+  // frame that readiness happens to be true: if `sheetsReady` ever disagreed with what `resolveFrames`
+  // needs, a level-triggered version would re-render on every tick forever. Belt and braces with
+  // `sheetReady` mirroring the resolver — cheap, and this component renders on every win.
+  const wasReady = useRef(false);
+  useEffect(() => {
+    wasReady.current = false; // a new sheet has to be re-observed from scratch
+  }, [sheetKey, animation]);
+
+  useTick(() => {
+    if (frames) return; // already resolved — nothing to watch
+    const ready = sheetsReady(sheetKey.split("\n"));
+    if (ready && !wasReady.current) setArrived((n) => n + 1);
+    wasReady.current = ready;
+  });
   const textures = frames?.textures;
   // Destroy only the Textures WE created (custom sheets); keep the shared GPU source (`false`).
   useEffect(() => {

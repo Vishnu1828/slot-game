@@ -6,6 +6,7 @@ import { useRoundStore, type WinPhase } from "@/store/useRoundStore";
 import { useGameControlsStore } from "@/store/useGameControlsStore";
 import { BOUNCE_MS, PAYLINE_MS } from "@/constants/winPresentation";
 import type { ThemeAssets } from "@/types/theme";
+import { hasAsset } from "@/utils/assets";
 import {
   bounceSheets,
   ensureSheets,
@@ -35,6 +36,12 @@ export interface UseWinPresentation {
    * against once they have started. Safe to call for a losing spin (it no-ops) and safe to call twice.
    */
   prefetchWin: (result: SpinResult) => void;
+  /**
+   * Is this spin's winning-glow art loaded yet? Wire it to `Reels`' `artReady` so the reels hold their
+   * landing (capped) until the glow exists — the spin then covers the download instead of the glow beat
+   * arriving to nothing. Trivially true on a losing spin.
+   */
+  winArtReady: () => boolean;
 }
 
 /**
@@ -83,29 +90,58 @@ export function useWinPresentation(
 
   // --- celebration art: fetch per win, free per beat (see winAssets.ts) ---
 
-  // Warm the bounce sheets once, in the background. They are the only beat with a deadline too tight
-  // to fetch against — at "extra fast" the reels land ~490ms after the result is known — and they are
-  // also by far the smallest, so they are the one set worth holding for the session.
+  // Warm the SPIN-INDEPENDENT art once and keep it for the session: the bounce sheets and the win popup.
+  //
+  // Neither depends on what a spin lands, so neither belongs in a per-spin race. The bounce beat starts
+  // BOUNCE_MS (~470ms) after the reels land — at "extra fast" that is ~960ms from the result arriving,
+  // far too short to fetch against. The popup has more slack but was costing more: it was freed after
+  // every presentation and re-acquired on the next win, which on a first win meant racing 1.5 MB over a
+  // CDN (the reason a first win used to show no celebration), and on every later win meant re-decoding it
+  // and re-uploading ~37 MB of texture to the GPU inside the same window.
+  //
+  // Holding the popup is close to free where it matters: it was already resident at the PEAK of a win, so
+  // keeping it raises the idle floor (~80 -> ~117 MB on a phone) while peak stays ~130 MB. Peak is the
+  // number that kills a tab; idle is not.
   useEffect(() => {
-    void ensureSheets(bounceSheets(theme));
+    void ensureSheets([...bounceSheets(theme), ...winPopupSheets(theme)]);
   }, [theme]);
 
-  // Fetch this spin's celebration art, glows FIRST.
-  //
-  // Both beats used to be requested in one `Assets.load`, which made them compete: a glow sheet is
-  // 1.3-2.5 MB and is needed BOUNCE_MS after the reels land, while the ten popup sheets total ~3.5 MB and
-  // are not needed for ~4s — so the urgent art was starved by art with eight times the slack. Awaiting the
-  // glows first gives them the full pipe, and the popup still lands comfortably inside its own window.
+  /**
+   * The glow sheets this spin is waiting on. Recorded when the result arrives — which is when we first
+   * know which symbols paid — so `winArtReady` can be asked about the CURRENT spin without depending on
+   * `lastResult`, which is not populated until the reels settle.
+   *
+   * Empty for a losing spin, which makes `winArtReady()` trivially true: nothing to wait for.
+   */
+  const pendingGlows = useRef<string[]>([]);
+
+  // Fetch this spin's celebration art. Only the glows are genuinely per-spin; the popup is warmed above,
+  // so the `ensureSheets` for it is normally a no-op and exists only as a safety net for a game that has
+  // not gone through the mount path.
   //
   // Deliberately not awaited by callers: a sheet that misses its beat degrades on its own (`hasSheet`
   // falls back to the still symbol), so a slow network costs an effect, never a stall.
   const prefetchWin = useCallback(
     async (result: SpinResult) => {
-      if (!result.wins.length) return; // a losing spin needs none of it
-      await ensureSheets(winningSheetsFor(theme, result.wins));
+      const glows = winningSheetsFor(theme, result.wins);
+      pendingGlows.current = glows;
+      if (!glows.length) return; // a losing spin needs none of it
+      await ensureSheets(glows);
       await ensureSheets(winPopupSheets(theme));
     },
     [theme],
+  );
+
+  /**
+   * Is this spin's glow art loaded? Read on the reel ticker, so it must stay allocation-free and must not
+   * cause a re-render — hence a callback over a piece of state.
+   *
+   * `Reels` uses this to hold the landing until the art exists, capped, so the spin itself covers the
+   * download instead of the glow beat arriving to nothing. See `HOLD_FOR_ART_MS` there.
+   */
+  const winArtReady = useCallback(
+    () => pendingGlows.current.every((base) => hasAsset(`${base}.json`)),
+    [],
   );
 
   // The real head start: `useReelSpin` calls `prefetchWin` the moment the result arrives, a whole reel
@@ -135,9 +171,11 @@ export function useWinPresentation(
       void releaseSheets(winningSheetsFor(theme, lastResult.wins));
   }, [phase, lastResult, theme]);
 
+  // Sweep every symbol's glow at the end of a presentation, including any a previous spin left behind.
+  // The POPUP is deliberately NOT freed here — it is warmed at mount and held for the session (see above),
+  // because freeing it bought nothing at peak and cost a re-download or re-upload on every single win.
   useEffect(() => {
-    if (phase === "none")
-      void releaseSheets([...winningSheets(theme), ...winPopupSheets(theme)]);
+    if (phase === "none") void releaseSheets(winningSheets(theme));
   }, [phase, theme]);
 
   // Declared FIRST so on mount it runs before the hand-off effect below.
@@ -211,6 +249,7 @@ export function useWinPresentation(
     dismiss: reset,
     // Fire-and-forget by design (see `prefetchWin`), so callers don't have to handle a promise.
     prefetchWin: (result: SpinResult) => void prefetchWin(result),
+    winArtReady,
   };
 }
 

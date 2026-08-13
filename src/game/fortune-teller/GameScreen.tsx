@@ -119,7 +119,10 @@ export function GameScreen() {
 
   // Win presentation (lines glow -> win screen -> idle). Shared across all games; the phase itself
   // lives in `useRoundStore` so the overlay and the win screen can read it too.
-  const { phase, dismiss, prefetchWin } = useWinPresentation(isSpinning, theme);
+  const { phase, dismiss, prefetchWin, winArtReady } = useWinPresentation(
+    isSpinning,
+    theme,
+  );
   useEffect(() => {
     prefetchWinRef.current = prefetchWin;
   });
@@ -249,6 +252,9 @@ export function GameScreen() {
               speed,
               onSettled: handleSettled,
               onReelLanded,
+              // Hold the landing (capped) until this spin's glow art exists, so the spin itself covers the
+              // download rather than the glow beat arriving to nothing on a slow connection.
+              artReady: winArtReady,
             }}
             paylines={{
               lines: config.lines,
