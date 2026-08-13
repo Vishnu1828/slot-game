@@ -31,6 +31,11 @@ export interface ReelsControl {
    * reel has stopped. Drives per-reel landing feedback (e.g. bouncing that reel's symbols).
    */
   onReelLanded?: (col: number) => void;
+  /**
+   * Is this spin's win-presentation art loaded? While false the reels keep turning (capped per speed), so
+   * the spin covers the download. See `Reels`' own `artReady`.
+   */
+  artReady?: () => boolean;
 }
 
 /**
@@ -175,6 +180,7 @@ export function ReelFrame({
           speed={reels.speed}
           onSettled={reels.onSettled}
           onReelLanded={reels.onReelLanded}
+          artReady={reels.artReady}
           hiddenCells={hiddenCells}
         />
       )}
