@@ -4,35 +4,47 @@ import { BlurFilter, type Container, type Ticker } from "pixi.js";
 import PixiContainer from "./PixiContainer";
 
 /**
- * HOW MUCH BLUR. This is the dial to turn — with the scrim fully transparent, the blur is the only
- * thing separating an overlay from the game behind it.
+ * THE PERFORMANCE DIAL. The scene is drawn into an off-screen texture this many pixels per screen pixel
+ * before being blurred, so cost scales with its SQUARE: 0.25 is a sixteenth of the pixels of 1.
  *
- * Units: FILTER-TARGET pixels (the shader steps its samples this many texels apart). The target is
- * scaled by `BLUR_RESOLUTION`, so the on-screen radius is roughly `BLUR_STRENGTH / BLUR_RESOLUTION`.
- * Raising the resolution therefore makes the blur look WEAKER — turn this number, not that one.
+ * KEEP IT AT 1. Both other values are tempting and both are wrong:
+ *
+ * BELOW 1 is cheaper, but the scene is rendered small and then bilinearly UPSCALED, and that upscale
+ * softness appears the instant the filter attaches — independent of strength. The transition then reads as
+ * sharp -> sudden soft pop -> gradual blur, and the reverse on the way out. At 0.25 the pop is a 4x
+ * magnification and is very obvious.
+ *
+ * ABOVE 1 supersamples, which looks fine but is the expensive direction, and it is where this started: it
+ * was set to 5 as a way to WEAKEN the blur (a given strength covers proportionally less screen at a larger
+ * target). At 5 the target also blew past the 4096px texture limit at every screen size
+ * (1512x982 -> 7560x4910), so it was silently clamped and the arithmetic stopped describing what was drawn.
+ * Measured render-target load at 60fps:
+ *
+ *                            resolution 5      resolution 1, quality 4
+ *     phone 390x844           1.0 Gpx/s          0.16 Gpx/s
+ *     retina laptop           4.5 Gpx/s          0.71 Gpx/s
+ *     1080p desktop           6.2 Gpx/s          1.00 Gpx/s
+ *     4K desktop             24.9 Gpx/s          3.98 Gpx/s
+ *
+ * A laptop integrated GPU has maybe 5-15 Gpx/s in total, so at 5 this filter alone consumed most of the
+ * budget for as long as the win popup was open — which is why desktop stuttered while phones, at a
+ * twentieth of the load, stayed smooth. To weaken the blur lower `BLUR_STRENGTH`; to make it cheaper lower
+ * `BLUR_QUALITY`. Never move this.
  */
-const BLUR_STRENGTH = 0.8;
-/** Fade in/out time (ms). Switching a filter on hard reads as a flash. */
-const BLUR_RAMP_MS = 220;
+const BLUR_RESOLUTION = 1;
 /**
- * PERFORMANCE dial, not a look dial. The size of the off-screen texture the scene is drawn into before
- * blurring, so cost scales with its SQUARE: 0.5 is a quarter of the pixels of 1, and 4 is sixty-four
- * times 0.5. This filter covers the whole screen and runs every frame, so it is the expensive setting.
- *
- * Pixi's own `FilterOptions` doc says "consider lowering this for things like blurs filters" — on
- * something being blurred anyway the downsample costs nothing you can see, and `App.tsx` already runs
- * the renderer at `min(devicePixelRatio, 2)`, so the target is 2x on retina before this is applied.
- *
- * Values below 1 make the blur look STRONGER for the same `BLUR_STRENGTH`; values above 1 weaken it.
+ * HOW MUCH BLUR — the look dial. On-screen radius is roughly `BLUR_STRENGTH / BLUR_RESOLUTION`, so at
+ * resolution 1 this is the radius in screen pixels. Turn THIS to make the blur weaker or stronger.
  */
-const BLUR_RESOLUTION = 5;
+const BLUR_STRENGTH = 2;
 /**
- * One pass. The default is 4; a full-screen filter runs every frame, so the passes are the expensive
- * part. At this strength, plus the half-res downsample, extra passes buy nothing you can see.
+ * Passes. A wide blur needs several, or the samples spread far enough apart to read as ghosting/banding
+ * rather than a smooth blur. This is the second cost multiplier after resolution, so keep it as low as
+ * still looks smooth.
  */
 const BLUR_QUALITY = 1;
-/** Below this the blur reads as nothing — snap to 0 and detach. */
-const BLUR_MIN = 0.05;
+/** Fade in/out time (ms). Switching a filter on hard reads as a flash. */
+const BLUR_RAMP_MS = 220;
 
 export interface SceneBlurProps {
   /** Blur the children. Eases in and out; the filter is detached entirely once it reaches 0. */
@@ -41,36 +53,42 @@ export interface SceneBlurProps {
 }
 
 /**
- * Blurs everything inside it while `active` — the backdrop for a modal overlay, in place of a flat grey
- * scrim.
+ * Blurs everything inside it while `active` — the backdrop for a modal overlay, in place of a flat scrim.
  *
  * Pixi has no backdrop filter, so "blur what's behind the popup" has to be "blur the thing behind the
  * popup": wrap the scene in this and keep the overlay as a SIBLING, or the overlay blurs with it.
  *
  * The filter is attached only while it's actually visible. That is the whole reason for the ramp and the
  * `filters = null`: an attached filter forces a full-screen render target every frame, so an idle game
- * must not be paying for one. Same conventions as the reel blur in `Reels.tsx`.
+ * must not be paying for one. Same conventions as the reel blur in `Reels.tsx` — which wraps each column
+ * rather than the screen, and so costs two orders of magnitude less than this one.
  */
 export function SceneBlur({ active, children }: SceneBlurProps) {
   const ref = useRef<Container>(null);
   const filterRef = useRef<BlurFilter | null>(null);
-  /** Current eased strength. Exactly 0 means "detached" — that's how the attach edge is detected. */
-  const strength = useRef(0);
+  /** Fade position, 0..1. Exactly 0 means "detached" — that's how the attach edge is detected. */
+  const progress = useRef(0);
 
   useTick((ticker: Ticker) => {
     const cont = ref.current;
     if (!cont) return;
 
-    const detached = strength.current === 0;
-    const ease = Math.min(1, ticker.deltaMS / BLUR_RAMP_MS);
-    strength.current +=
-      ((active ? BLUR_STRENGTH : 0) - strength.current) * ease;
+    const detached = progress.current === 0;
 
-    if (!active && strength.current < BLUR_MIN) {
-      if (!detached) {
-        strength.current = 0;
-        cont.filters = null; // nothing to blur — drop the render target
-      }
+    // LINEAR, not exponential. An exponential ease never actually arrives, so it needs a "close enough"
+    // threshold to snap and detach on — and the time to reach that threshold scales with BLUR_STRENGTH,
+    // which made raising the strength silently stretch the fade-out into a slow crawl. A linear ramp takes
+    // exactly BLUR_RAMP_MS in both directions whatever the strength, so the transition is predictable and
+    // symmetric.
+    const step = ticker.deltaMS / BLUR_RAMP_MS;
+    progress.current = Math.max(
+      0,
+      Math.min(1, progress.current + (active ? step : -step)),
+    );
+
+    if (progress.current === 0) {
+      // Fully faded out — drop the render target so an idle game pays nothing for this.
+      if (!detached) cont.filters = null;
       return;
     }
 
@@ -79,7 +97,7 @@ export function SceneBlur({ active, children }: SceneBlurProps) {
       quality: BLUR_QUALITY,
       resolution: BLUR_RESOLUTION,
     }));
-    f.strength = strength.current;
+    f.strength = progress.current * BLUR_STRENGTH;
     // Attach on the edge only: the `filters` setter rebuilds the FilterEffect on every assignment.
     if (detached) cont.filters = f;
   });
