@@ -7,6 +7,7 @@ import { useGameControlsStore } from "@/store/useGameControlsStore";
 import { BOUNCE_MS, PAYLINE_MS } from "@/constants/winPresentation";
 import type { ThemeAssets } from "@/types/theme";
 import { hasAsset } from "@/utils/assets";
+import { activeTier } from "@/assets/loader";
 import {
   bounceSheets,
   ensureSheets,
@@ -102,9 +103,23 @@ export function useWinPresentation(
   // Holding the popup is close to free where it matters: it was already resident at the PEAK of a win, so
   // keeping it raises the idle floor (~80 -> ~117 MB on a phone) while peak stays ~130 MB. Peak is the
   // number that kills a tab; idle is not.
+  // ...but ONLY WHERE HOLDING IT IS CHEAP. The popup's cost is entirely tier-dependent: ~37 MB at tier 0.5,
+  // ~160 MB at tier 1. Holding it unconditionally pushed a retina laptop's idle from ~201 MB to ~361 MB and
+  // reintroduced exactly the texture thrashing this work removed — on the one platform that was never the
+  // problem. Symptom: spin AND popup both stutter at a healthy frame rate, because it is the renderer
+  // paging textures rather than any single animation.
+  //
+  // So at tier 1 the popup goes back to per-win load/free (see the release below). Devices resolving tier 1
+  // are also the ones with the bandwidth to re-fetch it, so the first-win race it was solving barely
+  // applies there.
+  const keepPopup = activeTier() <= 0.5;
+
   useEffect(() => {
-    void ensureSheets([...bounceSheets(theme), ...winPopupSheets(theme)]);
-  }, [theme]);
+    void ensureSheets([
+      ...bounceSheets(theme),
+      ...(keepPopup ? winPopupSheets(theme) : []),
+    ]);
+  }, [theme, keepPopup]);
 
   /**
    * The glow sheets this spin is waiting on. Recorded when the result arrives — which is when we first
@@ -172,11 +187,18 @@ export function useWinPresentation(
   }, [phase, lastResult, theme]);
 
   // Sweep every symbol's glow at the end of a presentation, including any a previous spin left behind.
-  // The POPUP is deliberately NOT freed here — it is warmed at mount and held for the session (see above),
-  // because freeing it bought nothing at peak and cost a re-download or re-upload on every single win.
+  //
+  // The popup is freed here ONLY when it is not being held for the session (`keepPopup`). Where it is held,
+  // freeing bought nothing at peak — it was already resident at the peak of a win — and cost a re-download
+  // or a re-upload on every single win. Where it is not held (tier 1, ~160 MB), keeping it would cost far
+  // more than it saves.
   useEffect(() => {
-    if (phase === "none") void releaseSheets(winningSheets(theme));
-  }, [phase, theme]);
+    if (phase !== "none") return;
+    void releaseSheets([
+      ...winningSheets(theme),
+      ...(keepPopup ? [] : winPopupSheets(theme)),
+    ]);
+  }, [phase, theme, keepPopup]);
 
   // Declared FIRST so on mount it runs before the hand-off effect below.
   //
